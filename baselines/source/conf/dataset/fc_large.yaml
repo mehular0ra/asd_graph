@@ -1,0 +1,12 @@
+name: fc_large
+batch_size: 1
+test_batch_size: 16
+val_batch_size: 16
+train_set: 0.8
+val_set: 0.2
+fc_path: /mnt/ssd1/mehul_data/research/fc_large_data.npy
+drop_last: True
+stratified: True
+
+num_node_features: 400
+num_classes: 2
