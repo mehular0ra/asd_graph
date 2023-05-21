@@ -1,0 +1,7 @@
+name: GCN
+
+num_layers: 2
+hidden_size: 64
+dropout: 0.5
+
+readout: mean

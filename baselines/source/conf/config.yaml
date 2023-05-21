@@ -1,5 +1,6 @@
 defaults: 
   - dataset: fc_small
+  - model: gcn
 
 
 repeat_time: 1

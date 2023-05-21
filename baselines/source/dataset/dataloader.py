@@ -46,7 +46,7 @@ def init_stratified_dataloader(cfg: DictConfig,
     total_counts = Counter(site)
 
     num_graphs, num_nodes = final_pearson.shape[0], final_pearson.shape[1]
-    node_feature = torch.ones((num_graphs, num_nodes))
+    node_feature = torch.ones(num_nodes, num_nodes)
 
     graph_data_list = create_graph_data(
         final_pearson, node_feature, labels, site, site_mapping)

@@ -6,6 +6,7 @@ import ipdb
 
 from .dataset.fc_small import load_fc_data
 from .dataset.dataloader import init_stratified_dataloader
+from .models.GCN import GCN
 
 from collections import Counter
 
@@ -15,14 +16,17 @@ def main(cfg: DictConfig) -> None:
     final_pearson, labels, site = load_fc_data(cfg)
 
     dataloaders = init_stratified_dataloader(cfg, final_pearson, labels, site)
-    for dl in dataloaders:
-        for batch in dl:
-            print(batch)  # or inspect batch in any other way you want
-    print()
-    train_sites = [data.site for data in dataloaders[0].dataset]
-    test_sites = [data.site for data in dataloaders[1].dataset]
-    print("Training dataset site breakdown:", Counter(train_sites))
-    print("Testing dataset site breakdown:", Counter(test_sites))
+
+    ## test GCN model
+    model = GCN(cfg)
+    for batch in dataloaders[0]:
+        print(batch.x.shape)
+        print(batch.edge_index.shape)
+        print(batch.y.shape)
+        output = model(batch.x, batch.edge_index)
+        print(output.shape)
+        # ipdb.set_trace()
+        break
 
 
 
