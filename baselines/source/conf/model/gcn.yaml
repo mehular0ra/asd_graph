@@ -1,7 +1,7 @@
 name: GCN
 
-num_layers: 2
-hidden_size: 64
-dropout: 0.5
+num_layers: 1
+hidden_size: 64  # 8, 16, 32, 64, 128
+dropout: 0.5     # 0.25
 
-readout: mean
+readout: mean   # sum, mean, max, OCReadout, AttentionReadout

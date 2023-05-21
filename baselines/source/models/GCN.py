@@ -17,6 +17,10 @@ class GCN(torch.nn.Module):
         # Initialize the list of convolutional layers
         self.convs = torch.nn.ModuleList()
 
+        if self.num_layers < 2:
+            self.convs.append(GCNConv(cfg.dataset.node_feature_sz, self.num_classes))
+            return
+            
         # Add the first layer (input layer)
         self.convs.append(
             GCNConv(cfg.dataset.node_feature_sz, self.hidden_size))
