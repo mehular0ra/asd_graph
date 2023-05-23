@@ -3,4 +3,14 @@ defaults:
   - model: gcn
 
 
+# hydra:
+#   job_logging:
+#     root:
+#       handlers: null
+
+log_path: result
+
+
+
+
 repeat_time: 1
