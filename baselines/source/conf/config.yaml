@@ -1,6 +1,7 @@
 defaults: 
   - dataset: fc_small
   - model: gcn
+  - optimizer: adam
 
 log_path: result
 
@@ -24,4 +25,7 @@ hydra:
         class: logging.FileHandler
         formatter: precise
         filename: ./output.log
+
+
+total_steps: 100 # remove this later
 

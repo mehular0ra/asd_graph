@@ -71,9 +71,9 @@ def init_stratified_dataloader(cfg: DictConfig,
     analyze_labels(train_dataloader, test_dataloader)
 
     # log the dataloaders sizes (testing logger)
-    logger = logging.getLogger()
-    logger.info("Train dataloader size: %s", len(train_dataloader))
-    logger.info("Test dataloader size: %s", len(test_dataloader))
+    # logger = logging.getLogger()
+    logging.info("Train dataloader size: %s", len(train_dataloader))
+    logging.info("Test dataloader size: %s", len(test_dataloader))
 
     
 
