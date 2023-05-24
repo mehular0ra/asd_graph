@@ -2,15 +2,26 @@ defaults:
   - dataset: fc_small
   - model: gcn
 
-
-# hydra:
-#   job_logging:
-#     root:
-#       handlers: null
-
 log_path: result
 
-
-
-
 repeat_time: 1
+
+hydra:
+  job_logging:
+    root:
+      handlers: [console, file]
+      propagate: true
+    formatters:
+      precise:
+        format: '[%(asctime)s][%(filename)s][L%(lineno)d][%(levelname)s]%(message)s'
+        datefmt: '%Y-%m-%d %H:%M:%S'
+    handlers:
+      console:
+        class: logging.StreamHandler
+        formatter: precise
+        stream: ext://sys.stdout
+      file:
+        class: logging.FileHandler
+        formatter: precise
+        filename: ./output.log
+

@@ -13,6 +13,8 @@ import ipdb
 import matplotlib.pyplot as plt
 from collections import Counter
 
+import logging
+
 def create_graph_data(final_pearson: torch.Tensor,
                       node_feature: torch.Tensor,
                       labels: torch.Tensor,
@@ -67,6 +69,13 @@ def init_stratified_dataloader(cfg: DictConfig,
     analyze_dataloaders(train_dataloader, test_dataloader,
                         site_mapping, total_counts)
     analyze_labels(train_dataloader, test_dataloader)
+
+    # log the dataloaders sizes (testing logger)
+    logger = logging.getLogger()
+    logger.info("Train dataloader size: %s", len(train_dataloader))
+    logger.info("Test dataloader size: %s", len(test_dataloader))
+
+    
 
     return [train_dataloader, test_dataloader]
 
