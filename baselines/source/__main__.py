@@ -29,33 +29,33 @@ def main(cfg: DictConfig) -> None:
         break
 
 
-    # test logger
-    logger = logging.getLogger()
-    logger.info("testing this logger")
+    # # test logger
+    # logger = logging.getLogger()
+    # logger.info("testing this logger")
 
-    # `cfg` is your DictConfig object
-    cfg_str = OmegaConf.to_yaml(cfg)
-    logger.info("Configuration:\n%s", cfg_str)
+    # # `cfg` is your DictConfig object
+    # cfg_str = OmegaConf.to_yaml(cfg)
+    # logger.info("Configuration:\n%s", cfg_str)
 
-    optimizers = optimizers_factory(model=model, optimizer_configs=cfg.optimizer)
-    lr_schedulers = lr_scheduler_factory(lr_configs=cfg.optimizer, cfg=cfg)
+    # optimizers = optimizers_factory(model=model, optimizer_configs=cfg.optimizer)
+    # lr_schedulers = lr_scheduler_factory(lr_configs=cfg.optimizer, cfg=cfg)
     
-    print(optimizers)
-    print(lr_schedulers)
-    optimizer = optimizers[0]
-    lr_scheduler = lr_schedulers[0]
+    # print(optimizers)
+    # print(lr_schedulers)
+    # optimizer = optimizers[0]
+    # lr_scheduler = lr_schedulers[0]
 
-    # Now let's simulate some training steps to test the learning rate scheduler
-    for step in range(1, cfg.total_steps + 1):
-        # simulate an optimizer step
-        optimizer.step()
+    # # Now let's simulate some training steps to test the learning rate scheduler
+    # for step in range(1, cfg.total_steps + 1):
+    #     # simulate an optimizer step
+    #     optimizer.step()
 
-        # update learning rate using the scheduler
-        lr_scheduler.update(optimizer=optimizer, step=step)
+    #     # update learning rate using the scheduler
+    #     lr_scheduler.update(optimizer=optimizer, step=step)
 
-        # check if the learning rate is updated correctly
-        for param_group in optimizer.param_groups:
-            print(f'Step: {step}, Learning Rate: {param_group["lr"]}')
+    #     # check if the learning rate is updated correctly
+    #     for param_group in optimizer.param_groups:
+    #         print(f'Step: {step}, Learning Rate: {param_group["lr"]}')
 
 
 

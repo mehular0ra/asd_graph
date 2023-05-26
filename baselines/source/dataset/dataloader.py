@@ -41,6 +41,10 @@ def init_stratified_dataloader(cfg: DictConfig,
                                site: np.array,
                                final_sc: Optional[torch.tensor] = None) -> List[DataLoader]:
 
+    train_ratio = cfg.dataset.train_set
+    val_ratio = cfg.dataset.val_set
+    test_ratio = cfg.dataset.test_set
+
     # map site names to unique integers
     unique_sites = set(site)
     site_mapping = {name: idx for idx, name in enumerate(unique_sites)}
@@ -54,37 +58,59 @@ def init_stratified_dataloader(cfg: DictConfig,
         final_pearson, node_feature, labels, site, site_mapping)
 
     # Stratified split
-    split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=42)
-    for train_index, test_index in split.split(final_pearson, site):
+    split = StratifiedShuffleSplit(
+        n_splits=1, test_size=val_ratio+test_ratio, train_size=train_ratio, random_state=42)
+    for train_index, test_valid_index in split.split(final_pearson, site):
         train_data_list = [graph_data_list[i] for i in train_index]
-        test_data_list = [graph_data_list[i] for i in test_index]
+        test_valid_data_list = [graph_data_list[i] for i in test_valid_index]
+        site = site[test_valid_index]
+
+    # Relative ratios for second split
+    relative_val_ratio = val_ratio / (val_ratio + test_ratio)
+    relative_test_ratio = 1 - relative_val_ratio
+
+    split2 = StratifiedShuffleSplit(
+        n_splits=1, test_size=relative_test_ratio, train_size=relative_val_ratio, random_state=42)
+    for valid_index, test_index in split2.split(test_valid_data_list, site):
+        val_data_list = [test_valid_data_list[i] for i in valid_index]
+        test_data_list = [test_valid_data_list[i] for i in test_index]
+
 
     # create pyg dataloader
     train_dataloader = DataLoader(
         train_data_list, batch_size=cfg.dataset.batch_size, shuffle=True)
+    val_dataloader = DataLoader(
+        val_data_list, batch_size=cfg.dataset.batch_size, shuffle=False)
     test_dataloader = DataLoader(
         test_data_list, batch_size=cfg.dataset.batch_size, shuffle=False)
-
-    # analyze dataloaders/ plots
-    analyze_dataloaders(train_dataloader, test_dataloader,
-                        site_mapping, total_counts)
-    analyze_labels(train_dataloader, test_dataloader)
-
-    # log the dataloaders sizes (testing logger)
-    # logger = logging.getLogger()
-    logging.info("Train dataloader size: %s", len(train_dataloader))
-    logging.info("Test dataloader size: %s", len(test_dataloader))
-
     
 
-    return [train_dataloader, test_dataloader]
 
 
-def analyze_labels(train_dataloader: DataLoader, test_dataloader: DataLoader):
+    # analyze dataloaders/ plots
+    analyze_dataloaders(train_dataloader, val_dataloader, test_dataloader,
+                        site_mapping, total_counts)
+    analyze_labels(train_dataloader, val_dataloader, test_dataloader)
+
+    # log the dataloaders sizes (valing logger)
+    # logger = logging.getLogger()
+    logging.info("Train dataloader size: %s", len(train_dataloader))
+    logging.info("val dataloader size: %s", len(val_dataloader))
+    logging.info("test dataloader size: %s", len(test_dataloader))
+
+    return [train_dataloader, val_dataloader]
+
+
+def analyze_labels(train_dataloader: DataLoader, val_dataloader: DataLoader, test_dataloader: DataLoader):
+    print("\nAnalyzing labels...")
     # count the number of occurrences of each label in the train set
     train_labels = [label.item()
                     for data in train_dataloader for label in data.y]
     train_counts = Counter(train_labels)
+
+    # count the number of occurrences of each label in the val set
+    val_labels = [label.item() for data in val_dataloader for label in data.y]
+    val_counts = Counter(val_labels)
 
     # count the number of occurrences of each label in the test set
     test_labels = [label.item()
@@ -94,29 +120,38 @@ def analyze_labels(train_dataloader: DataLoader, test_dataloader: DataLoader):
     # convert counts to percentages
     train_percentages = {
         label: count/len(train_labels)*100 for label, count in train_counts.items()}
+    val_percentages = {
+        label: count/len(val_labels)*100 for label, count in val_counts.items()}
     test_percentages = {
         label: count/len(test_labels)*100 for label, count in test_counts.items()}
 
-    print("Train percentages: ", train_percentages)
-    print("Test percentages: ", test_percentages)
+    print("Train counts: ", train_counts)
+    print("Val counts: ", val_counts)
+    print("Test counts: ", test_counts)
 
     # plot the data
-    labels = [0, 1]  # if your labels are 0 and 1
-    train_values = [train_percentages.get(label, 0) for label in labels]
-    test_values = [test_percentages.get(label, 0) for label in labels]
+    categories = ['Train', 'Val', 'Test']
+    labels = [0, 1]  # assuming your labels are 0 and 1
 
-    x = np.arange(len(labels))  # the label locations
+    label_0_values = [train_percentages.get(labels[0], 0), val_percentages.get(
+        labels[0], 0), test_percentages.get(labels[0], 0)]
+    label_1_values = [train_percentages.get(labels[1], 0), val_percentages.get(
+        labels[1], 0), test_percentages.get(labels[1], 0)]
+
+    x = np.arange(len(categories))  # the label locations
     width = 0.35  # the width of the bars
 
     fig, ax = plt.subplots()
-    rects1 = ax.bar(x - width/2, train_values, width, label='Train')
-    rects2 = ax.bar(x + width/2, test_values, width, label='Test')
+    rects1 = ax.bar(x - width/2, label_0_values,
+                    width, label=f'Label {labels[0]}')
+    rects2 = ax.bar(x + width/2, label_1_values,
+                    width, label=f'Label {labels[1]}')
 
-    ax.set_xlabel('Labels')
+    ax.set_xlabel('Datasets')
     ax.set_ylabel('Percentage')
-    ax.set_title('Percentage by label')
+    ax.set_title('Percentage of each label in each dataset')
     ax.set_xticks(x)
-    ax.set_xticklabels(labels)
+    ax.set_xticklabels(categories)
     ax.legend()
 
     fig.tight_layout()
@@ -131,15 +166,17 @@ def analyze_labels(train_dataloader: DataLoader, test_dataloader: DataLoader):
     plt.close(fig)
 
 
-
-
-
-def analyze_dataloaders(train_dataloader: DataLoader, test_dataloader: DataLoader, site_mapping: dict, total_counts: Counter):
-
+def analyze_dataloaders(train_dataloader: DataLoader, val_dataloader: DataLoader, test_dataloader: DataLoader, site_mapping: dict, total_counts: Counter):
+    print("\nAnalyzing dataloaders...")
     # count the number of occurrences of each site in the train set
     train_sites = [site.item()
                    for data in train_dataloader for site in data.site]
     train_counts = Counter(train_sites)
+
+    # count the number of occurrences of each site in the val set
+    val_sites = [site.item()
+                 for data in val_dataloader for site in data.site]
+    val_counts = Counter(val_sites)
 
     # count the number of occurrences of each site in the test set
     test_sites = [site.item()
@@ -152,30 +189,34 @@ def analyze_dataloaders(train_dataloader: DataLoader, test_dataloader: DataLoade
     # convert counts to percentages of the total number of each site's subjects
     train_percentages = {reverse_site_mapping[site]: (
         count / total_counts[reverse_site_mapping[site]])*100 for site, count in train_counts.items()}
+    val_percentages = {reverse_site_mapping[site]: (
+        count / total_counts[reverse_site_mapping[site]])*100 for site, count in val_counts.items()}
     test_percentages = {reverse_site_mapping[site]: (
         count / total_counts[reverse_site_mapping[site]])*100 for site, count in test_counts.items()}
 
     print("Train percentages: ", train_percentages)
+    print("Val percentages: ", val_percentages)
     print("Test percentages: ", test_percentages)
 
     # plot the data
+    categories = ['Train', 'Val', 'Test']
     labels = list(reverse_site_mapping.values())
-    # use 0 if site doesn't exist in train set
-    train_values = [train_percentages.get(label, 0) for label in labels]
-    # use 0 if site doesn't exist in test set
-    test_values = [test_percentages.get(label, 0) for label in labels]
+
+    label_values = {category: [percentages.get(label, 0) for label in labels] for category, percentages in zip(
+        categories, [train_percentages, val_percentages, test_percentages])}
 
     x = np.arange(len(labels))  # the label locations
-    width = 0.35  # the width of the bars
+    width = 0.2  # the width of the bars
 
     fig, ax = plt.subplots()
-    rects1 = ax.bar(x - width/2, train_values, width, label='Train')
-    rects2 = ax.bar(x + width/2, test_values, width, label='Test')
+    rects1 = ax.bar(x - width, label_values['Train'], width, label='Train')
+    rects2 = ax.bar(x, label_values['Val'], width, label='Val')
+    rects3 = ax.bar(x + width, label_values['Test'], width, label='Test')
 
     ax.set_xlabel('Sites')
     ax.set_ylabel('Percentage')
     ax.set_title(
-        'Percentage of subjects from each site in train and test sets')
+        'Percentage of subjects from each site in train, val and test sets')
     ax.set_xticks(x)
     ax.set_xticklabels(labels)
     ax.legend()
@@ -183,10 +224,11 @@ def analyze_dataloaders(train_dataloader: DataLoader, test_dataloader: DataLoade
     fig.tight_layout()
 
     # Save the plot in the specified directory
-    original_dir = hydra.utils.get_original_cwd()  # This will be the directory where your application was launched
+    original_dir = hydra.utils.get_original_cwd()
     img_dir = os.path.join(original_dir, 'imgs')
-    os.makedirs(img_dir, exist_ok=True)  # This will create the directory if it doesn't already exist
+    os.makedirs(img_dir, exist_ok=True)
     plt.savefig(f"{img_dir}/site_percentage_plot.png")
     plt.close(fig)
+
 
 

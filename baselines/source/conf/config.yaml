@@ -29,3 +29,6 @@ hydra:
 
 total_steps: 100 # remove this later
 
+device: cuda:0
+is_wandb: false
+
