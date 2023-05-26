@@ -127,7 +127,7 @@ class Train:
         return [auc] + list(metric) + recall
 
     def train(self):
-        print("Training Started")
+        print("\nStarting training...")
         training_process = []
         self.current_step = 0
 

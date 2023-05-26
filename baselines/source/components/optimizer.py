@@ -63,6 +63,7 @@ def optimizer_factory(model: torch.nn.Module, optimizer_config: DictConfig) -> t
     else:
         params = list(model.parameters())
         logging.info(f'Parameters [normal] length [{len(params)}]')
+        
 
     parameters['params'] = params
 
@@ -76,6 +77,5 @@ def optimizer_factory(model: torch.nn.Module, optimizer_config: DictConfig) -> t
 def optimizers_factory(model: torch.nn.Module, optimizer_configs: List[DictConfig]) -> List[torch.optim.Optimizer]:
     if model is None:
         return None
-
 
     return [optimizer_factory(model=model, optimizer_config=single_config) for single_config in optimizer_configs]

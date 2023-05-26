@@ -1,5 +1,5 @@
 name: fc_small
-batch_size: 32
+batch_size: 16
 test_batch_size: 1
 val_batch_size: 1
 

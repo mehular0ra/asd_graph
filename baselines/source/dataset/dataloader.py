@@ -3,7 +3,8 @@ from typing import Optional, List
 import hydra
 from omegaconf import DictConfig, open_dict
 from sklearn.model_selection import StratifiedShuffleSplit
-from torch_geometric.data import DataLoader, Data
+from torch_geometric.data import Data
+from torch_geometric.loader import DataLoader
 
 import numpy as np
 import torch
@@ -22,7 +23,6 @@ def create_graph_data(final_pearson: torch.Tensor,
                       site_mapping: dict):
 
     graph_data_list = []
-    print(final_pearson.shape[0])
     for i in range(final_pearson.shape[0]):
         edge_index = final_pearson[i].nonzero(as_tuple=False).t().contiguous()
 
@@ -98,13 +98,6 @@ def init_stratified_dataloader(cfg: DictConfig,
     analyze_dataloaders(train_dataloader, val_dataloader, test_dataloader,
                         site_mapping, total_counts)
     analyze_labels(train_dataloader, val_dataloader, test_dataloader)
-
-    # log the dataloaders sizes (valing logger)
-    # logger = logging.getLogger()
-    logging.info("Train dataloader size: %s", len(train_dataloader))
-    logging.info("val dataloader size: %s", len(val_dataloader))
-    logging.info("test dataloader size: %s", len(test_dataloader))
-
     return [train_dataloader, val_dataloader, test_dataloader]
 
 

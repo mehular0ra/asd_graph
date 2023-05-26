@@ -30,6 +30,9 @@ hydra:
 
 total_steps: 100 # remove this later
 
-device: cpu
-is_wandb: false
+device: cuda:0
+
+# wandb:
+is_wandb: true
+project: asd-graph
 

@@ -1,71 +1,51 @@
 import logging
 from omegaconf import DictConfig, OmegaConf
 import hydra
+import wandb
 
 import ipdb
 
-from .dataset import load_fc_data, init_stratified_dataloader
-from .models import GCN
+from .dataset import dataset_factory
+from .models import model_factory
 from .components import optimizers_factory, lr_scheduler_factory
 from .training import training_factory
 
+
+def model_training(cfg: DictConfig):
+
+    dataloaders = dataset_factory(cfg)
+    model = model_factory(cfg)
+    optimizers = optimizers_factory(
+        model=model, optimizer_configs=cfg.optimizer)
+    lr_schedulers = lr_scheduler_factory(lr_configs=cfg.optimizer, cfg=cfg)
+    training = training_factory(cfg=cfg,
+                                model=model,
+                                optimizers=optimizers,
+                                lr_schedulers=lr_schedulers,
+                                dataloaders=dataloaders)
+    training.train()
 
 
 @hydra.main(config_path="conf", config_name="config")
 def main(cfg: DictConfig) -> None:
 
-    final_pearson, labels, site = load_fc_data(cfg)
+    group_name = f"{cfg.dataset.name}_{cfg.model.name}"
 
-    dataloaders = init_stratified_dataloader(cfg, final_pearson, labels, site)
-    model = GCN(cfg)
-    optimizers = optimizers_factory(model=model, optimizer_configs=cfg.optimizer)
-    lr_schedulers = lr_scheduler_factory(lr_configs=cfg.optimizer, cfg=cfg)
-    training = training_factory(cfg=cfg,
-                            model=model,
-                            optimizers=optimizers,
-                            lr_schedulers=lr_schedulers,
-                            dataloaders=dataloaders)
-    training.train()
+    for _ in range(cfg.repeat_time):
 
-    ## test GCN model
-    model = GCN(cfg)
-    for batch in dataloaders[0]:
-        print(batch.x.shape)
-        print(batch.edge_index.shape)
-        print(batch.y.shape)
-        output = model(batch.x, batch.edge_index)
-        print(output.shape)
-        # ipdb.set_trace()
-        break
+        if cfg.is_wandb:
+            run = wandb.init(project=cfg.project, reinit=True,
+                             group=f"{group_name}", tags=[f"{cfg.dataset.name}, {cfg.model.name}"])
+            # save config
+            wandb.init(project=cfg.project, config=cfg)
+            # wandb.config.update(cfg)
 
+        logging.info(OmegaConf.to_yaml(cfg)) 
+        model_training(cfg)
 
-    # # test logger
-    # logger = logging.getLogger()
-    # logger.info("testing this logger")
+        if cfg.is_wandb:
+            wandb.finish()
 
-    # # `cfg` is your DictConfig object
-    # cfg_str = OmegaConf.to_yaml(cfg)
-    # logger.info("Configuration:\n%s", cfg_str)
-
-    # optimizers = optimizers_factory(model=model, optimizer_configs=cfg.optimizer)
-    # lr_schedulers = lr_scheduler_factory(lr_configs=cfg.optimizer, cfg=cfg)
-    
-    # print(optimizers)
-    # print(lr_schedulers)
-    # optimizer = optimizers[0]
-    # lr_scheduler = lr_schedulers[0]
-
-    # # Now let's simulate some training steps to test the learning rate scheduler
-    # for step in range(1, cfg.total_steps + 1):
-    #     # simulate an optimizer step
-    #     optimizer.step()
-
-    #     # update learning rate using the scheduler
-    #     lr_scheduler.update(optimizer=optimizer, step=step)
-
-    #     # check if the learning rate is updated correctly
-    #     for param_group in optimizer.param_groups:
-    #         print(f'Step: {step}, Learning Rate: {param_group["lr"]}')
 
 
 
