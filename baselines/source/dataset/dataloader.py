@@ -1,7 +1,7 @@
 import os
 from typing import Optional, List
 import hydra
-from omegaconf import DictConfig
+from omegaconf import DictConfig, open_dict
 from sklearn.model_selection import StratifiedShuffleSplit
 from torch_geometric.data import DataLoader, Data
 
@@ -41,6 +41,7 @@ def init_stratified_dataloader(cfg: DictConfig,
                                site: np.array,
                                final_sc: Optional[torch.tensor] = None) -> List[DataLoader]:
 
+    train_length = cfg.dataset.train_set * final_pearson.shape[0]
     train_ratio = cfg.dataset.train_set
     val_ratio = cfg.dataset.val_set
     test_ratio = cfg.dataset.test_set
@@ -83,6 +84,12 @@ def init_stratified_dataloader(cfg: DictConfig,
         val_data_list, batch_size=cfg.dataset.batch_size, shuffle=False)
     test_dataloader = DataLoader(
         test_data_list, batch_size=cfg.dataset.batch_size, shuffle=False)
+
+    # add total_steps and steps_per_epoch to cfg
+    with open_dict(cfg):
+        # total_steps, steps_per_epoch for lr schedular
+        cfg.steps_per_epoch = (train_length - 1) // cfg.dataset.batch_size + 1
+        cfg.total_steps = cfg.steps_per_epoch * cfg.training.epochs
     
 
 
@@ -98,7 +105,7 @@ def init_stratified_dataloader(cfg: DictConfig,
     logging.info("val dataloader size: %s", len(val_dataloader))
     logging.info("test dataloader size: %s", len(test_dataloader))
 
-    return [train_dataloader, val_dataloader]
+    return [train_dataloader, val_dataloader, test_dataloader]
 
 
 def analyze_labels(train_dataloader: DataLoader, val_dataloader: DataLoader, test_dataloader: DataLoader):

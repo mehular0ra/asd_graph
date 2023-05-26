@@ -2,6 +2,7 @@ defaults:
   - dataset: fc_small
   - model: gcn
   - optimizer: adam
+  - training: basic_training
 
 log_path: result
 
@@ -29,6 +30,6 @@ hydra:
 
 total_steps: 100 # remove this later
 
-device: cuda:0
+device: cpu
 is_wandb: false
 

@@ -7,6 +7,7 @@ import ipdb
 from .dataset import load_fc_data, init_stratified_dataloader
 from .models import GCN
 from .components import optimizers_factory, lr_scheduler_factory
+from .training import training_factory
 
 
 
@@ -16,6 +17,15 @@ def main(cfg: DictConfig) -> None:
     final_pearson, labels, site = load_fc_data(cfg)
 
     dataloaders = init_stratified_dataloader(cfg, final_pearson, labels, site)
+    model = GCN(cfg)
+    optimizers = optimizers_factory(model=model, optimizer_configs=cfg.optimizer)
+    lr_schedulers = lr_scheduler_factory(lr_configs=cfg.optimizer, cfg=cfg)
+    training = training_factory(cfg=cfg,
+                            model=model,
+                            optimizers=optimizers,
+                            lr_schedulers=lr_schedulers,
+                            dataloaders=dataloaders)
+    training.train()
 
     ## test GCN model
     model = GCN(cfg)

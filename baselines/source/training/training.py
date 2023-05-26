@@ -5,12 +5,11 @@ from pathlib import Path
 import torch.nn.functional as F
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import precision_recall_fscore_support, classification_report
-from source.utils import continus_mixup_data
 import wandb
 from omegaconf import DictConfig
 from typing import List
 import torch.utils.data as utils
-from source.components import LRScheduler
+from source.components import lr_scheduler_factory, LRScheduler
 import logging
 
 
@@ -22,16 +21,21 @@ class Train:
                  lr_schedulers: List[LRScheduler],
                  dataloaders: List[utils.DataLoader]) -> None:
 
+                
+
         self.cfg = cfg
+        self.device = self.cfg.device
+
         self.logger = logging.getLogger()
-        self.model = model
+        self.model = model.to(self.device)
         self.logger.info(f'#model params: {count_params(self.model)}')
         self.train_dataloader, self.val_dataloader, self.test_dataloader = dataloaders
         self.epochs = cfg.training.epochs
         self.total_steps = cfg.total_steps
         self.optimizers = optimizers
         self.lr_schedulers = lr_schedulers
-        self.loss_fn = torch.nn.CrossEntropyLoss(reduction='sum')
+        self.loss_fn = torch.nn.CrossEntropyLoss()
+
 
         self.init_meters()
 
@@ -50,21 +54,22 @@ class Train:
     def train_per_epoch(self, optimizer, lr_scheduler):
         self.model.train()
 
-        for node_feature, label in self.train_dataloader:
-            label = label.float()
+        for data in self.train_dataloader:
+            node_feature, edge_index, label = data.x, data.edge_index, data.y
+            # label = label.float()
             self.current_step += 1
 
             lr_scheduler.update(optimizer=optimizer,
-                                step=self.current_step)  # DOUBT
+                                step=self.current_step) 
 
-            node_feature, label = node_feature.to(
-                self.cfg.device), label.to(self.cfg.device)
+            node_feature = node_feature.to(self.device)
+            edge_index = edge_index.to(self.device)
+            label = label.to(self.device)
 
-            if self.cfg.preprocess.continus:
-                node_feature, label = continus_mixup_data(
-                    node_feature, y=label)
+            predict = self.model(node_feature, edge_index)
 
-            predict = self.model(node_feature)
+            # convert label to long
+            label = label.long()
 
             loss = self.loss_fn(predict, label)
 
@@ -72,7 +77,7 @@ class Train:
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
-            acc = accuracy(predict, label[:, 1])[0]
+            acc = accuracy(predict, label)
             self.train_accuracy.update_with_weight(acc, label.shape[0])
 
             if self.cfg.is_wandb:
@@ -86,20 +91,24 @@ class Train:
 
         self.model.eval()
 
-        for node_feature, label in dataloader:
-            node_feature, label = node_feature.to(
-                self.cfg.device), label.to(self.cfg.device)
-            output = self.model(node_feature)
+        for data in dataloader:
+            node_feature, edge_index, label = data.x, data.edge_index, data.y
+            node_feature = node_feature.to(self.device)
+            edge_index = edge_index.to(self.device)
+            label = label.to(self.device)
 
-            label = label.float()  # DOUBT: why does loss_fn need float label
+            output = self.model(node_feature, edge_index)
+
+            label = label.long()  # DOUBT: why does loss_fn need float label
+
 
             loss = self.loss_fn(output, label)
             loss_meter.update_with_weight(
                 loss.item(), label.shape[0])
-            top1 = accuracy(output, label[:, 1])[0]
-            acc_meter.update_with_weight(top1, label.shape[0])
+            acc = accuracy(output, label)
+            acc_meter.update_with_weight(acc, label.shape[0])
             result += F.softmax(output, dim=1)[:, 1].tolist()
-            labels += label[:, 1].tolist()
+            labels += label.tolist()
 
         auc = roc_auc_score(labels, result)
         result, labels = np.array(result), np.array(labels)
@@ -118,6 +127,7 @@ class Train:
         return [auc] + list(metric) + recall
 
     def train(self):
+        print("Training Started")
         training_process = []
         self.current_step = 0
 
@@ -135,7 +145,7 @@ class Train:
                                               self.test_loss, self.test_accuracy)
 
             self.logger.info(" | ".join([
-                f'Epoch[{epoch}/{self.epochs}]',
+                f'Epoch[{epoch+1}/{self.epochs}]',
                 f'Train Loss:{self.train_loss.avg: .3f}',
                 f'Train Accuracy:{self.train_accuracy.avg: .3f}%',
 
@@ -147,6 +157,10 @@ class Train:
                 f'Test Accuracy:{self.test_accuracy.avg: .3f}%',
                 f'Test AUC:{test_result[0]:.4f}',
                 f'Test Sen:{test_result[-1]:.4f}',
+                f'Test Spe:{test_result[-2]:.4f}',
+                f'Test F1:{test_result[-4]:.4f}',
+                f'Test Recall:{test_result[-5]:.4f}',
+                f'Test Precision:{test_result[-6]:.4f}',
                 f'LR:{self.lr_schedulers[0].lr:.7f}'
             ]))
 
