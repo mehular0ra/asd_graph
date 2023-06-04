@@ -12,6 +12,8 @@ import torch.utils.data as utils
 from source.components import lr_scheduler_factory, LRScheduler
 import logging
 
+import ipdb
+
 
 class Train:
 
@@ -52,10 +54,13 @@ class Train:
             meter.reset()
 
     def train_per_epoch(self, optimizer, lr_scheduler):
+        ipdb.set_trace()
+
         self.model.train()
 
         for data in self.train_dataloader:
-            node_feature, edge_index, label = data.x, data.edge_index, data.y
+            optimizer.zero_grad()
+            node_feature, edge_index, edge_weight, label = data.x, data.edge_index, data.edge_weight, data.y
             # label = label.float()
             self.current_step += 1
 
@@ -64,20 +69,22 @@ class Train:
 
             node_feature = node_feature.to(self.device)
             edge_index = edge_index.to(self.device)
+            edge_weight = edge_weight.to(self.device)
             label = label.to(self.device)
 
-            predict = self.model(node_feature, edge_index)
+            predict = self.model(node_feature, edge_index, edge_weight)
 
             # convert label to long
             label = label.long()
 
             loss = self.loss_fn(predict, label)
+            loss.backward()
+
+
 
             self.train_loss.update_with_weight(loss.item(), label.shape[0])
-            optimizer.zero_grad()
-            loss.backward()
             optimizer.step()
-            acc = accuracy(predict, label)
+            acc = accuracy(predict, label) 
             self.train_accuracy.update_with_weight(acc, label.shape[0])
 
             if self.cfg.is_wandb:
@@ -92,15 +99,15 @@ class Train:
         self.model.eval()
 
         for data in dataloader:
-            node_feature, edge_index, label = data.x, data.edge_index, data.y
+            node_feature, edge_index, edge_weight, label = data.x, data.edge_index, data.edge_weight, data.y
             node_feature = node_feature.to(self.device)
             edge_index = edge_index.to(self.device)
+            edge_weight = edge_weight.to(self.device)
             label = label.to(self.device)
 
-            output = self.model(node_feature, edge_index)
+            output = self.model(node_feature, edge_index, edge_weight)
 
             label = label.long()  # DOUBT: why does loss_fn need float label
-
 
             loss = self.loss_fn(output, label)
             loss_meter.update_with_weight(
@@ -109,6 +116,8 @@ class Train:
             acc_meter.update_with_weight(acc, label.shape[0])
             result += F.softmax(output, dim=1)[:, 1].tolist()
             labels += label.tolist()
+
+
 
         auc = roc_auc_score(labels, result)
         result, labels = np.array(result), np.array(labels)

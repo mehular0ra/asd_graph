@@ -28,11 +28,11 @@ hydra:
         filename: ./output.log
 
 
-total_steps: 100 # remove this later
+# total_steps: 100 # remove this later
 
 device: cuda:0
 
 # wandb:
-is_wandb: true
+is_wandb: false
 project: asd-graph
 

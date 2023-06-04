@@ -9,12 +9,12 @@ from torch_geometric.loader import DataLoader
 import numpy as np
 import torch
 
-import ipdb
-
 import matplotlib.pyplot as plt
 from collections import Counter
 
 import logging
+
+import ipdb
 
 def create_graph_data(final_pearson: torch.Tensor,
                       node_feature: torch.Tensor,
@@ -26,11 +26,25 @@ def create_graph_data(final_pearson: torch.Tensor,
     for i in range(final_pearson.shape[0]):
         edge_index = final_pearson[i].nonzero(as_tuple=False).t().contiguous()
 
+        # create edge weights tensor 'MAKING THEM ABSOLUTE'
+        edge_weight = final_pearson[i][edge_index[0], edge_index[1]].clamp(min=0)
+
+        # Check for NaN values in edge_weight tensor
+        if torch.isnan(edge_weight).any():
+            print(f"Found NaN values in edge weights for graph {i}")
+
+        
         # map site string to integer
         mapped_site = site_mapping[site[i]]
+
+        # Check for NaN values in node_feature tensor
+        # if torch.isnan(node_feature).any():
+        #     print(f"Found NaN values in node features for graph {i}")
+
         data = Data(x=node_feature, edge_index=edge_index,
-                    y=labels[i], site=mapped_site)
+                    y=labels[i], site=mapped_site, edge_weight=edge_weight)
         graph_data_list.append(data)
+
 
     return graph_data_list
 
@@ -53,7 +67,11 @@ def init_stratified_dataloader(cfg: DictConfig,
     total_counts = Counter(site)
 
     num_graphs, num_nodes = final_pearson.shape[0], final_pearson.shape[1]
-    node_feature = torch.ones(num_nodes, num_nodes)
+
+    # Create a tensor of indices from 0 to num_nodes
+    indices = torch.arange(num_nodes)
+    # Create a one-hot encoded tensor
+    node_feature = torch.nn.functional.one_hot(indices).float()
 
     graph_data_list = create_graph_data(
         final_pearson, node_feature, labels, site, site_mapping)
