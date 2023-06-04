@@ -54,28 +54,22 @@ class Train:
             meter.reset()
 
     def train_per_epoch(self, optimizer, lr_scheduler):
-        ipdb.set_trace()
+        # ipdb.set_trace()
 
         self.model.train()
 
         for data in self.train_dataloader:
             optimizer.zero_grad()
-            node_feature, edge_index, edge_weight, label = data.x, data.edge_index, data.edge_weight, data.y
             # label = label.float()
             self.current_step += 1
 
             lr_scheduler.update(optimizer=optimizer,
                                 step=self.current_step) 
+            
+            data = data.to(self.device)
+            predict = self.model(data)
 
-            node_feature = node_feature.to(self.device)
-            edge_index = edge_index.to(self.device)
-            edge_weight = edge_weight.to(self.device)
-            label = label.to(self.device)
-
-            predict = self.model(node_feature, edge_index, edge_weight)
-
-            # convert label to long
-            label = label.long()
+            label = data.y.long().to(self.device)
 
             loss = self.loss_fn(predict, label)
             loss.backward()
@@ -99,15 +93,11 @@ class Train:
         self.model.eval()
 
         for data in dataloader:
-            node_feature, edge_index, edge_weight, label = data.x, data.edge_index, data.edge_weight, data.y
-            node_feature = node_feature.to(self.device)
-            edge_index = edge_index.to(self.device)
-            edge_weight = edge_weight.to(self.device)
-            label = label.to(self.device)
 
-            output = self.model(node_feature, edge_index, edge_weight)
+            data = data.to(self.device)
+            output = self.model(data)
 
-            label = label.long()  # DOUBT: why does loss_fn need float label
+            label = data.y.long().to(self.device)
 
             loss = self.loss_fn(output, label)
             loss_meter.update_with_weight(

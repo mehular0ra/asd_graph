@@ -1,5 +1,6 @@
 from omegaconf import DictConfig, open_dict
 from .fc_small import load_fc_small_data
+from .fc import load_fc_data
 from .dataloader import init_stratified_dataloader
 
 from typing import List
@@ -11,8 +12,9 @@ def dataset_factory(cfg: DictConfig) -> List[utils.data.DataLoader]:
 
     logging.info('cfg.dataset.name: %s', cfg.dataset.name)
 
-    datasets = eval(
-        f"load_{cfg.dataset.name}_data")(cfg)
+    # datasets = eval(
+    #     f"load_{cfg.dataset.name}_data")(cfg)
+    datasets = load_fc_data(cfg)
     
     dataloaders = init_stratified_dataloader(cfg, *datasets) 
     

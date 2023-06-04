@@ -3,3 +3,10 @@
 
 # Ignore all '__pycache__' directories
 **/__pycache__/
+
+**/Graph_Level_Predictions_on_ADNI_Data_with_Hierarchical_Clustering.ipynb
+final_diagnosis.csv
+log_transformed_ADNI_expression_data_with_covariates.csv
+protein_adjacency_matrix.csv
+
+data_read.ipynb

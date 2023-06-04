@@ -51,35 +51,25 @@ class GCN(torch.nn.Module):
 
 
 
-    def forward(self, x, edge_index, edge_weight=None):
-        # ipdb.set_trace()
-        # For each layer in the network...
+    def forward(self, data):
+        x, edge_index, edge_weight, batch = data.x, data.edge_index, data.edge_weight, data.batch
+
+ 
         for i in range(self.num_layers - 1):
-            # Apply the layer, then activation function (ReLU), then dropout
             x = self.convs[i](x, edge_index, edge_weight)
             x = F.leaky_relu(x)
-            # x = F.dropout(x, p=self.dropout, training=self.training)
 
-            # Check for NaN values in output tensor
             if torch.isnan(x).any():
                 print(f"Found NaN values in output tensor in layer {i}")
 
 
-        # For the last layer, just apply the layer (no activation or dropout)
         x = self.convs[-1](x, edge_index, edge_weight)
 
-        x = self.custom_mean_pool(x)
-        # x = global_mean_pool(x, Batch.batch)
+        x = global_mean_pool(x, batch)
         x = self.fc(x)
 
         return x
 
-    def custom_mean_pool(self, x):
-        # ipdb.set_trace()
-        # return x.mean(dim=1)
-        batch_size = x.shape[0] // 400
-        x = x.view(batch_size, 400, -1).mean(dim=1)
-        return x
     
 
 # check if the model works

@@ -1,5 +1,5 @@
 defaults: 
-  - dataset: fc_small
+  - dataset: fc_bnt
   - model: gcn
   - optimizer: adam
   - training: basic_training
