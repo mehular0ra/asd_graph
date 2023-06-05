@@ -1,5 +1,6 @@
 from omegaconf import DictConfig
 from .GCN import GCN
+from .SimpleNN import SimpleNN
 # from .GAT import GAT
 # from .GraphSAGE import GraphSAGE
 

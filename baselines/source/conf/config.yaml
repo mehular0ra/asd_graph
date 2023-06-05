@@ -1,6 +1,6 @@
 defaults: 
-  - dataset: fc_bnt
-  - model: gcn
+  - dataset: fc_small
+  - model: simplenn
   - optimizer: adam
   - training: basic_training
 

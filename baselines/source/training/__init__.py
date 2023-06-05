@@ -1,5 +1,6 @@
 from operator import mod
 from .training import Train
+from .simple_training import SimpleTrain
 # from .FBNettraining import FBNetTrain
 from omegaconf import DictConfig
 from typing import List

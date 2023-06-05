@@ -16,6 +16,30 @@ import logging
 
 import ipdb
 
+
+def create_simple_data(final_pearson: torch.Tensor,
+                       node_feature: torch.Tensor,
+                       labels: torch.Tensor,
+                       site: torch.Tensor,
+                       site_mapping: dict):
+
+    print("Creating simple data\n\n\n")
+    data_list = []
+    for i in range(final_pearson.shape[0]):
+
+        # map site string to integer
+        mapped_site = site_mapping[site[i]]
+
+        data_tuple = (final_pearson[i].view(-1), labels[i], torch.tensor(mapped_site))
+
+        data_list.append(data_tuple)
+
+    return data_list
+
+
+
+
+
 def create_graph_data(final_pearson: torch.Tensor,
                       node_feature: torch.Tensor,
                       labels: torch.Tensor,
@@ -73,15 +97,20 @@ def init_stratified_dataloader(cfg: DictConfig,
     # Create a one-hot encoded tensor
     node_feature = torch.nn.functional.one_hot(indices).float()
 
-    graph_data_list = create_graph_data(
-        final_pearson, node_feature, labels, site, site_mapping)
+    if cfg.model.name == 'SimpleNN':
+        # create a simple data loader using with each data object containing the final_pearson row
+        data_list = create_simple_data(
+            final_pearson, node_feature, labels, site, site_mapping)
+    else:
+        data_list = create_graph_data(
+            final_pearson, node_feature, labels, site, site_mapping)
 
     # Stratified split
     split = StratifiedShuffleSplit(
         n_splits=1, test_size=val_ratio+test_ratio, train_size=train_ratio, random_state=42)
     for train_index, test_valid_index in split.split(final_pearson, site):
-        train_data_list = [graph_data_list[i] for i in train_index]
-        test_valid_data_list = [graph_data_list[i] for i in test_valid_index]
+        train_data_list = [data_list[i] for i in train_index]
+        test_valid_data_list = [data_list[i] for i in test_valid_index]
         site = site[test_valid_index]
 
     # Relative ratios for second split
@@ -111,11 +140,12 @@ def init_stratified_dataloader(cfg: DictConfig,
     
 
 
+    if cfg.model.name != 'SimpleNN':
+        # analyze dataloaders/ plots
+        analyze_dataloaders(train_dataloader, val_dataloader, test_dataloader,
+                            site_mapping, total_counts)
+        analyze_labels(train_dataloader, val_dataloader, test_dataloader)
 
-    # analyze dataloaders/ plots
-    analyze_dataloaders(train_dataloader, val_dataloader, test_dataloader,
-                        site_mapping, total_counts)
-    analyze_labels(train_dataloader, val_dataloader, test_dataloader)
     return [train_dataloader, val_dataloader, test_dataloader]
 
 

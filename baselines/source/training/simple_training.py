@@ -15,15 +15,13 @@ import logging
 import ipdb
 
 
-class Train:
+class SimpleTrain:
 
     def __init__(self, cfg: DictConfig,
                  model: torch.nn.Module,
                  optimizers: List[torch.optim.Optimizer],
                  lr_schedulers: List[LRScheduler],
                  dataloaders: List[utils.DataLoader]) -> None:
-
-                
 
         self.cfg = cfg
         self.device = self.cfg.device
@@ -37,7 +35,6 @@ class Train:
         self.optimizers = optimizers
         self.lr_schedulers = lr_schedulers
         self.loss_fn = torch.nn.CrossEntropyLoss()
-
 
         self.init_meters()
 
@@ -53,38 +50,34 @@ class Train:
                       self.val_loss, self.test_loss]:
             meter.reset()
 
-    def train_per_epoch(self, optimizer, lr_scheduler):
-        # ipdb.set_trace()
 
+    def train_per_epoch(self, optimizer, lr_scheduler):
         self.model.train()
 
         for data in self.train_dataloader:
             optimizer.zero_grad()
-            # label = label.float()
+
             self.current_step += 1
+            lr_scheduler.update(optimizer=optimizer, step=self.current_step)
 
-            lr_scheduler.update(optimizer=optimizer,
-                                step=self.current_step) 
-            
-            data = data.to(self.device)
-            predict = self.model(data)
+            # Unpack the data tuple and move to device
+            pearson, label, site = data
+            pearson = pearson.to(self.device)
+            label = label.long().to(self.device)
 
-            label = data.y.long().to(self.device)
+            predict = self.model(pearson)
 
             loss = self.loss_fn(predict, label)
             loss.backward()
 
-
-
             self.train_loss.update_with_weight(loss.item(), label.shape[0])
             optimizer.step()
-            acc = accuracy(predict, label) 
+            acc = accuracy(predict, label)
             self.train_accuracy.update_with_weight(acc, label.shape[0])
 
             if self.cfg.is_wandb:
                 # WANDB LOGGING
-                wandb.log({"LR": lr_scheduler.lr,
-                       "Iter loss": loss.item()})
+                wandb.log({"LR": lr_scheduler.lr, "Iter loss": loss.item()})
 
     def test_per_epoch(self, dataloader, loss_meter, acc_meter):
         labels = []
@@ -94,19 +87,20 @@ class Train:
 
         for data in dataloader:
 
-            data = data.to(self.device)
-            output = self.model(data)
+            # Unpack the data tuple and move to device
+            pearson, label, site = data
+            pearson = pearson.to(self.device)
+            label = label.long().to(self.device)
 
-            label = data.y.long().to(self.device)
+            output = self.model(pearson)
 
             loss = self.loss_fn(output, label)
-            loss_meter.update_with_weight(
-                loss.item(), label.shape[0])
+            loss_meter.update_with_weight(loss.item(), label.shape[0])
             acc = accuracy(output, label)
             acc_meter.update_with_weight(acc, label.shape[0])
             result += F.softmax(output, dim=1)[:, 1].tolist()
             labels += label.tolist()
-
+        
         auc = roc_auc_score(labels, result)
         result, labels = np.array(result), np.array(labels)
         result[result > 0.5] = 1
@@ -128,10 +122,10 @@ class Train:
         training_process = []
         self.current_step = 0
 
-        ## LOG THE CONFIG IN WANDB AND LOGGING HERE
+        # LOG THE CONFIG IN WANDB AND LOGGING HERE
         # wandb.init(project="graph-ml", con/fig=self.cfg)
         # wandb.cfg.update(self.cfg)
-        
+
         for epoch in range(self.epochs):
             self.reset_meters()
             self.train_per_epoch(self.optimizers[0], self.lr_schedulers[0])
@@ -181,6 +175,3 @@ class Train:
 
                     # f'LR': self.lr_schedulers[0].lr,
                 })
-
-
-
