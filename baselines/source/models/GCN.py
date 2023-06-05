@@ -16,6 +16,13 @@ class GCN(torch.nn.Module):
         self.hidden_size = cfg.model.hidden_size
         self.num_classes = cfg.dataset.num_classes
 
+        self.convs = torch.nn.ModuleList()
+        for i in range(self.num_layers):
+            if i==0:
+                self.convs.append(GCNConv(cfg.dataset.node_feature_sz, self.hidden_size))
+            else:
+                self.convs.append(GCNConv(self.hidden_size,self.hidden_size))
+                
         self.fc = nn.Sequential(
             nn.Linear(self.hidden_size, self.hidden_size//2),
             nn.LeakyReLU(),
@@ -24,29 +31,7 @@ class GCN(torch.nn.Module):
             nn.LeakyReLU(),
             nn.Linear(self.hidden_size//4, self.num_classes)
         )
-
-        # Initialize the list of convolutional layers
-        self.convs = torch.nn.ModuleList()
-
-        if self.num_layers < 2:
-            # TODO: try setting add_self_loops: False
-            self.convs.append(GCNConv(cfg.dataset.node_feature_sz, self.hidden_size))  
-            return
-            
-        # Add the first layer (input layer)
-        self.convs.append(
-            GCNConv(cfg.dataset.node_feature_sz, self.hidden_size))
-
-        # Add the hidden layers
-        # -2 because we manually add the first and the last layers
-        for _ in range(self.num_layers - 2):
-            self.convs.append(GCNConv(self.hidden_size,
-                              self.hidden_size))
-
-        # Add the last layer (output layer)
-        self.convs.append(GCNConv(self.hidden_size,
-                          self.hidden_size))
-        
+                
         ### TODO: Add different pooling methods
 
 
@@ -54,26 +39,15 @@ class GCN(torch.nn.Module):
     def forward(self, data):
         x, edge_index, edge_weight, batch = data.x, data.edge_index, data.edge_weight, data.batch
 
- 
-        for i in range(self.num_layers - 1):
+        for i in range(self.num_layers):
             x = self.convs[i](x, edge_index, edge_weight)
-            x = F.leaky_relu(x)
+            if i < self.num_layers - 1:
+                x = F.leaky_relu(x)
 
             if torch.isnan(x).any():
                 print(f"Found NaN values in output tensor in layer {i}")
-
-
-        x = self.convs[-1](x, edge_index, edge_weight)
 
         x = global_mean_pool(x, batch)
         x = self.fc(x)
 
         return x
-
-    
-
-# check if the model works
-if __name__ == "__main__":
-    # print model
-    model = GCN()
-    print(model)
