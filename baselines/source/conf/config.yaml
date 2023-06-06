@@ -33,6 +33,6 @@ hydra:
 device: cuda:0
 
 # wandb:
-is_wandb: false
+is_wandb: true
 project: asd-graph
 
