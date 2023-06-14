@@ -1,5 +1,5 @@
 defaults: 
-  - dataset: fc_bnt
+  - dataset: fc_small
   - model: gcn
   - optimizer: adam
   - training: basic_training
@@ -33,6 +33,6 @@ hydra:
 device: cuda:0
 
 # wandb:
-is_wandb: false
+is_wandb: true
 project: asd-graph
 
