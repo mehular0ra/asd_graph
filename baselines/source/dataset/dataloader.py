@@ -108,14 +108,10 @@ def init_stratified_dataloader(cfg: DictConfig,
         # total_steps, steps_per_epoch for lr schedular
         cfg.steps_per_epoch = (train_length - 1) // cfg.dataset.batch_size + 1
         cfg.total_steps = cfg.steps_per_epoch * cfg.training.epochs
-    
 
-
-
-    # analyze dataloaders/ plots
-    analyze_dataloaders(train_dataloader, val_dataloader, test_dataloader,
-                        site_mapping, total_counts)
-    analyze_labels(train_dataloader, val_dataloader, test_dataloader)
+    # analyze_dataloaders(train_dataloader, val_dataloader, test_dataloader,
+    #                     site_mapping, total_counts)
+    # analyze_labels(train_dataloader, val_dataloader, test_dataloader)
     return [train_dataloader, val_dataloader, test_dataloader]
 
 

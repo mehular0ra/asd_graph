@@ -12,6 +12,8 @@ import torch.utils.data as utils
 from source.components import lr_scheduler_factory, LRScheduler
 import logging
 
+from scipy.special import expit
+
 import ipdb
 
 
@@ -36,7 +38,7 @@ class Train:
         self.total_steps = cfg.total_steps
         self.optimizers = optimizers
         self.lr_schedulers = lr_schedulers
-        self.loss_fn = torch.nn.CrossEntropyLoss()
+        self.loss_fn = torch.nn.BCEWithLogitsLoss()
 
 
         self.init_meters()
@@ -67,14 +69,12 @@ class Train:
                                 step=self.current_step) 
             
             data = data.to(self.device)
-            predict = self.model(data)
+            predict = self.model(data).squeeze()
 
-            label = data.y.long().to(self.device)
+            label = data.y.to(self.device)
 
             loss = self.loss_fn(predict, label)
             loss.backward()
-
-
 
             self.train_loss.update_with_weight(loss.item(), label.shape[0])
             optimizer.step()
@@ -88,36 +88,40 @@ class Train:
 
     def test_per_epoch(self, dataloader, loss_meter, acc_meter):
         labels = []
-        result = []
+        logits = []
 
         self.model.eval()
 
         for data in dataloader:
 
             data = data.to(self.device)
-            output = self.model(data)
+            output = self.model(data).squeeze()
 
-            label = data.y.long().to(self.device)
+            label = data.y.to(self.device)
 
             loss = self.loss_fn(output, label)
+
             loss_meter.update_with_weight(
                 loss.item(), label.shape[0])
             acc = accuracy(output, label)
             acc_meter.update_with_weight(acc, label.shape[0])
-            result += F.softmax(output, dim=1)[:, 1].tolist()
+            # result += F.softmax(output, dim=1)[:, 1].tolist()
+            logits += output.squeeze().tolist()
             labels += label.tolist()
 
+        # convert logits to probabilities and predictions
+        probabilities = expit(np.array(logits))
+        predictions = np.round(probabilities)
 
+        labels = np.array(labels)
 
-        auc = roc_auc_score(labels, result)
-        result, labels = np.array(result), np.array(labels)
-        result[result > 0.5] = 1
-        result[result <= 0.5] = 0
+        auc = roc_auc_score(labels, probabilities)
+
         metric = precision_recall_fscore_support(
-            labels, result, average='micro')
+            labels, predictions, average='micro')
 
         report = classification_report(
-            labels, result, output_dict=True, zero_division=0)
+            labels, predictions, output_dict=True, zero_division=0)
 
         recall = [0, 0]
         for k in report:

@@ -29,7 +29,7 @@ class GCN(torch.nn.Module):
             # nn.Dropout(p=self.dropout),
             nn.Linear(self.hidden_size//2, self.hidden_size//4),
             nn.LeakyReLU(),
-            nn.Linear(self.hidden_size//4, self.num_classes)
+            nn.Linear(self.hidden_size//4, 1)
         )
                 
         ### TODO: Add different pooling methods
