@@ -53,7 +53,8 @@ def init_stratified_dataloader(cfg: DictConfig,
                                final_pearson: torch.tensor,
                                labels: torch.tensor,
                                site: np.array,
-                               final_sc: Optional[torch.tensor] = None) -> List[DataLoader]:
+                               final_sc: Optional[torch.tensor] = None,
+                               data_creation_func=None) -> List[DataLoader]:
 
     train_length = cfg.dataset.train_set * final_pearson.shape[0]
     train_ratio = cfg.dataset.train_set
@@ -73,8 +74,9 @@ def init_stratified_dataloader(cfg: DictConfig,
     # Create a one-hot encoded tensor
     node_feature = torch.nn.functional.one_hot(indices).float()
 
-    graph_data_list = create_graph_data(
-        final_pearson, node_feature, labels, site, site_mapping)
+
+    graph_data_list = data_creation_func(
+        final_pearson, node_feature, labels, site, site_mapping, final_sc)
 
     # Stratified split
     split = StratifiedShuffleSplit(
