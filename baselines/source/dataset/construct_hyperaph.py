@@ -1,8 +1,13 @@
 """
 transform graphs (represented by edge list) to hypergraph (represented by node_dict & edge_dict)
 """
+from typing import Optional
 import numpy as np
+from omegaconf import DictConfig
 from sklearn.metrics.pairwise import cosine_distances as cos_dis
+import torch
+
+import ipdb
 
 
 def hyperedge_concat(*H_list):
@@ -31,6 +36,7 @@ def construct_H_with_KNN(X, K_neigs=[10], is_probH=False, m_prob=1):
     :param m_prob: prob
     :return: N_object x N_hyperedge
     """
+    ipdb.set_trace()
     if len(X.shape) != 2:
         X = X.reshape(-1, X.shape[-1])
 
@@ -136,4 +142,41 @@ def construct_G_from_fts(Xs, k_neighbors):
     G = generate_G_from_H(H)
     return G
 
-def create_hypergraph_data()
+
+def create_hypergraph_feature(feature):
+
+    # number of nodes
+    m = feature.shape[1]
+
+    for i in range(feature.shape[0]):
+        # Taking upper triangular part of each converted matrixes
+        t = np.triu(feature[i, :, :])
+        # Creating 1xK matrixes which K is connectivity number of upper triangular part.
+        x = t[np.triu_indices(m, 1)]
+        x1 = x.transpose()
+        Featurematrix = np.empty((0, x1.shape[0]), int)
+        Featurematrix = np.append(Featurematrix, np.array([x1]), axis=0)
+    return Featurematrix
+
+
+def create_hypergraph_data(cfg: DictConfig,
+                           final_pearson: torch.Tensor,
+                           node_feature: torch.Tensor,
+                           labels: torch.Tensor,
+                           site: torch.Tensor,
+                           site_mapping: dict,
+                           final_sc: Optional[torch.Tensor] = None):
+
+    K_neigs = cfg.model.K_neigs
+    is_probH = cfg.model.is_probH
+    
+
+    Xs = []
+    Xs = [create_hypergraph_feature(final_pearson)]
+    if final_sc is not None:
+        Xs.append(create_hypergraph_feature(final_sc))
+
+    H = [construct_H_with_KNN(Xs[i], [K_neigs], is_probH)
+         for i in range(len(Xs))]
+
+    return H

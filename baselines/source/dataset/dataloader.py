@@ -12,15 +12,20 @@ import torch
 import matplotlib.pyplot as plt
 from collections import Counter
 
+from .construct_hyperaph import create_hypergraph_data
+
 import logging
 
 import ipdb
 
-def create_graph_data(final_pearson: torch.Tensor,
+
+def create_graph_data(cfg: DictConfig,
+                      final_pearson: torch.Tensor,
                       node_feature: torch.Tensor,
                       labels: torch.Tensor,
                       site: torch.Tensor,
-                      site_mapping: dict):
+                      site_mapping: dict,
+                      final_sc: Optional[torch.Tensor] = None):
 
     graph_data_list = []
     for i in range(final_pearson.shape[0]):
@@ -29,17 +34,9 @@ def create_graph_data(final_pearson: torch.Tensor,
         # create edge weights tensor 'MAKING THEM ABSOLUTE'
         edge_weight = final_pearson[i][edge_index[0], edge_index[1]].clamp(min=0)
 
-        # Check for NaN values in edge_weight tensor
-        if torch.isnan(edge_weight).any():
-            print(f"Found NaN values in edge weights for graph {i}")
 
         
-        # map site string to integer
         mapped_site = site_mapping[site[i]]
-
-        # Check for NaN values in node_feature tensor
-        # if torch.isnan(node_feature).any():
-        #     print(f"Found NaN values in node features for graph {i}")
 
         data = Data(x=node_feature, edge_index=edge_index,
                     y=labels[i], site=mapped_site, edge_weight=edge_weight)
@@ -54,7 +51,7 @@ def init_stratified_dataloader(cfg: DictConfig,
                                labels: torch.tensor,
                                site: np.array,
                                final_sc: Optional[torch.tensor] = None,
-                               data_creation_func=None) -> List[DataLoader]:
+                               data_creation_func = None) -> List[DataLoader]:
 
     train_length = cfg.dataset.train_set * final_pearson.shape[0]
     train_ratio = cfg.dataset.train_set
@@ -74,9 +71,8 @@ def init_stratified_dataloader(cfg: DictConfig,
     # Create a one-hot encoded tensor
     node_feature = torch.nn.functional.one_hot(indices).float()
 
-
-    graph_data_list = data_creation_func(
-        final_pearson, node_feature, labels, site, site_mapping, final_sc)
+    graph_data_list = eval(data_creation_func)(
+        cfg, final_pearson, node_feature, labels, site, site_mapping, final_sc)
 
     # Stratified split
     split = StratifiedShuffleSplit(

@@ -1,6 +1,6 @@
 defaults: 
   - dataset: fc_small
-  - model: gcn
+  - model: hgnn
   - optimizer: adam
   - training: basic_training
 
