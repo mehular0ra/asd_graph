@@ -27,7 +27,9 @@ def create_graph_data(final_pearson: torch.Tensor,
         edge_index = final_pearson[i].nonzero(as_tuple=False).t().contiguous()
 
         # create edge weights tensor 'MAKING THEM ABSOLUTE'
-        edge_weight = final_pearson[i][edge_index[0], edge_index[1]].clamp(min=0)
+        # edge_weight = final_pearson[i][edge_index[0], edge_index[1]].clamp(min=0)
+
+        edge_weight = final_pearson[i][edge_index[0], edge_index[1]]
 
         # Check for NaN values in edge_weight tensor
         if torch.isnan(edge_weight).any():
