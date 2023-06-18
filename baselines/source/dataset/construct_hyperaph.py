@@ -10,153 +10,74 @@ import torch
 import ipdb
 
 
-def hyperedge_concat(*H_list):
+def construct_H_with_KNN(X, K_neig, is_probH=False):
     """
-    Concatenate hyperedge group in H_list
-    :param H_list: Hyperedge groups which contain two or more hypergraph incidence matrix
-    :return: Fused hypergraph incidence matrix
+    Initialize hypergraph Vertex-Edge matrix from original node feature matrix
+    :param X: 2D array representing the pairwise distances between nodes
+    :param K_neig: The number of neighbor expansion
+    :param is_probH: Prob Vertex-Edge matrix or binary
+    :return: N_nodes x N_hyperedge
     """
-    H = None
-    for h in H_list:
-        if h is not None:
-            # for the first H appended to fused hypergraph incidence matrix
-            if H is None:
-                H = h
-            else:
-                H = np.hstack((H, h))
-    return H
+    n_nodes = X.shape[0]
+
+    # Construct hypergraph incidence matrix H
+    H = np.zeros((n_nodes, n_nodes))
+
+    for center_idx in range(n_nodes):
+        # Here, we're considering each node as the center of a hyperedge
+        # Obtain the distances from the current center_idx to all other nodes
+        # dis_vec = X[center_idx]
+        dis_vec = X[center_idx]
+
+        # Obtain K nearest neighbors to the current center_idx
+        # nearest_idx = np.argpartition(dis_vec, K_neig)[-K_neig:]
+        nearest_idx = np.argsort(np.abs(dis_vec))[-K_neig:]
 
 
-def construct_H_with_KNN(X, K_neigs=[10], is_probH=False, m_prob=1):
-    """
-    init multi-scale hypergraph Vertex-Edge matrix from original node feature matrix
-    :param X: N_object x feature_number
-    :param K_neigs: the number of neighbor expansion
-    :param is_probH: prob Vertex-Edge matrix or binary
-    :param m_prob: prob
-    :return: N_object x N_hyperedge
-    """
-    ipdb.set_trace()
-    if len(X.shape) != 2:
-        X = X.reshape(-1, X.shape[-1])
 
-    if type(K_neigs) == int:
-        K_neigs = [K_neigs]
-
-    dis_mat = cos_dis(X)
-    H = None
-    for k_neig in K_neigs:
-        H_tmp = construct_H_with_KNN_from_distance(
-            dis_mat, k_neig, is_probH, m_prob)
-        H = hyperedge_concat(H, H_tmp)
-    return H
-
-
-def construct_H_with_KNN_from_distance(dis_mat, k_neig, is_probH=False, m_prob=1):
-    """
-    construct hypregraph incidence matrix from hypergraph node distance matrix
-    :param dis_mat: node distance matrix
-    :param k_neig: K nearest neighbor
-    :param is_probH: prob Vertex-Edge matrix or binary
-    :param m_prob: prob
-    :return: N_object X N_hyperedge
-    """
-    n_obj = dis_mat.shape[0]
-    # construct hyperedge from the central feature space of each node
-    n_edge = n_obj
-    H = np.zeros((n_obj, n_edge))
-    for center_idx in range(n_obj):
-        dis_mat[center_idx, center_idx] = 0
-        dis_vec = dis_mat[center_idx]
-        nearest_idx = np.array(np.argsort(dis_vec)).squeeze()
-        avg_dis = np.average(dis_vec)
-        if not np.any(nearest_idx[:k_neig] == center_idx):
-            nearest_idx[k_neig - 1] = center_idx
-
-        for node_idx in nearest_idx[:k_neig]:
+        for node_idx in nearest_idx:
             if is_probH:
-                H[node_idx, center_idx] = np.exp(
-                    -dis_vec[0, node_idx] ** 2 / (m_prob * avg_dis) ** 2)
+                H[node_idx, center_idx] = np.abs(
+                    dis_vec[node_idx]) / torch.sum(np.abs(dis_vec[nearest_idx]))
+                
+                # Softmax normalization
+                # H[node_idx, center_idx] = softmax(np.abs(dis_vec))[node_idx]
+
+                # Inverse distance weighting
+                # H[node_idx, center_idx] = 1 / np.abs(dis_vec[node_idx])
             else:
                 H[node_idx, center_idx] = 1.0
+
     return H
 
 
-def _generate_G_from_H(H, variable_weight=False):
+def generate_G_from_H(H):
     """
-    calculate G from hypgraph incidence matrix H
+    Calculate G from hypgraph incidence matrix H
     :param H: hypergraph incidence matrix H
-    :param variable_weight: whether the weight of hyperedge is variable
     :return: G
     """
     H = np.array(H)
     n_edge = H.shape[1]
-    # the weight of the hyperedge
+
+    # The weight of the hyperedge
     W = np.ones(n_edge)
-    # the degree of the node
+
+    # The degree of the node
     DV = np.sum(H * W, axis=1)
-    # the degree of the hyperedge
+
+    # The degree of the hyperedge
     DE = np.sum(H, axis=0)
 
-    invDE = np.mat(np.diag(np.power(DE, -1)))
-    DV2 = np.mat(np.diag(np.power(DV, -0.5)))
-    W = np.mat(np.diag(W))
-    H = np.mat(H)
+    invDE = np.diag(np.power(DE, -1))
+    DV2 = np.diag(np.power(DV, -0.5))
+    W = np.diag(W)
+    H = np.matrix(H)
     HT = H.T
 
-    if variable_weight:
-        DV2_H = DV2 * H
-        invDE_HT_DV2 = invDE * HT * DV2
-        return DV2_H, W, invDE_HT_DV2
-    else:
-        G = DV2 * H * W * invDE * HT * DV2
-        return G
-
-
-def generate_G_from_H(H, variable_weight=False):
-    """
-    calculate G from hypgraph incidence matrix H
-    :param H: hypergraph incidence matrix H
-    :param variable_weight: whether the weight of hyperedge is variable
-    :return: G
-    """
-    if type(H) != list:
-        return _generate_G_from_H(H, variable_weight)
-    else:
-        G = []
-        for sub_H in H:
-            G.append(generate_G_from_H(sub_H, variable_weight))
-        return G
-
-
-def construct_G_from_fts(Xs, k_neighbors):
-    """
-    generate G from concatenated H from list of features
-    :param Xs: list of features
-    :param k_neighs: list of k
-    :return: numpy array
-    """
-    Hs = [construct_H_with_KNN(Xs[i], [k_neighbors[i]])
-          for i in range(len(Xs))]
-    H = np.concatenate(Hs, axis=1)
-    G = generate_G_from_H(H)
+    G = DV2 @ H @ W @ invDE @ HT @ DV2
     return G
 
-
-def create_hypergraph_feature(feature):
-
-    # number of nodes
-    m = feature.shape[1]
-
-    for i in range(feature.shape[0]):
-        # Taking upper triangular part of each converted matrixes
-        t = np.triu(feature[i, :, :])
-        # Creating 1xK matrixes which K is connectivity number of upper triangular part.
-        x = t[np.triu_indices(m, 1)]
-        x1 = x.transpose()
-        Featurematrix = np.empty((0, x1.shape[0]), int)
-        Featurematrix = np.append(Featurematrix, np.array([x1]), axis=0)
-    return Featurematrix
 
 
 def create_hypergraph_data(cfg: DictConfig,
@@ -169,14 +90,12 @@ def create_hypergraph_data(cfg: DictConfig,
 
     K_neigs = cfg.model.K_neigs
     is_probH = cfg.model.is_probH
-    
 
-    Xs = []
-    Xs = [create_hypergraph_feature(final_pearson)]
-    if final_sc is not None:
-        Xs.append(create_hypergraph_feature(final_sc))
-
-    H = [construct_H_with_KNN(Xs[i], [K_neigs], is_probH)
-         for i in range(len(Xs))]
-
-    return H
+    H_list = []
+    G_list = []
+    for subject_matrix in final_pearson:
+        H_tmp = construct_H_with_KNN(subject_matrix, K_neigs, is_probH)
+        G_tmp = generate_G_from_H(H_tmp)
+        H_list.append(H_tmp)
+        G_list.append(G_tmp)
+    return G_list

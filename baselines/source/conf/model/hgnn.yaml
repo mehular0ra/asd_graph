@@ -8,4 +8,4 @@ readout: mean   # sum, mean, max, OCReadout, AttentionReadout
 
 data_creation: hypergraph
 K_neigs: 4
-is_probH: False
+is_probH: True
