@@ -140,11 +140,11 @@ def init_stratified_dataloader(cfg: DictConfig,
     
 
 
-    if cfg.model.name != 'SimpleNN':
-        # analyze dataloaders/ plots
-        analyze_dataloaders(train_dataloader, val_dataloader, test_dataloader,
-                            site_mapping, total_counts)
-        analyze_labels(train_dataloader, val_dataloader, test_dataloader)
+    # if cfg.model.name != 'SimpleNN':
+    #     # analyze dataloaders/ plots
+    #     analyze_dataloaders(train_dataloader, val_dataloader, test_dataloader,
+    #                         site_mapping, total_counts)
+    #     analyze_labels(train_dataloader, val_dataloader, test_dataloader)
 
     return [train_dataloader, val_dataloader, test_dataloader]
 
