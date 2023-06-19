@@ -1,6 +1,6 @@
 defaults: 
   - dataset: fc_small
-  - model: signedgcn
+  - model: gcn
   - optimizer: adam
   - training: basic_training
 
