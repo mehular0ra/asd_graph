@@ -1,5 +1,4 @@
 from omegaconf import DictConfig, open_dict
-from .fc_small import load_fc_small_data
 from .fc import load_fc_data
 from .dataloader import init_stratified_dataloader, create_graph_data, create_hypergraph_data
 

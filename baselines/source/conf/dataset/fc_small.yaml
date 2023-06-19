@@ -1,4 +1,4 @@
-name: fc_small
+name: fc_bnt
 batch_size: 16
 
 train_set: 0.8
@@ -12,3 +12,5 @@ stratified: True
 node_sz: 400
 node_feature_sz: 400
 num_classes: 2
+
+perc_edges: 10
