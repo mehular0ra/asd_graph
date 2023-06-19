@@ -24,16 +24,9 @@ def construct_H_with_KNN(X, K_neig, is_probH=False):
     H = np.zeros((n_nodes, n_nodes))
 
     for center_idx in range(n_nodes):
-        # Here, we're considering each node as the center of a hyperedge
-        # Obtain the distances from the current center_idx to all other nodes
-        # dis_vec = X[center_idx]
         dis_vec = X[center_idx]
 
-        # Obtain K nearest neighbors to the current center_idx
-        # nearest_idx = np.argpartition(dis_vec, K_neig)[-K_neig:]
         nearest_idx = np.argsort(np.abs(dis_vec))[-K_neig:]
-
-
 
         for node_idx in nearest_idx:
             if is_probH:
