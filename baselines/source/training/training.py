@@ -1,4 +1,4 @@
-from source.utils import accuracy, TotalMeter, count_params, isfloat
+from source.utils import accuracy, TotalMeter, count_params, isfloat, BCEWithLogitsLossL2
 import torch
 import numpy as np
 from pathlib import Path
@@ -33,7 +33,7 @@ class Train:
         self.logger = logging.getLogger()
         self.model = model.to(self.device)
         self.logger.info(f'#model params: {count_params(self.model)}')
-        self.train_dataloader, self.val_dataloader, self.test_dataloader = dataloaders
+        self.train_dataloader, self.val_dataloader = dataloaders
         self.epochs = cfg.training.epochs
         self.total_steps = cfg.total_steps
         self.optimizers = optimizers
@@ -141,11 +141,9 @@ class Train:
         for epoch in range(self.epochs):
             self.reset_meters()
             self.train_per_epoch(self.optimizers[0], self.lr_schedulers[0])
-            val_result = self.test_per_epoch(self.val_dataloader,
-                                             self.val_loss, self.val_accuracy)
+            val_result = self.test_per_epoch(self.val_dataloader,    
+                                            self.val_loss, self.val_accuracy)
 
-            test_result = self.test_per_epoch(self.test_dataloader,
-                                              self.test_loss, self.test_accuracy)
 
             self.logger.info(" | ".join([
                 f'Epoch[{epoch+1}/{self.epochs}]',
@@ -155,37 +153,34 @@ class Train:
                 f'Val Loss:{self.val_loss.avg: .3f}',
                 f'Val Accuracy:{self.val_accuracy.avg: .3f}%',
                 f'Val AUC:{val_result[0]:.4f}',
-
-                f'Test Accuracy:{self.test_accuracy.avg: .3f}%',
-                f'Test AUC:{test_result[0]:.4f}',
-                f'Test Sen:{test_result[-1]:.4f}',
-                f'Test Spe:{test_result[-2]:.4f}',
-                f'Test F1:{test_result[-4]:.4f}',
-                f'Test Recall:{test_result[-5]:.4f}',
-                f'Test Precision:{test_result[-6]:.4f}',
+                f'Val Sen:{val_result[-1]:.4f}',
+                f'Val Spe:{val_result[-2]:.4f}',
+                f'Val F1:{val_result[-4]:.4f}',
+                f'Val Recall:{val_result[-5]:.4f}',
+                f'Val Precision:{val_result[-6]:.4f}',
                 f'LR:{self.lr_schedulers[0].lr:.7f}'
+
             ]))
 
             if self.cfg.is_wandb:
                 wandb.log({
                     "Train Loss": self.train_loss.avg,
                     "Train Accuracy": self.train_accuracy.avg,
+                    "Best Train Accuracy": self.train_accuracy.best,
+                    "Train AUC": self.train_auc.avg,
+                    "Train Sensitivity": self.train_sen.avg,
+                    "Train Specificity": self.train_spe.avg,
 
                     "Val Loss": self.val_loss.avg,
                     "Val Accuracy": self.val_accuracy.avg,
+                    "Best Val Accuracy": self.val_accuracy.best,
                     "Val AUC": val_result[0],
-                    'Val Sensitivity': val_result[-1],
-                    'Val Specificity': val_result[-2],
+                    "Val Sensitivity": val_result[-1],
+                    "Val Specificity": val_result[-2],
+                    "Val F1": val_result[-4],
+                    "Val Recall": val_result[-5],
+                    "Val Precision": val_result[-6],
 
-                    "Test Accuracy": self.test_accuracy.avg,
-                    "Test AUC": test_result[0],
-                    'Test Sensitivity': test_result[-1],
-                    'Test Specificity': test_result[-2],
-                    'micro F1': test_result[-4],
-                    'micro recall': test_result[-5],
-                    'micro precision': test_result[-6],
-
-                    # f'LR': self.lr_schedulers[0].lr,
                 })
 
 

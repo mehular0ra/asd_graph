@@ -1,11 +1,13 @@
 import torch
 import torch.nn.functional as F
 import torch.nn as nn
-from torch_geometric.nn import GCNConv, global_mean_pool
-from .EdgeWeightedSignedConv import EdgeWeightedSignedConv as EdgeWeightedSignedConv
+from torch_geometric.nn import GCNConv, global_mean_pool, EdgePooling
 from torch_geometric.data import Batch
 
 from omegaconf import DictConfig
+
+from .EdgeWeightedSignedConv import EdgeWeightedSignedConv
+
 import ipdb
 
 
@@ -16,6 +18,7 @@ class SignedGCN(torch.nn.Module):
         self.dropout = cfg.model.dropout
         self.hidden_size = cfg.model.hidden_size
         self.num_classes = cfg.dataset.num_classes
+        self.node_sz = cfg.dataset.node_sz
 
         self.convs = torch.nn.ModuleList()
         for i in range(self.num_layers):
@@ -26,7 +29,8 @@ class SignedGCN(torch.nn.Module):
                 self.convs.append(EdgeWeightedSignedConv(
                     self.hidden_size, self.hidden_size // 2))
 
-        self.lincomb = nn.Linear(400 * self.hidden_size, self.hidden_size)
+        self.lincomb = nn.Linear(self.node_sz * self.hidden_size, self.hidden_size)
+
         self.lin = nn.Linear(self.hidden_size, 1)
 
         # TODO: Add different pooling methods
@@ -44,9 +48,9 @@ class SignedGCN(torch.nn.Module):
                 print(f"Found NaN values in output tensor in layer {i}")
 
         # 2. Readout layer
-        # x = global_mean_pool(x, batch)
-        x = torch.stack([self.lincomb(x[i:i+400].flatten())
-                        for i in range(0, x.shape[0], 400)]).to('cuda')
+        # x = global_max_pool(x, batch)
+        x = torch.stack([self.lincomb(x[i:i+self.node_sz].flatten())
+                        for i in range(0, x.shape[0], self.node_sz)]).to('cuda')
 
         # 3. Apply a final classifier
         x = F.dropout(x, p=0.5, training=self.training)

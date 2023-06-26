@@ -53,11 +53,10 @@ def init_stratified_dataloader(cfg: DictConfig,
                                labels: torch.tensor,
                                site: np.array,
                                final_sc: Optional[torch.tensor] = None,
-                               data_creation_func = None) -> List[DataLoader]:
+                               data_creation_func=None) -> List[DataLoader]:
 
     train_length = cfg.dataset.train_set * final_pearson.shape[0]
     train_ratio = cfg.dataset.train_set
-    val_ratio = cfg.dataset.val_set
     test_ratio = cfg.dataset.test_set
 
     # map site names to unique integers
@@ -78,28 +77,14 @@ def init_stratified_dataloader(cfg: DictConfig,
 
     # Stratified split
     split = StratifiedShuffleSplit(
-        n_splits=1, test_size=val_ratio+test_ratio, train_size=train_ratio, random_state=42)
-    for train_index, test_valid_index in split.split(final_pearson, site):
+        n_splits=1, test_size=test_ratio, train_size=train_ratio, random_state=42)
+    for train_index, test_index in split.split(final_pearson, site):
         train_data_list = [graph_data_list[i] for i in train_index]
-        test_valid_data_list = [graph_data_list[i] for i in test_valid_index]
-        site = site[test_valid_index]
-
-    # Relative ratios for second split
-    relative_val_ratio = val_ratio / (val_ratio + test_ratio)
-    relative_test_ratio = 1 - relative_val_ratio
-
-    split2 = StratifiedShuffleSplit(
-        n_splits=1, test_size=relative_test_ratio, train_size=relative_val_ratio, random_state=42)
-    for valid_index, test_index in split2.split(test_valid_data_list, site):
-        val_data_list = [test_valid_data_list[i] for i in valid_index]
-        test_data_list = [test_valid_data_list[i] for i in test_index]
-
+        test_data_list = [graph_data_list[i] for i in test_index]
 
     # create pyg dataloader
     train_dataloader = DataLoader(
         train_data_list, batch_size=cfg.dataset.batch_size, shuffle=True)
-    val_dataloader = DataLoader(
-        val_data_list, batch_size=cfg.dataset.batch_size, shuffle=False)
     test_dataloader = DataLoader(
         test_data_list, batch_size=cfg.dataset.batch_size, shuffle=False)
 
@@ -109,10 +94,11 @@ def init_stratified_dataloader(cfg: DictConfig,
         cfg.steps_per_epoch = (train_length - 1) // cfg.dataset.batch_size + 1
         cfg.total_steps = cfg.steps_per_epoch * cfg.training.epochs
 
-    # analyze_dataloaders(train_dataloader, val_dataloader, test_dataloader,
+    # analyze_dataloaders(train_dataloader, test_dataloader,
     #                     site_mapping, total_counts)
-    # analyze_labels(train_dataloader, val_dataloader, test_dataloader)
-    return [train_dataloader, val_dataloader, test_dataloader]
+    # analyze_labels(train_dataloader, test_dataloader)
+    return [train_dataloader, test_dataloader]
+
 
 
 def analyze_labels(train_dataloader: DataLoader, val_dataloader: DataLoader, test_dataloader: DataLoader):
