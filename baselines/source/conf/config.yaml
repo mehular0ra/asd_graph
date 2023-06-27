@@ -1,12 +1,22 @@
 defaults: 
   - dataset: fc_bnt
-  - model: gcn
+  - model: signedgcn
   - optimizer: adam
-  - training: basic_training
+  - training: train
 
 log_path: result
 
-repeat_time: 1
+repeat_time: 3
+
+# total_steps: 100 # remove this later
+
+device: cuda:0
+
+# wandb:
+is_wandb: true
+project: asd-graph
+
+
 
 hydra:
   job_logging:
@@ -26,13 +36,4 @@ hydra:
         class: logging.FileHandler
         formatter: precise
         filename: ./output.log
-
-
-# total_steps: 100 # remove this later
-
-device: cuda:0
-
-# wandb:
-is_wandb: false
-project: asd-graph
 

@@ -56,6 +56,7 @@ def optimizer_factory(model: torch.nn.Module, optimizer_config: DictConfig) -> t
         'weight_decay': optimizer_config.weight_decay
     }
 
+
     if optimizer_config.no_weight_decay:
         params, _ = get_param_group_no_wd(model,
                                           match_rule=optimizer_config.match_rule,

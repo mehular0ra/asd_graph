@@ -27,14 +27,8 @@ class GCN(torch.nn.Module):
         self.lincomb = nn.Linear(
             self.node_sz * self.hidden_size, self.hidden_size)
                 
-        self.fc = nn.Sequential(
-            nn.Linear(self.hidden_size, self.hidden_size//2),
-            nn.LeakyReLU(),
-            # nn.Dropout(p=self.dropout),
-            nn.Linear(self.hidden_size//2, self.hidden_size//4),
-            nn.LeakyReLU(),
-            nn.Linear(self.hidden_size//4, 1)
-        )
+        self.lin = nn.Linear(self.hidden_size, 1)
+
                 
         ### TODO: Add different pooling methods
 
@@ -58,6 +52,6 @@ class GCN(torch.nn.Module):
         x = torch.stack([self.lincomb(x[i:i+self.node_sz].flatten())
                             for i in range(0, x.shape[0], self.node_sz)]).to('cuda')
 
-        x = self.fc(x)
+        x = self.lin(x)
 
         return x

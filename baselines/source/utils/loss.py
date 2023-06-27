@@ -2,7 +2,7 @@ import torch
 
 
 class BCEWithLogitsLossL2(torch.nn.Module):
-    def __init__(self, model, lambda_l2=0.1):
+    def __init__(self, model, lambda_l2=0.00):
         super(BCEWithLogitsLossL2, self).__init__()
         self.model = model
         self.lambda_l2 = lambda_l2

@@ -12,3 +12,6 @@ stratified: True
 node_sz: 400
 node_feature_sz: 400
 num_classes: 2
+
+perc_edges: 100
+

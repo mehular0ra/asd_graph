@@ -1,24 +1,31 @@
 from omegaconf import DictConfig, open_dict
 from .fc import load_fc_data
-from .dataloader import init_stratified_dataloader, create_graph_data, create_hypergraph_data
+from .dataloader import init_stratified_dataloader, k_fold_cv_dataloader
 
 from typing import List
 import torch.utils as utils
 import logging
 
+from .construct_graph import create_graph_data
 from .construct_hyperaph import create_hypergraph_data
 
 
 def dataset_factory(cfg: DictConfig) -> List[utils.data.DataLoader]:
 
     logging.info('cfg.dataset.name: %s', cfg.dataset.name)
-
+    
+    # create dataset
     datasets = load_fc_data(cfg)
 
-
+    # graph data creation
     data_creation = cfg.model.get("data_creation", "graph")
     data_creation_func = "create_" + data_creation + "_data"
+    graph_data_list, site = eval(data_creation_func)(cfg, *datasets)
 
-    dataloaders = init_stratified_dataloader(
-        cfg, *datasets, data_creation_func=data_creation_func)
+    # dataloader creation
+    if cfg.training.name == "CVTrain":
+        dataloaders = k_fold_cv_dataloader(cfg, graph_data_list, site)
+    else:
+        dataloaders = init_stratified_dataloader(cfg, graph_data_list, site)
+
     return dataloaders
