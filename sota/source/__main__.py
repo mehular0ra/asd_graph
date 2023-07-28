@@ -11,10 +11,9 @@ from .components import optimizers_factory, lr_scheduler_factory
 from .training import training_factory
 
 
-
 def model_training(cfg: DictConfig):
 
-    dataloaders = dataset_factory(cfg)
+    data_list = dataset_factory(cfg)
     model = model_factory(cfg)
     print(model)
     optimizers = optimizers_factory(
@@ -24,7 +23,7 @@ def model_training(cfg: DictConfig):
                                 model=model,
                                 optimizers=optimizers,
                                 lr_schedulers=lr_schedulers,
-                                dataloaders=dataloaders)
+                                data_list=data_list)
     training.train()
 
 
@@ -38,13 +37,11 @@ def main(cfg: DictConfig) -> None:
         if cfg.is_wandb:
             run = wandb.init(project=cfg.project, reinit=True,
                              group=f"{group_name}", tags=[f"{cfg.dataset.name}, {cfg.model.name}"])
-        logging.info(OmegaConf.to_yaml(cfg)) 
+        logging.info(OmegaConf.to_yaml(cfg))
         model_training(cfg)
 
         if cfg.is_wandb:
             wandb.finish()
-
-
 
 
 if __name__ == "__main__":

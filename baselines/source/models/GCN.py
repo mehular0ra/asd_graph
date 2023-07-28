@@ -49,6 +49,7 @@ class GCN(torch.nn.Module):
                 print(f"Found NaN values in output tensor in layer {i}")
 
         # x = global_mean_pool(x, batch)
+        ipdb.set_trace()
         x = torch.stack([self.lincomb(x[i:i+self.node_sz].flatten())
                             for i in range(0, x.shape[0], self.node_sz)]).to('cuda')
 

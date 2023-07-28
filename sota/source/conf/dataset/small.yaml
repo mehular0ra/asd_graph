@@ -1,0 +1,18 @@
+name: small
+
+fc: true
+sc: false
+t1: false
+
+fc_path: /mnt/ssd1/mehul_data/research/fc_small_data.npy
+
+perc_edges: 10
+node_feature_dim: 400
+num_nodes: 400
+
+
+k: 5
+
+
+train_set: 0.8
+test_set: 0.2

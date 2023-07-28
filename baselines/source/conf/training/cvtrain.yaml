@@ -1,3 +1,5 @@
 name: CVTrain
 epochs: 50
 n_splits: 5
+
+l2: 0.0

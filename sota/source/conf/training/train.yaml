@@ -1,4 +1,6 @@
 name: Train
 epochs: 50
 
+batch_size: 8
+
 l2: 0.0

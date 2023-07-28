@@ -28,7 +28,6 @@ def load_fc_data(cfg: DictConfig):
     final_pearson = fc_data["corr"]
     labels = fc_data["label"]
     site = fc_data['site']
-
     # Apply edge pruning
     for i in range(final_pearson.shape[0]):
         final_pearson[i] = top_percent_edges(final_pearson[i], cfg.dataset.perc_edges)

@@ -6,13 +6,16 @@ import torch.nn.functional as F
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import precision_recall_fscore_support, classification_report
 import wandb
-from omegaconf import DictConfig
+from omegaconf import DictConfig, open_dict
 from typing import List
 import torch.utils.data as utils
 from source.components import lr_scheduler_factory, LRScheduler
 import logging
 
 from scipy.special import expit
+
+
+from ..dataset import create_mini_batch
 
 import ipdb
 
@@ -23,9 +26,13 @@ class Train:
                  model: torch.nn.Module,
                  optimizers: List[torch.optim.Optimizer],
                  lr_schedulers: List[LRScheduler],
-                 dataloaders: List[utils.DataLoader]) -> None:
-
-                
+                 data_list: list) -> None:
+        
+        # add total_steps and steps_per_epoch to cfg
+        with open_dict(cfg):
+            # total_steps, steps_per_epoch for lr schedular
+            cfg.steps_per_epoch = (len(data_list[0]) - 1) // cfg.training.batch_size + 1
+            cfg.total_steps = cfg.steps_per_epoch * cfg.training.epochs
 
         self.cfg = cfg
         self.device = self.cfg.device
@@ -33,22 +40,20 @@ class Train:
         self.logger = logging.getLogger()
         self.model = model.to(self.device)
         self.logger.info(f'#model params: {count_params(self.model)}')
-        self.train_dataloader, self.test_dataloader = dataloaders
+        self.train_list, self.test_list = data_list
         self.epochs = cfg.training.epochs
         self.total_steps = cfg.total_steps
         self.optimizers = optimizers
         self.lr_schedulers = lr_schedulers
-        self.loss_fn = BCEWithLogitsLossL2(self.model, self.cfg.training.l2)
+        self.loss_fn = BCEWithLogitsLossL2(self.model, cfg.training.l2)
 
         self.best_test_accuracy = 0.0
-
-
 
         self.init_meters()
 
     def init_meters(self):
         self.train_loss, self.test_loss, self.train_accuracy, self.test_accuracy = [
-                TotalMeter() for _ in range(4)]
+            TotalMeter() for _ in range(4)]
 
     def reset_meters(self):
         for meter in [self.train_accuracy, self.test_accuracy, self.train_loss, self.test_loss]:
@@ -58,57 +63,51 @@ class Train:
         # ipdb.set_trace()
 
         self.model.train()
-
-        for data in self.train_dataloader:
+        BATCH_SIZE = self.cfg.training.batch_size
+        num_iter = int(len(self.train_list)/BATCH_SIZE)
+        
+        for i in range(num_iter):
             optimizer.zero_grad()
-            # label = label.float()
             self.current_step += 1
-
             lr_scheduler.update(optimizer=optimizer,
-                                step=self.current_step) 
+                                step=self.current_step)
             
-            data = data.to(self.device)
-            predict = self.model(data).squeeze()
-
-            label = data.y.to(self.device)
+            batch_list = self.train_list[i*BATCH_SIZE:(i+1)*BATCH_SIZE]
+            batch = create_mini_batch(batch_list)
+            batch = batch.to(self.device)
+            predict = self.model(batch).squeeze()
+            label = batch.y.to(self.device)
 
             loss = self.loss_fn(predict, label)
             loss.backward()
 
             self.train_loss.update_with_weight(loss.item(), label.shape[0])
             optimizer.step()
-            acc = accuracy(predict, label) 
+            acc = accuracy(predict, label)
             self.train_accuracy.update_with_weight(acc, label.shape[0])
 
-            # if self.cfg.is_wandb:
-            #     # WANDB LOGGING
-            #     wandb.log({"LR": lr_scheduler.lr,
-            #            "Iter loss": loss.item()})
-
-    def test_per_epoch(self, dataloader, loss_meter, acc_meter):
+    def test_per_epoch(self, loss_meter, acc_meter):
         labels = []
         logits = []
-
         self.model.eval()
 
-        with torch.no_grad():
+        BATCH_SIZE = self.cfg.training.batch_size
+        num_iter = int(len(self.train_list)/BATCH_SIZE)
+        for i in range(num_iter):
+            batch_list = self.train_list[i*BATCH_SIZE:(i+1)*BATCH_SIZE]
+            batch = create_mini_batch(batch_list)
+            batch = batch.to(self.device)
+            output = self.model(batch).squeeze()
+            label = batch.y.to(self.device)
+            loss = self.loss_fn(output, label)
 
-            for data in dataloader:
-
-                data = data.to(self.device)
-                output = self.model(data).squeeze()
-
-                label = data.y.to(self.device)
-
-                loss = self.loss_fn(output, label)
-
-                loss_meter.update_with_weight(
-                    loss.item(), label.shape[0])
-                acc = accuracy(output, label)
-                acc_meter.update_with_weight(acc, label.shape[0])
-                # result += F.softmax(output, dim=1)[:, 1].tolist()
-                logits += output.squeeze().tolist()
-                labels += label.tolist()
+            loss_meter.update_with_weight(
+            loss.item(), label.shape[0])
+            acc = accuracy(output, label)
+            acc_meter.update_with_weight(acc, label.shape[0])
+            # result += F.softmax(output, dim=1)[:, 1].tolist()
+            logits += output.squeeze().tolist()
+            labels += label.tolist()
 
         # convert logits to probabilities and predictions
         probabilities = expit(np.array(logits))
@@ -130,25 +129,22 @@ class Train:
                 recall[int(float(k))] = report[k]['recall']
         return [auc] + list(metric) + recall
 
+
+
     def train(self):
         print("\nStarting training...")
         training_process = []
-        self.current_step = 0
+        # self.current_step = 0
 
-        ## LOG THE CONFIG IN WANDB AND LOGGING HERE
-        # wandb.init(project="graph-ml", con/fig=self.cfg)
-        # wandb.cfg.update(self.cfg)
-        
         for epoch in range(self.epochs):
+            self.current_step = 0
+
             self.reset_meters()
             self.train_per_epoch(self.optimizers[0], self.lr_schedulers[0])
-            test_result = self.test_per_epoch(self.test_dataloader,    
-                                            self.test_loss, self.test_accuracy)
-            
+            test_result = self.test_per_epoch(self.test_loss, self.test_accuracy)
+
             if self.test_accuracy.avg > self.best_test_accuracy:
                 self.best_test_accuracy = self.test_accuracy.avg
-
-
 
             self.logger.info(" | ".join([
                 f'Epoch[{epoch+1}/{self.epochs}]',
@@ -184,6 +180,3 @@ class Train:
                     "Test Precision": test_result[-6],
 
                 })
-
-
-

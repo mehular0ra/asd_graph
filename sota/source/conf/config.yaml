@@ -1,6 +1,6 @@
 defaults: 
-  - dataset: fc_bnt
-  - model: signedgcn
+  - dataset: small
+  - model: hgnn
   - optimizer: adam
   - training: train
 
@@ -14,7 +14,7 @@ device: cuda:0
 
 # wandb:
 is_wandb: false
-project: asd-graph
+project: asd-hypergraph
 
 
 
