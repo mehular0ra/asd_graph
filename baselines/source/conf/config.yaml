@@ -1,19 +1,24 @@
 defaults: 
-  - dataset: fc_bnt
+  - dataset: fc_large
   - model: signedgcn
   - optimizer: adam
   - training: train
 
+
+dataset:
+  node: fc
+
+
 log_path: result
 
-repeat_time: 3
+repeat_time: 2
 
 # total_steps: 100 # remove this later
 
 device: cuda:0
 
 # wandb:
-is_wandb: false
+is_wandb: False
 project: asd-graph
 
 

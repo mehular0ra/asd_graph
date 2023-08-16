@@ -5,10 +5,13 @@
   no_weight_decay: false
   weight_decay: 1.0e-4
   lr_scheduler:
-    mode: poly # ['step', 'poly', 'cos']
-    base_lr: 1.0e-3
+    mode: plateau # ['step', 'poly', 'cos']
+    base_lr: 1.0e-4
     target_lr: 1.0e-6
 
+    plateau_factor: 0.1 # for plateau mode
+    plateau_patience: 3
+    
     decay_factor: 0.1 # for step mode
     milestones: [0.3, 0.6, 0.9]
     poly_power: 2.0 # for poly mode

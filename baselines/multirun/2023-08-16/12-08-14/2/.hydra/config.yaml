@@ -1,0 +1,47 @@
+dataset:
+  name: fc_large
+  batch_size: 16
+  train_set: 0.9
+  test_set: 0.1
+  fc_path: /mnt/ssd1/mehul_data/research/fc_large_data.npy
+  node_sz: 400
+  node_feature_sz: 400
+  num_classes: 2
+  perc_edges: 100
+  node: one_hot
+model:
+  name: GraphSAGE
+  num_layers: 2
+  hidden_size: 64
+  dropout: 0.5
+  readout: mean
+  edge_percentage: 0.1
+optimizer:
+- name: Adam
+  lr: 0.0001
+  match_rule: None
+  except_rule: None
+  no_weight_decay: false
+  weight_decay: 0.0001
+  lr_scheduler:
+    mode: poly
+    base_lr: 0.0001
+    target_lr: 1.0e-05
+    decay_factor: 0.1
+    milestones:
+    - 0.3
+    - 0.6
+    - 0.9
+    poly_power: 2.0
+    lr_decay: 0.98
+    warm_up_from: 0.0
+    warm_up_steps: 0
+training:
+  name: Train
+  epochs: 100
+  l2: 0.0
+log_path: result
+repeat_time: 5
+device: cuda:0
+is_wandb: false
+project: asd-graph

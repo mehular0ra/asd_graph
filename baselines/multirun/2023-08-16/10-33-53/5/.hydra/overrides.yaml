@@ -1,0 +1,2 @@
+- dataset=fc_small
+- model=signedgcn

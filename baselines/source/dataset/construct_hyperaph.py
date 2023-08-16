@@ -10,6 +10,9 @@ import torch
 import ipdb
 
 
+
+
+
 def construct_H_with_KNN(X, K_neig, is_probH=False):
     """
     Initialize hypergraph Vertex-Edge matrix from original node feature matrix
@@ -43,7 +46,6 @@ def construct_H_with_KNN(X, K_neig, is_probH=False):
 
     return H
 
-
 def generate_G_from_H(H):
     """
     Calculate G from hypgraph incidence matrix H
@@ -70,8 +72,6 @@ def generate_G_from_H(H):
 
     G = DV2 @ H @ W @ invDE @ HT @ DV2
     return G
-
-
 
 def create_hypergraph_data(cfg: DictConfig,
                            final_pearson: torch.Tensor,

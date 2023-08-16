@@ -40,7 +40,13 @@ class Train:
         self.lr_schedulers = lr_schedulers
         self.loss_fn = BCEWithLogitsLossL2(self.model, self.cfg.training.l2)
 
-        self.best_test_accuracy = 0.0
+        # self.best_test_accuracy = 0.0
+        self.best_test_metrics = {
+            "accuracy": 0.0,
+            "auc": 0.0,
+            "sensitivity": 0.0,
+            "specificity": 0.0,
+        }
 
 
 
@@ -145,10 +151,14 @@ class Train:
             test_result = self.test_per_epoch(self.test_dataloader,    
                                             self.test_loss, self.test_accuracy)
             
-            if self.test_accuracy.avg > self.best_test_accuracy:
-                self.best_test_accuracy = self.test_accuracy.avg
-
-
+            if self.test_accuracy.avg > self.best_test_metrics["accuracy"]:
+                self.best_test_metrics["accuracy"] = self.test_accuracy.avg
+                auc = test_result[0]
+                sensitivity = test_result[-1]
+                specificity = test_result[-2]
+                self.best_test_metrics["auc"] = auc
+                self.best_test_metrics["sensitivity"] = sensitivity
+                self.best_test_metrics["specificity"] = specificity
 
             self.logger.info(" | ".join([
                 f'Epoch[{epoch+1}/{self.epochs}]',
@@ -157,13 +167,17 @@ class Train:
 
                 f'Test Loss:{self.test_loss.avg: .3f}',
                 f'Test Accuracy:{self.test_accuracy.avg: .3f}%',
-                f'Best Test Accuracy:{self.best_test_accuracy: .3f}%',
                 f'Test AUC:{test_result[0]:.4f}',
                 f'Test Sen:{test_result[-1]:.4f}',
                 f'Test Spe:{test_result[-2]:.4f}',
                 f'Test F1:{test_result[-4]:.4f}',
                 f'Test Recall:{test_result[-5]:.4f}',
                 f'Test Precision:{test_result[-6]:.4f}',
+
+                f'Best Test Accuracy:{self.best_test_metrics["accuracy"]: .3f}%',
+                f'Best Test AUC:{self.best_test_metrics["auc"]:.4f}',
+                f'Best Test Sensitivity:{self.best_test_metrics["sensitivity"]:.4f}',
+                f'Best Test Specificity:{self.best_test_metrics["specificity"]:.4f}',
                 f'LR:{self.lr_schedulers[0].lr:.7f}'
 
             ]))
@@ -175,7 +189,6 @@ class Train:
 
                     "Test Loss": self.test_loss.avg,
                     "Test Accuracy": self.test_accuracy.avg,
-                    "Best Test Accuracy": self.best_test_accuracy,
                     "Test AUC": test_result[0],
                     "Test Sensitivity": test_result[-1],
                     "Test Specificity": test_result[-2],
@@ -183,7 +196,10 @@ class Train:
                     "Test Recall": test_result[-5],
                     "Test Precision": test_result[-6],
 
+                    "Best Test Accuracy": self.best_test_metrics["accuracy"],
+                    "Best Test AUC": self.best_test_metrics["auc"],
+                    "Best Test Sensitivity": self.best_test_metrics["sensitivity"],
+                    "Best Test Specificity": self.best_test_metrics["specificity"],
                 })
-
 
 

@@ -1,16 +1,19 @@
-name: fc_bnt
+name: fc_small
 batch_size: 16
 
-train_set: 0.8
-val_set: 0.1
+train_set: 0.9
+# val_set: 0.0
 test_set: 0.1
 
 fc_path: /mnt/ssd1/mehul_data/research/fc_small_data.npy
-drop_last: True
-stratified: True
+# drop_last: True
+# stratified: True
 
 node_sz: 400
 node_feature_sz: 400
 num_classes: 2
 
-perc_edges: 10
+perc_edges: 100
+
+node: fc
+

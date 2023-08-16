@@ -4,14 +4,16 @@ fc: true
 sc: false
 t1: false
 
-fc_path: /mnt/ssd1/mehul_data/research/fc_small_data.npy
-
-perc_edges: 10
-node_feature_dim: 400
-num_nodes: 400
+# fc_path: /mnt/ssd1/mehul_data/research/fc_small_data.npy
+fc_path: /mnt/ssd1/mehul_data/research/fc_abide2_200.npy
 
 
-k: 5
+perc_edges: 100
+# node_feature_dim: 400
+# num_nodes: 400
+
+
+k_neighs: 10
 
 
 train_set: 0.8

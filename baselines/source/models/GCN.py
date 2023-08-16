@@ -24,7 +24,7 @@ class GCN(torch.nn.Module):
             else:
                 self.convs.append(GCNConv(self.hidden_size,self.hidden_size))
 
-        self.lincomb = nn.Linear(
+        self.readout_lin = nn.Linear(
             self.node_sz * self.hidden_size, self.hidden_size)
                 
         self.lin = nn.Linear(self.hidden_size, 1)
@@ -48,10 +48,16 @@ class GCN(torch.nn.Module):
             if torch.isnan(x).any():
                 print(f"Found NaN values in output tensor in layer {i}")
 
-        # x = global_mean_pool(x, batch)
-        ipdb.set_trace()
-        x = torch.stack([self.lincomb(x[i:i+self.node_sz].flatten())
-                            for i in range(0, x.shape[0], self.node_sz)]).to('cuda')
+        # x = torch.stack([self.lincomb(x[i:i+self.node_sz].flatten())
+        #                     for i in range(0, x.shape[0], self.node_sz)]).to('cuda')
+
+        xs = []
+        for graph_idx in batch.unique():
+            graph_nodes = x[batch == graph_idx]
+            graph_nodes = graph_nodes.view(-1)
+            xs.append(self.readout_lin(graph_nodes))
+        x = torch.stack(xs).to(x.device)
+
 
         x = self.lin(x)
 

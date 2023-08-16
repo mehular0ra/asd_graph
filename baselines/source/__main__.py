@@ -31,7 +31,7 @@ def model_training(cfg: DictConfig):
 @hydra.main(config_path="conf", config_name="config")
 def main(cfg: DictConfig) -> None:
 
-    group_name = f"{cfg.dataset.name}_{cfg.model.name}"
+    group_name = f"{cfg.dataset.name}_{cfg.model.name}_node:{cfg.dataset.node}"
 
     for _ in range(cfg.repeat_time):
 

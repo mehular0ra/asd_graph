@@ -4,6 +4,8 @@ from typing import List
 from omegaconf import DictConfig
 import torch
 
+from torch.optim.lr_scheduler import ReduceLROnPlateau
+
 
 class LRScheduler:
     def __init__(self, cfg: DictConfig,  optimizer_cfg: DictConfig):
@@ -12,9 +14,9 @@ class LRScheduler:
         self.lr = optimizer_cfg.lr
 
         assert self.lr_config.mode in [
-            'step', 'poly', 'cos', 'linear', 'decay']
+            'step', 'poly', 'cos', 'linear', 'decay', 'plateau']
 
-    def update(self, optimizer: torch.optim.Optimizer, step: int):
+    def update(self, optimizer: torch.optim.Optimizer, step: int, val_loss: float = None):
         lr_config = self.lr_config
         lr_mode = lr_config.mode
         base_lr = lr_config.base_lr

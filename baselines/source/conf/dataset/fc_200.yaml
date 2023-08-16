@@ -1,0 +1,19 @@
+name: fc_200
+batch_size: 16
+
+train_set: 0.90
+# val_set: 0.0
+test_set: 0.1
+
+fc_path: /mnt/ssd1/mehul_data/research/fc_200_data.npy
+# drop_last: True
+# stratified: True
+
+node_sz: 200
+node_feature_sz: 200
+num_classes: 2
+
+perc_edges: 100
+
+node: fc
+

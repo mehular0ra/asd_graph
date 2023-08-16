@@ -33,7 +33,7 @@ def dataset_factory(cfg: DictConfig):
                               t1[i] if t1 is not None else None,
                               fc[i] if fc is not None else None,
                               labels[i],
-                              cfg.dataset.k) for i in range(len(labels))]
+                              cfg.dataset.k_neighs) for i in range(len(labels))]
 
     data_list = [hypergraphs[i] for i in range(len(labels))]
     train_list, test_list = stratified_split(cfg, data_list, labels, site)

@@ -1,0 +1,61 @@
+2023-08-15 11:56:21,033 INFO    MainThread:187586 [wandb_setup.py:_flush():76] Configure stats pid to 187586
+2023-08-15 11:56:21,033 INFO    MainThread:187586 [wandb_setup.py:_flush():76] Loading settings from /home/mehul/.config/wandb/settings
+2023-08-15 11:56:21,033 INFO    MainThread:187586 [wandb_setup.py:_flush():76] Loading settings from /home/mehul/asd_graph/baselines/multirun/2023-08-15/11-55-28/0/wandb/settings
+2023-08-15 11:56:21,033 INFO    MainThread:187586 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2023-08-15 11:56:21,033 INFO    MainThread:187586 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2023-08-15 11:56:21,033 WARNING MainThread:187586 [wandb_setup.py:_flush():76] Could not find program at -m source.__main__
+2023-08-15 11:56:21,033 INFO    MainThread:187586 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': None, 'program': '-m source.__main__'}
+2023-08-15 11:56:21,033 INFO    MainThread:187586 [wandb_init.py:_log_setup():507] Logging user logs to /home/mehul/asd_graph/baselines/multirun/2023-08-15/11-55-28/0/wandb/run-20230815_115621-cu6p8fuv/logs/debug.log
+2023-08-15 11:56:21,033 INFO    MainThread:187586 [wandb_init.py:_log_setup():508] Logging internal logs to /home/mehul/asd_graph/baselines/multirun/2023-08-15/11-55-28/0/wandb/run-20230815_115621-cu6p8fuv/logs/debug-internal.log
+2023-08-15 11:56:21,041 INFO    MainThread:187586 [wandb_init.py:_jupyter_setup():453] configuring jupyter hooks <wandb.sdk.wandb_init._WandbInit object at 0x7ff9ac5127d0>
+2023-08-15 11:56:21,041 INFO    MainThread:187586 [wandb_init.py:init():547] calling init triggers
+2023-08-15 11:56:21,042 INFO    MainThread:187586 [wandb_init.py:init():554] wandb.init called with sweep_config: {}
+config: {}
+2023-08-15 11:56:21,042 INFO    MainThread:187586 [wandb_init.py:init():571] re-initializing run, found existing run on stack: q1tp6g7l
+2023-08-15 11:56:21,042 INFO    MainThread:187586 [wandb_run.py:_finish():1892] finishing run asd-graph/asd-graph/q1tp6g7l
+2023-08-15 11:56:21,042 INFO    MainThread:187586 [wandb_run.py:_atexit_cleanup():2126] got exitcode: 0
+2023-08-15 11:56:21,042 INFO    MainThread:187586 [wandb_run.py:_restore():2109] restore
+2023-08-15 11:56:21,042 INFO    MainThread:187586 [wandb_run.py:_restore():2115] restore done
+2023-08-15 11:56:26,948 INFO    MainThread:187586 [wandb_run.py:_footer_history_summary_info():3476] rendering history
+2023-08-15 11:56:26,948 INFO    MainThread:187586 [wandb_run.py:_footer_history_summary_info():3508] rendering summary
+2023-08-15 11:56:26,950 INFO    MainThread:187586 [wandb_run.py:_footer_sync_info():3434] logging synced files
+2023-08-15 11:56:27,322 INFO    MainThread:187586 [wandb_init.py:init():595] starting backend
+2023-08-15 11:56:27,322 INFO    MainThread:187586 [wandb_init.py:init():599] setting up manager
+2023-08-15 11:56:27,327 INFO    MainThread:187586 [backend.py:_multiprocessing_setup():106] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2023-08-15 11:56:27,327 INFO    MainThread:187586 [wandb_init.py:init():605] backend started and connected
+2023-08-15 11:56:27,328 INFO    MainThread:187586 [wandb_run.py:_label_probe_notebook():1237] probe notebook
+2023-08-15 11:56:27,328 INFO    MainThread:187586 [wandb_run.py:_label_probe_notebook():1247] Unable to probe notebook: 'NoneType' object has no attribute 'get'
+2023-08-15 11:56:27,328 INFO    MainThread:187586 [wandb_init.py:init():695] updated telemetry
+2023-08-15 11:56:27,332 INFO    MainThread:187586 [wandb_init.py:init():732] communicating run to backend with 60.0 second timeout
+2023-08-15 11:56:28,699 INFO    MainThread:187586 [wandb_run.py:_on_init():2176] communicating current version
+2023-08-15 11:56:28,827 INFO    MainThread:187586 [wandb_run.py:_on_init():2185] got version response upgrade_message: "wandb version 0.15.8 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2023-08-15 11:56:28,827 INFO    MainThread:187586 [wandb_init.py:init():782] starting run threads in backend
+2023-08-15 11:56:31,434 INFO    MainThread:187586 [wandb_run.py:_console_start():2157] atexit reg
+2023-08-15 11:56:31,434 INFO    MainThread:187586 [wandb_run.py:_redirect():2012] redirect: 3
+2023-08-15 11:56:31,434 INFO    MainThread:187586 [wandb_run.py:_redirect():2077] Wrapping output streams.
+2023-08-15 11:56:31,434 INFO    MainThread:187586 [wandb_run.py:_redirect():2102] Redirects installed.
+2023-08-15 11:56:31,435 INFO    MainThread:187586 [wandb_init.py:init():824] run started, returning control to user process
+2023-08-15 11:56:43,610 INFO    MainThread:187586 [wandb_setup.py:_flush():76] Configure stats pid to 187586
+2023-08-15 11:56:43,610 INFO    MainThread:187586 [wandb_setup.py:_flush():76] Loading settings from /home/mehul/.config/wandb/settings
+2023-08-15 11:56:43,611 INFO    MainThread:187586 [wandb_setup.py:_flush():76] Loading settings from /home/mehul/asd_graph/baselines/multirun/2023-08-15/11-55-28/0/wandb/settings
+2023-08-15 11:56:43,611 INFO    MainThread:187586 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2023-08-15 11:56:43,611 INFO    MainThread:187586 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2023-08-15 11:56:43,611 WARNING MainThread:187586 [wandb_setup.py:_flush():76] Could not find program at -m source.__main__
+2023-08-15 11:56:43,611 INFO    MainThread:187586 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': None, 'program': '-m source.__main__'}
+2023-08-15 11:56:43,611 INFO    MainThread:187586 [wandb_init.py:_log_setup():507] Logging user logs to /home/mehul/asd_graph/baselines/multirun/2023-08-15/11-55-28/0/wandb/run-20230815_115643-2bhjnqth/logs/debug.log
+2023-08-15 11:56:43,611 INFO    MainThread:187586 [wandb_init.py:_log_setup():508] Logging internal logs to /home/mehul/asd_graph/baselines/multirun/2023-08-15/11-55-28/0/wandb/run-20230815_115643-2bhjnqth/logs/debug-internal.log
+2023-08-15 11:56:43,611 INFO    MainThread:187586 [wandb_init.py:init():547] calling init triggers
+2023-08-15 11:56:43,611 INFO    MainThread:187586 [wandb_init.py:init():554] wandb.init called with sweep_config: {}
+config: {}
+2023-08-15 11:56:43,611 INFO    MainThread:187586 [wandb_init.py:init():571] re-initializing run, found existing run on stack: cu6p8fuv
+2023-08-15 11:56:43,611 INFO    MainThread:187586 [wandb_run.py:_finish():1892] finishing run asd-graph/asd-graph/cu6p8fuv
+2023-08-15 11:56:43,611 ERROR   MainThread:187586 [jupyter.py:save_history():437] Run pip install nbformat to save notebook history
+2023-08-15 11:56:43,611 INFO    MainThread:187586 [jupyter.py:save_ipynb():373] not saving jupyter notebook
+2023-08-15 11:56:43,611 INFO    MainThread:187586 [wandb_init.py:_jupyter_teardown():435] cleaning up jupyter logic
+2023-08-15 11:56:43,611 INFO    MainThread:187586 [wandb_run.py:_atexit_cleanup():2126] got exitcode: 0
+2023-08-15 11:56:43,611 INFO    MainThread:187586 [wandb_run.py:_restore():2109] restore
+2023-08-15 11:56:43,611 INFO    MainThread:187586 [wandb_run.py:_restore():2115] restore done
+2023-08-15 11:56:50,668 INFO    MainThread:187586 [wandb_run.py:_footer_history_summary_info():3476] rendering history
+2023-08-15 11:56:50,668 INFO    MainThread:187586 [wandb_run.py:_footer_history_summary_info():3508] rendering summary
+2023-08-15 11:56:50,670 INFO    MainThread:187586 [wandb_run.py:_footer_sync_info():3434] logging synced files

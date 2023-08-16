@@ -15,7 +15,6 @@ def model_training(cfg: DictConfig):
 
     data_list = dataset_factory(cfg)
     model = model_factory(cfg)
-    print(model)
     optimizers = optimizers_factory(
         model=model, optimizer_configs=cfg.optimizer)
     lr_schedulers = lr_scheduler_factory(lr_configs=cfg.optimizer, cfg=cfg)

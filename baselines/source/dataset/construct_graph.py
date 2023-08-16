@@ -19,11 +19,7 @@ def create_graph_data(cfg: DictConfig,
 
     num_nodes = final_pearson.shape[1]
 
-    # define node features
-    # Create a tensor of indices from 0 to num_nodes
-    indices = torch.arange(num_nodes)
-    # Create a one-hot encoded tensor
-    node_feature = torch.nn.functional.one_hot(indices).float()
+
 
     graph_data_list = []
     for i in range(final_pearson.shape[0]):
@@ -34,10 +30,28 @@ def create_graph_data(cfg: DictConfig,
 
         edge_weight = final_pearson[i][edge_index[0], edge_index[1]]
 
+        # define node features
+        if cfg.dataset.node == 'one_hot':
+            # Create a tensor of indices from 0 to num_nodes
+            indices = torch.arange(num_nodes)
+            # Create a one-hot encoded tensor
+            node_feature = torch.nn.functional.one_hot(indices).float()
+        elif cfg.dataset.node == 'fc':
+            # Using the fully connected (fc) tensor as node features
+            node_feature = final_pearson[i]
+        elif cfg.dataset.node == 'sc':
+            # Using the fully connected (fc) tensor as node features
+            node_feature = final_sc[i]
+
         mapped_site = site_mapping[site[i]]
 
         data = Data(x=node_feature, edge_index=edge_index,
                     y=labels[i], site=mapped_site, edge_weight=edge_weight)
+        
+        if t1 != None:
+            data.t1 = t1[i]
+            data = Data(x=node_feature, edge_index=edge_index,
+                        y=labels[i], site=mapped_site, edge_weight=edge_weight, t1=t1[i])
         graph_data_list.append(data)
 
     return graph_data_list, site

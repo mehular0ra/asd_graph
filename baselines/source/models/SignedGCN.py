@@ -29,7 +29,7 @@ class SignedGCN(torch.nn.Module):
                 self.convs.append(EdgeWeightedSignedConv(
                     self.hidden_size, self.hidden_size // 2))
 
-        self.lincomb = nn.Linear(self.node_sz * self.hidden_size, self.hidden_size)
+        self.readout_lin = nn.Linear(self.node_sz * self.hidden_size, self.hidden_size)
 
         self.lin = nn.Linear(self.hidden_size, 1)
 
@@ -48,9 +48,15 @@ class SignedGCN(torch.nn.Module):
                 print(f"Found NaN values in output tensor in layer {i}")
 
         # 2. Readout layer
+        xs = []
+        for graph_idx in batch.unique():
+            graph_nodes = x[batch == graph_idx]
+            graph_nodes = graph_nodes.view(-1)
+            xs.append(self.readout_lin(graph_nodes))
+        x = torch.stack(xs).to(x.device)
         # x = global_max_pool(x, batch)
-        x = torch.stack([self.lincomb(x[i:i+self.node_sz].flatten())
-                        for i in range(0, x.shape[0], self.node_sz)]).to('cuda')
+        # x = torch.stack([self.lincomb(x[i:i+self.node_sz].flatten())
+        #                 for i in range(0, x.shape[0], self.node_sz)]).to('cuda')
 
         # 3. Apply a final classifier
         x = F.dropout(x, p=0.5, training=self.training)

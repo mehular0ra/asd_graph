@@ -1,0 +1,163 @@
+[2023-08-15 12:05:42][__main__.py][L41][INFO]dataset:
+  name: fc_large
+  batch_size: 16
+  train_set: 0.8
+  val_set: 0.1
+  test_set: 0.1
+  fc_path: /mnt/ssd1/mehul_data/research/fc_large_data.npy
+  drop_last: true
+  stratified: true
+  node_sz: 400
+  node_feature_sz: 400
+  num_classes: 2
+  perc_edges: 100
+model:
+  name: GCN
+  num_layers: 2
+  hidden_size: 64
+  dropout: 0.5
+  readout: mean
+optimizer:
+- name: Adam
+  lr: 0.0001
+  match_rule: None
+  except_rule: None
+  no_weight_decay: false
+  weight_decay: 0.0001
+  lr_scheduler:
+    mode: poly
+    base_lr: 0.0001
+    target_lr: 1.0e-05
+    decay_factor: 0.1
+    milestones:
+    - 0.3
+    - 0.6
+    - 0.9
+    poly_power: 2.0
+    lr_decay: 0.98
+    warm_up_from: 0.0
+    warm_up_steps: 0
+training:
+  name: Train
+  epochs: 100
+  l2: 0.0
+log_path: result
+repeat_time: 3
+device: cuda:0
+is_wandb: true
+project: asd-graph
+steps_per_epoch: 41.0
+total_steps: 4100.0
+[2023-08-15 12:05:42][__init__.py][L15][INFO]cfg.dataset.name: fc_large
+GCN(
+  (convs): ModuleList(
+    (0): GCNConv(400, 64)
+    (1): GCNConv(64, 64)
+  )
+  (lincomb): Linear(in_features=25600, out_features=64, bias=True)
+  (lin): Linear(in_features=64, out_features=1, bias=True)
+)
+[2023-08-15 12:05:50][optimizer.py][L66][INFO]Parameters [normal] length [8]
+[2023-08-15 12:05:50][__init__.py][L25][INFO]Training: Train
+[2023-08-15 12:05:50][Train.py][L35][INFO]#model params: 1668353
+Starting training...
+[2023-08-15 12:05:51][Train.py][L153][INFO]Epoch[1/100] | Train Loss: 0.692 | Train Accuracy: 52.851% | Test Loss: 0.684 | Test Accuracy: 59.756% | Best Test Accuracy: 59.756% | Test AUC:0.5343 | Test Sen:0.0000 | Test Spe:1.0000 | Test F1:0.5976 | Test Recall:0.5976 | Test Precision:0.5976 | LR:0.0000982
+[2023-08-15 12:05:52][Train.py][L153][INFO]Epoch[2/100] | Train Loss: 0.689 | Train Accuracy: 53.313% | Test Loss: 0.682 | Test Accuracy: 59.756% | Best Test Accuracy: 59.756% | Test AUC:0.5745 | Test Sen:0.0000 | Test Spe:1.0000 | Test F1:0.5976 | Test Recall:0.5976 | Test Precision:0.5976 | LR:0.0000964
+[2023-08-15 12:05:53][Train.py][L153][INFO]Epoch[3/100] | Train Loss: 0.687 | Train Accuracy: 53.313% | Test Loss: 0.681 | Test Accuracy: 59.756% | Best Test Accuracy: 59.756% | Test AUC:0.5708 | Test Sen:0.0000 | Test Spe:1.0000 | Test F1:0.5976 | Test Recall:0.5976 | Test Precision:0.5976 | LR:0.0000947
+[2023-08-15 12:05:55][Train.py][L153][INFO]Epoch[4/100] | Train Loss: 0.682 | Train Accuracy: 53.313% | Test Loss: 0.679 | Test Accuracy: 59.756% | Best Test Accuracy: 59.756% | Test AUC:0.5683 | Test Sen:0.0000 | Test Spe:1.0000 | Test F1:0.5976 | Test Recall:0.5976 | Test Precision:0.5976 | LR:0.0000929
+[2023-08-15 12:05:56][Train.py][L153][INFO]Epoch[5/100] | Train Loss: 0.678 | Train Accuracy: 56.394% | Test Loss: 0.676 | Test Accuracy: 60.976% | Best Test Accuracy: 60.976% | Test AUC:0.5671 | Test Sen:0.0303 | Test Spe:1.0000 | Test F1:0.6098 | Test Recall:0.6098 | Test Precision:0.6098 | LR:0.0000912
+[2023-08-15 12:05:57][Train.py][L153][INFO]Epoch[6/100] | Train Loss: 0.674 | Train Accuracy: 55.162% | Test Loss: 0.682 | Test Accuracy: 59.756% | Best Test Accuracy: 60.976% | Test AUC:0.5615 | Test Sen:0.1818 | Test Spe:0.8776 | Test F1:0.5976 | Test Recall:0.5976 | Test Precision:0.5976 | LR:0.0000895
+[2023-08-15 12:05:58][Train.py][L153][INFO]Epoch[7/100] | Train Loss: 0.664 | Train Accuracy: 61.325% | Test Loss: 0.681 | Test Accuracy: 57.317% | Best Test Accuracy: 60.976% | Test AUC:0.5603 | Test Sen:0.2727 | Test Spe:0.7755 | Test F1:0.5732 | Test Recall:0.5732 | Test Precision:0.5732 | LR:0.0000878
+[2023-08-15 12:05:59][Train.py][L153][INFO]Epoch[8/100] | Train Loss: 0.659 | Train Accuracy: 64.715% | Test Loss: 0.682 | Test Accuracy: 58.537% | Best Test Accuracy: 60.976% | Test AUC:0.5547 | Test Sen:0.4545 | Test Spe:0.6735 | Test F1:0.5854 | Test Recall:0.5854 | Test Precision:0.5854 | LR:0.0000862
+[2023-08-15 12:06:00][Train.py][L153][INFO]Epoch[9/100] | Train Loss: 0.646 | Train Accuracy: 65.485% | Test Loss: 0.674 | Test Accuracy: 56.098% | Best Test Accuracy: 60.976% | Test AUC:0.5547 | Test Sen:0.2121 | Test Spe:0.7959 | Test F1:0.5610 | Test Recall:0.5610 | Test Precision:0.5610 | LR:0.0000845
+[2023-08-15 12:06:01][Train.py][L153][INFO]Epoch[10/100] | Train Loss: 0.634 | Train Accuracy: 68.567% | Test Loss: 0.690 | Test Accuracy: 53.659% | Best Test Accuracy: 60.976% | Test AUC:0.5553 | Test Sen:0.6061 | Test Spe:0.4898 | Test F1:0.5366 | Test Recall:0.5366 | Test Precision:0.5366 | LR:0.0000829
+[2023-08-15 12:06:02][Train.py][L153][INFO]Epoch[11/100] | Train Loss: 0.622 | Train Accuracy: 70.108% | Test Loss: 0.676 | Test Accuracy: 59.756% | Best Test Accuracy: 60.976% | Test AUC:0.5541 | Test Sen:0.3636 | Test Spe:0.7551 | Test F1:0.5976 | Test Recall:0.5976 | Test Precision:0.5976 | LR:0.0000813
+[2023-08-15 12:06:03][Train.py][L153][INFO]Epoch[12/100] | Train Loss: 0.611 | Train Accuracy: 69.646% | Test Loss: 0.674 | Test Accuracy: 62.195% | Best Test Accuracy: 62.195% | Test AUC:0.5498 | Test Sen:0.3636 | Test Spe:0.7959 | Test F1:0.6220 | Test Recall:0.6220 | Test Precision:0.6220 | LR:0.0000797
+[2023-08-15 12:06:04][Train.py][L153][INFO]Epoch[13/100] | Train Loss: 0.604 | Train Accuracy: 70.108% | Test Loss: 0.679 | Test Accuracy: 57.317% | Best Test Accuracy: 62.195% | Test AUC:0.5399 | Test Sen:0.3636 | Test Spe:0.7143 | Test F1:0.5732 | Test Recall:0.5732 | Test Precision:0.5732 | LR:0.0000781
+[2023-08-15 12:06:05][Train.py][L153][INFO]Epoch[14/100] | Train Loss: 0.590 | Train Accuracy: 71.341% | Test Loss: 0.679 | Test Accuracy: 58.537% | Best Test Accuracy: 62.195% | Test AUC:0.5362 | Test Sen:0.3333 | Test Spe:0.7551 | Test F1:0.5854 | Test Recall:0.5854 | Test Precision:0.5854 | LR:0.0000766
+[2023-08-15 12:06:06][Train.py][L153][INFO]Epoch[15/100] | Train Loss: 0.580 | Train Accuracy: 71.495% | Test Loss: 0.682 | Test Accuracy: 60.976% | Best Test Accuracy: 62.195% | Test AUC:0.5275 | Test Sen:0.2121 | Test Spe:0.8776 | Test F1:0.6098 | Test Recall:0.6098 | Test Precision:0.6098 | LR:0.0000750
+[2023-08-15 12:06:07][Train.py][L153][INFO]Epoch[16/100] | Train Loss: 0.565 | Train Accuracy: 72.265% | Test Loss: 0.689 | Test Accuracy: 58.537% | Best Test Accuracy: 62.195% | Test AUC:0.5238 | Test Sen:0.4242 | Test Spe:0.6939 | Test F1:0.5854 | Test Recall:0.5854 | Test Precision:0.5854 | LR:0.0000735
+[2023-08-15 12:06:08][Train.py][L153][INFO]Epoch[17/100] | Train Loss: 0.557 | Train Accuracy: 73.960% | Test Loss: 0.728 | Test Accuracy: 45.122% | Best Test Accuracy: 62.195% | Test AUC:0.5343 | Test Sen:0.6364 | Test Spe:0.3265 | Test F1:0.4512 | Test Recall:0.4512 | Test Precision:0.4512 | LR:0.0000720
+[2023-08-15 12:06:09][Train.py][L153][INFO]Epoch[18/100] | Train Loss: 0.550 | Train Accuracy: 73.035% | Test Loss: 0.688 | Test Accuracy: 59.756% | Best Test Accuracy: 62.195% | Test AUC:0.5331 | Test Sen:0.3333 | Test Spe:0.7755 | Test F1:0.5976 | Test Recall:0.5976 | Test Precision:0.5976 | LR:0.0000705
+[2023-08-15 12:06:10][Train.py][L153][INFO]Epoch[19/100] | Train Loss: 0.541 | Train Accuracy: 73.960% | Test Loss: 0.700 | Test Accuracy: 50.000% | Best Test Accuracy: 62.195% | Test AUC:0.5325 | Test Sen:0.3939 | Test Spe:0.5714 | Test F1:0.5000 | Test Recall:0.5000 | Test Precision:0.5000 | LR:0.0000690
+[2023-08-15 12:06:11][Train.py][L153][INFO]Epoch[20/100] | Train Loss: 0.527 | Train Accuracy: 74.730% | Test Loss: 0.705 | Test Accuracy: 53.659% | Best Test Accuracy: 62.195% | Test AUC:0.5281 | Test Sen:0.4242 | Test Spe:0.6122 | Test F1:0.5366 | Test Recall:0.5366 | Test Precision:0.5366 | LR:0.0000676
+[2023-08-15 12:06:12][Train.py][L153][INFO]Epoch[21/100] | Train Loss: 0.516 | Train Accuracy: 75.039% | Test Loss: 0.716 | Test Accuracy: 48.780% | Best Test Accuracy: 62.195% | Test AUC:0.5343 | Test Sen:0.4242 | Test Spe:0.5306 | Test F1:0.4878 | Test Recall:0.4878 | Test Precision:0.4878 | LR:0.0000662
+[2023-08-15 12:06:13][Train.py][L153][INFO]Epoch[22/100] | Train Loss: 0.532 | Train Accuracy: 73.960% | Test Loss: 0.715 | Test Accuracy: 50.000% | Best Test Accuracy: 62.195% | Test AUC:0.5485 | Test Sen:0.4545 | Test Spe:0.5306 | Test F1:0.5000 | Test Recall:0.5000 | Test Precision:0.5000 | LR:0.0000648
+[2023-08-15 12:06:14][Train.py][L153][INFO]Epoch[23/100] | Train Loss: 0.500 | Train Accuracy: 77.196% | Test Loss: 0.706 | Test Accuracy: 60.976% | Best Test Accuracy: 62.195% | Test AUC:0.5325 | Test Sen:0.3636 | Test Spe:0.7755 | Test F1:0.6098 | Test Recall:0.6098 | Test Precision:0.6098 | LR:0.0000634
+[2023-08-15 12:06:15][Train.py][L153][INFO]Epoch[24/100] | Train Loss: 0.493 | Train Accuracy: 76.579% | Test Loss: 0.717 | Test Accuracy: 50.000% | Best Test Accuracy: 62.195% | Test AUC:0.5430 | Test Sen:0.3939 | Test Spe:0.5714 | Test F1:0.5000 | Test Recall:0.5000 | Test Precision:0.5000 | LR:0.0000620
+[2023-08-15 12:06:17][Train.py][L153][INFO]Epoch[25/100] | Train Loss: 0.484 | Train Accuracy: 77.042% | Test Loss: 0.731 | Test Accuracy: 46.341% | Best Test Accuracy: 62.195% | Test AUC:0.5417 | Test Sen:0.4242 | Test Spe:0.4898 | Test F1:0.4634 | Test Recall:0.4634 | Test Precision:0.4634 | LR:0.0000606
+[2023-08-15 12:06:18][Train.py][L153][INFO]Epoch[26/100] | Train Loss: 0.479 | Train Accuracy: 77.966% | Test Loss: 0.717 | Test Accuracy: 56.098% | Best Test Accuracy: 62.195% | Test AUC:0.5424 | Test Sen:0.3636 | Test Spe:0.6939 | Test F1:0.5610 | Test Recall:0.5610 | Test Precision:0.5610 | LR:0.0000593
+[2023-08-15 12:06:19][Train.py][L153][INFO]Epoch[27/100] | Train Loss: 0.470 | Train Accuracy: 78.737% | Test Loss: 0.728 | Test Accuracy: 50.000% | Best Test Accuracy: 62.195% | Test AUC:0.5387 | Test Sen:0.3939 | Test Spe:0.5714 | Test F1:0.5000 | Test Recall:0.5000 | Test Precision:0.5000 | LR:0.0000580
+[2023-08-15 12:06:20][Train.py][L153][INFO]Epoch[28/100] | Train Loss: 0.461 | Train Accuracy: 79.815% | Test Loss: 0.733 | Test Accuracy: 50.000% | Best Test Accuracy: 62.195% | Test AUC:0.5393 | Test Sen:0.3939 | Test Spe:0.5714 | Test F1:0.5000 | Test Recall:0.5000 | Test Precision:0.5000 | LR:0.0000567
+[2023-08-15 12:06:21][Train.py][L153][INFO]Epoch[29/100] | Train Loss: 0.460 | Train Accuracy: 79.353% | Test Loss: 0.743 | Test Accuracy: 50.000% | Best Test Accuracy: 62.195% | Test AUC:0.5399 | Test Sen:0.4242 | Test Spe:0.5510 | Test F1:0.5000 | Test Recall:0.5000 | Test Precision:0.5000 | LR:0.0000554
+[2023-08-15 12:06:22][Train.py][L153][INFO]Epoch[30/100] | Train Loss: 0.448 | Train Accuracy: 80.740% | Test Loss: 0.745 | Test Accuracy: 50.000% | Best Test Accuracy: 62.195% | Test AUC:0.5424 | Test Sen:0.4242 | Test Spe:0.5510 | Test F1:0.5000 | Test Recall:0.5000 | Test Precision:0.5000 | LR:0.0000541
+[2023-08-15 12:06:23][Train.py][L153][INFO]Epoch[31/100] | Train Loss: 0.441 | Train Accuracy: 81.202% | Test Loss: 0.752 | Test Accuracy: 50.000% | Best Test Accuracy: 62.195% | Test AUC:0.5461 | Test Sen:0.4242 | Test Spe:0.5510 | Test F1:0.5000 | Test Recall:0.5000 | Test Precision:0.5000 | LR:0.0000528
+[2023-08-15 12:06:24][Train.py][L153][INFO]Epoch[32/100] | Train Loss: 0.434 | Train Accuracy: 81.510% | Test Loss: 0.742 | Test Accuracy: 60.976% | Best Test Accuracy: 62.195% | Test AUC:0.5461 | Test Sen:0.3333 | Test Spe:0.7959 | Test F1:0.6098 | Test Recall:0.6098 | Test Precision:0.6098 | LR:0.0000516
+[2023-08-15 12:06:25][Train.py][L153][INFO]Epoch[33/100] | Train Loss: 0.430 | Train Accuracy: 81.048% | Test Loss: 0.753 | Test Accuracy: 50.000% | Best Test Accuracy: 62.195% | Test AUC:0.5485 | Test Sen:0.3939 | Test Spe:0.5714 | Test F1:0.5000 | Test Recall:0.5000 | Test Precision:0.5000 | LR:0.0000504
+[2023-08-15 12:06:26][Train.py][L153][INFO]Epoch[34/100] | Train Loss: 0.425 | Train Accuracy: 81.510% | Test Loss: 0.749 | Test Accuracy: 53.659% | Best Test Accuracy: 62.195% | Test AUC:0.5467 | Test Sen:0.3636 | Test Spe:0.6531 | Test F1:0.5366 | Test Recall:0.5366 | Test Precision:0.5366 | LR:0.0000492
+[2023-08-15 12:06:27][Train.py][L153][INFO]Epoch[35/100] | Train Loss: 0.417 | Train Accuracy: 81.818% | Test Loss: 0.759 | Test Accuracy: 50.000% | Best Test Accuracy: 62.195% | Test AUC:0.5510 | Test Sen:0.3939 | Test Spe:0.5714 | Test F1:0.5000 | Test Recall:0.5000 | Test Precision:0.5000 | LR:0.0000480
+[2023-08-15 12:06:28][Train.py][L153][INFO]Epoch[36/100] | Train Loss: 0.409 | Train Accuracy: 82.589% | Test Loss: 0.759 | Test Accuracy: 53.659% | Best Test Accuracy: 62.195% | Test AUC:0.5473 | Test Sen:0.3636 | Test Spe:0.6531 | Test F1:0.5366 | Test Recall:0.5366 | Test Precision:0.5366 | LR:0.0000469
+[2023-08-15 12:06:29][Train.py][L153][INFO]Epoch[37/100] | Train Loss: 0.402 | Train Accuracy: 82.897% | Test Loss: 0.780 | Test Accuracy: 50.000% | Best Test Accuracy: 62.195% | Test AUC:0.5461 | Test Sen:0.4242 | Test Spe:0.5510 | Test F1:0.5000 | Test Recall:0.5000 | Test Precision:0.5000 | LR:0.0000457
+[2023-08-15 12:06:30][Train.py][L153][INFO]Epoch[38/100] | Train Loss: 0.401 | Train Accuracy: 82.897% | Test Loss: 0.765 | Test Accuracy: 54.878% | Best Test Accuracy: 62.195% | Test AUC:0.5473 | Test Sen:0.3636 | Test Spe:0.6735 | Test F1:0.5488 | Test Recall:0.5488 | Test Precision:0.5488 | LR:0.0000446
+[2023-08-15 12:06:31][Train.py][L153][INFO]Epoch[39/100] | Train Loss: 0.394 | Train Accuracy: 83.513% | Test Loss: 0.778 | Test Accuracy: 50.000% | Best Test Accuracy: 62.195% | Test AUC:0.5461 | Test Sen:0.3939 | Test Spe:0.5714 | Test F1:0.5000 | Test Recall:0.5000 | Test Precision:0.5000 | LR:0.0000435
+[2023-08-15 12:06:32][Train.py][L153][INFO]Epoch[40/100] | Train Loss: 0.393 | Train Accuracy: 82.743% | Test Loss: 0.779 | Test Accuracy: 51.220% | Best Test Accuracy: 62.195% | Test AUC:0.5485 | Test Sen:0.3939 | Test Spe:0.5918 | Test F1:0.5122 | Test Recall:0.5122 | Test Precision:0.5122 | LR:0.0000424
+[2023-08-15 12:06:33][Train.py][L153][INFO]Epoch[41/100] | Train Loss: 0.384 | Train Accuracy: 84.284% | Test Loss: 0.785 | Test Accuracy: 51.220% | Best Test Accuracy: 62.195% | Test AUC:0.5455 | Test Sen:0.3939 | Test Spe:0.5918 | Test F1:0.5122 | Test Recall:0.5122 | Test Precision:0.5122 | LR:0.0000413
+[2023-08-15 12:06:34][Train.py][L153][INFO]Epoch[42/100] | Train Loss: 0.380 | Train Accuracy: 84.900% | Test Loss: 0.786 | Test Accuracy: 52.439% | Best Test Accuracy: 62.195% | Test AUC:0.5442 | Test Sen:0.3636 | Test Spe:0.6327 | Test F1:0.5244 | Test Recall:0.5244 | Test Precision:0.5244 | LR:0.0000403
+[2023-08-15 12:06:35][Train.py][L153][INFO]Epoch[43/100] | Train Loss: 0.375 | Train Accuracy: 84.438% | Test Loss: 0.784 | Test Accuracy: 57.317% | Best Test Accuracy: 62.195% | Test AUC:0.5467 | Test Sen:0.3636 | Test Spe:0.7143 | Test F1:0.5732 | Test Recall:0.5732 | Test Precision:0.5732 | LR:0.0000392
+[2023-08-15 12:06:36][Train.py][L153][INFO]Epoch[44/100] | Train Loss: 0.372 | Train Accuracy: 84.129% | Test Loss: 0.794 | Test Accuracy: 51.220% | Best Test Accuracy: 62.195% | Test AUC:0.5455 | Test Sen:0.3939 | Test Spe:0.5918 | Test F1:0.5122 | Test Recall:0.5122 | Test Precision:0.5122 | LR:0.0000382
+[2023-08-15 12:06:38][Train.py][L153][INFO]Epoch[45/100] | Train Loss: 0.367 | Train Accuracy: 84.746% | Test Loss: 0.791 | Test Accuracy: 57.317% | Best Test Accuracy: 62.195% | Test AUC:0.5485 | Test Sen:0.3333 | Test Spe:0.7347 | Test F1:0.5732 | Test Recall:0.5732 | Test Precision:0.5732 | LR:0.0000372
+[2023-08-15 12:06:39][Train.py][L153][INFO]Epoch[46/100] | Train Loss: 0.367 | Train Accuracy: 84.900% | Test Loss: 0.802 | Test Accuracy: 51.220% | Best Test Accuracy: 62.195% | Test AUC:0.5448 | Test Sen:0.3939 | Test Spe:0.5918 | Test F1:0.5122 | Test Recall:0.5122 | Test Precision:0.5122 | LR:0.0000362
+[2023-08-15 12:06:40][Train.py][L153][INFO]Epoch[47/100] | Train Loss: 0.362 | Train Accuracy: 85.516% | Test Loss: 0.802 | Test Accuracy: 51.220% | Best Test Accuracy: 62.195% | Test AUC:0.5492 | Test Sen:0.3636 | Test Spe:0.6122 | Test F1:0.5122 | Test Recall:0.5122 | Test Precision:0.5122 | LR:0.0000353
+[2023-08-15 12:06:41][Train.py][L153][INFO]Epoch[48/100] | Train Loss: 0.357 | Train Accuracy: 86.287% | Test Loss: 0.802 | Test Accuracy: 57.317% | Best Test Accuracy: 62.195% | Test AUC:0.5504 | Test Sen:0.3333 | Test Spe:0.7347 | Test F1:0.5732 | Test Recall:0.5732 | Test Precision:0.5732 | LR:0.0000343
+[2023-08-15 12:06:42][Train.py][L153][INFO]Epoch[49/100] | Train Loss: 0.352 | Train Accuracy: 86.441% | Test Loss: 0.810 | Test Accuracy: 52.439% | Best Test Accuracy: 62.195% | Test AUC:0.5461 | Test Sen:0.3636 | Test Spe:0.6327 | Test F1:0.5244 | Test Recall:0.5244 | Test Precision:0.5244 | LR:0.0000334
+[2023-08-15 12:06:43][Train.py][L153][INFO]Epoch[50/100] | Train Loss: 0.349 | Train Accuracy: 86.749% | Test Loss: 0.812 | Test Accuracy: 56.098% | Best Test Accuracy: 62.195% | Test AUC:0.5461 | Test Sen:0.3636 | Test Spe:0.6939 | Test F1:0.5610 | Test Recall:0.5610 | Test Precision:0.5610 | LR:0.0000325
+[2023-08-15 12:06:44][Train.py][L153][INFO]Epoch[51/100] | Train Loss: 0.346 | Train Accuracy: 86.287% | Test Loss: 0.818 | Test Accuracy: 52.439% | Best Test Accuracy: 62.195% | Test AUC:0.5455 | Test Sen:0.3636 | Test Spe:0.6327 | Test F1:0.5244 | Test Recall:0.5244 | Test Precision:0.5244 | LR:0.0000316
+[2023-08-15 12:06:45][Train.py][L153][INFO]Epoch[52/100] | Train Loss: 0.341 | Train Accuracy: 87.365% | Test Loss: 0.822 | Test Accuracy: 52.439% | Best Test Accuracy: 62.195% | Test AUC:0.5448 | Test Sen:0.3636 | Test Spe:0.6327 | Test F1:0.5244 | Test Recall:0.5244 | Test Precision:0.5244 | LR:0.0000307
+[2023-08-15 12:06:46][Train.py][L153][INFO]Epoch[53/100] | Train Loss: 0.338 | Train Accuracy: 87.519% | Test Loss: 0.832 | Test Accuracy: 50.000% | Best Test Accuracy: 62.195% | Test AUC:0.5424 | Test Sen:0.3636 | Test Spe:0.5918 | Test F1:0.5000 | Test Recall:0.5000 | Test Precision:0.5000 | LR:0.0000299
+[2023-08-15 12:06:47][Train.py][L153][INFO]Epoch[54/100] | Train Loss: 0.337 | Train Accuracy: 87.673% | Test Loss: 0.822 | Test Accuracy: 58.537% | Best Test Accuracy: 62.195% | Test AUC:0.5492 | Test Sen:0.3636 | Test Spe:0.7347 | Test F1:0.5854 | Test Recall:0.5854 | Test Precision:0.5854 | LR:0.0000290
+[2023-08-15 12:06:48][Train.py][L153][INFO]Epoch[55/100] | Train Loss: 0.336 | Train Accuracy: 87.057% | Test Loss: 0.826 | Test Accuracy: 58.537% | Best Test Accuracy: 62.195% | Test AUC:0.5485 | Test Sen:0.3333 | Test Spe:0.7551 | Test F1:0.5854 | Test Recall:0.5854 | Test Precision:0.5854 | LR:0.0000282
+[2023-08-15 12:06:49][Train.py][L153][INFO]Epoch[56/100] | Train Loss: 0.332 | Train Accuracy: 87.827% | Test Loss: 0.829 | Test Accuracy: 58.537% | Best Test Accuracy: 62.195% | Test AUC:0.5479 | Test Sen:0.3636 | Test Spe:0.7347 | Test F1:0.5854 | Test Recall:0.5854 | Test Precision:0.5854 | LR:0.0000274
+[2023-08-15 12:06:50][Train.py][L153][INFO]Epoch[57/100] | Train Loss: 0.329 | Train Accuracy: 87.827% | Test Loss: 0.831 | Test Accuracy: 58.537% | Best Test Accuracy: 62.195% | Test AUC:0.5473 | Test Sen:0.3636 | Test Spe:0.7347 | Test F1:0.5854 | Test Recall:0.5854 | Test Precision:0.5854 | LR:0.0000266
+[2023-08-15 12:06:51][Train.py][L153][INFO]Epoch[58/100] | Train Loss: 0.326 | Train Accuracy: 88.290% | Test Loss: 0.851 | Test Accuracy: 51.220% | Best Test Accuracy: 62.195% | Test AUC:0.5448 | Test Sen:0.3636 | Test Spe:0.6122 | Test F1:0.5122 | Test Recall:0.5122 | Test Precision:0.5122 | LR:0.0000259
+[2023-08-15 12:06:52][Train.py][L153][INFO]Epoch[59/100] | Train Loss: 0.322 | Train Accuracy: 87.673% | Test Loss: 0.842 | Test Accuracy: 53.659% | Best Test Accuracy: 62.195% | Test AUC:0.5473 | Test Sen:0.3636 | Test Spe:0.6531 | Test F1:0.5366 | Test Recall:0.5366 | Test Precision:0.5366 | LR:0.0000251
+[2023-08-15 12:06:53][Train.py][L153][INFO]Epoch[60/100] | Train Loss: 0.320 | Train Accuracy: 88.752% | Test Loss: 0.844 | Test Accuracy: 53.659% | Best Test Accuracy: 62.195% | Test AUC:0.5485 | Test Sen:0.3636 | Test Spe:0.6531 | Test F1:0.5366 | Test Recall:0.5366 | Test Precision:0.5366 | LR:0.0000244
+[2023-08-15 12:06:54][Train.py][L153][INFO]Epoch[61/100] | Train Loss: 0.318 | Train Accuracy: 87.827% | Test Loss: 0.844 | Test Accuracy: 57.317% | Best Test Accuracy: 62.195% | Test AUC:0.5479 | Test Sen:0.3636 | Test Spe:0.7143 | Test F1:0.5732 | Test Recall:0.5732 | Test Precision:0.5732 | LR:0.0000237
+[2023-08-15 12:06:55][Train.py][L153][INFO]Epoch[62/100] | Train Loss: 0.317 | Train Accuracy: 87.827% | Test Loss: 0.864 | Test Accuracy: 51.220% | Best Test Accuracy: 62.195% | Test AUC:0.5461 | Test Sen:0.3636 | Test Spe:0.6122 | Test F1:0.5122 | Test Recall:0.5122 | Test Precision:0.5122 | LR:0.0000230
+[2023-08-15 12:06:56][Train.py][L153][INFO]Epoch[63/100] | Train Loss: 0.316 | Train Accuracy: 89.368% | Test Loss: 0.850 | Test Accuracy: 57.317% | Best Test Accuracy: 62.195% | Test AUC:0.5467 | Test Sen:0.3636 | Test Spe:0.7143 | Test F1:0.5732 | Test Recall:0.5732 | Test Precision:0.5732 | LR:0.0000223
+[2023-08-15 12:06:57][Train.py][L153][INFO]Epoch[64/100] | Train Loss: 0.312 | Train Accuracy: 88.906% | Test Loss: 0.865 | Test Accuracy: 51.220% | Best Test Accuracy: 62.195% | Test AUC:0.5485 | Test Sen:0.3636 | Test Spe:0.6122 | Test F1:0.5122 | Test Recall:0.5122 | Test Precision:0.5122 | LR:0.0000217
+[2023-08-15 12:06:58][Train.py][L153][INFO]Epoch[65/100] | Train Loss: 0.312 | Train Accuracy: 89.522% | Test Loss: 0.860 | Test Accuracy: 52.439% | Best Test Accuracy: 62.195% | Test AUC:0.5479 | Test Sen:0.3636 | Test Spe:0.6327 | Test F1:0.5244 | Test Recall:0.5244 | Test Precision:0.5244 | LR:0.0000210
+[2023-08-15 12:06:59][Train.py][L153][INFO]Epoch[66/100] | Train Loss: 0.306 | Train Accuracy: 89.060% | Test Loss: 0.872 | Test Accuracy: 52.439% | Best Test Accuracy: 62.195% | Test AUC:0.5498 | Test Sen:0.3939 | Test Spe:0.6122 | Test F1:0.5244 | Test Recall:0.5244 | Test Precision:0.5244 | LR:0.0000204
+[2023-08-15 12:07:00][Train.py][L153][INFO]Epoch[67/100] | Train Loss: 0.306 | Train Accuracy: 89.831% | Test Loss: 0.863 | Test Accuracy: 53.659% | Best Test Accuracy: 62.195% | Test AUC:0.5485 | Test Sen:0.3636 | Test Spe:0.6531 | Test F1:0.5366 | Test Recall:0.5366 | Test Precision:0.5366 | LR:0.0000198
+[2023-08-15 12:07:02][Train.py][L153][INFO]Epoch[68/100] | Train Loss: 0.304 | Train Accuracy: 89.676% | Test Loss: 0.862 | Test Accuracy: 56.098% | Best Test Accuracy: 62.195% | Test AUC:0.5485 | Test Sen:0.3636 | Test Spe:0.6939 | Test F1:0.5610 | Test Recall:0.5610 | Test Precision:0.5610 | LR:0.0000192
+[2023-08-15 12:07:03][Train.py][L153][INFO]Epoch[69/100] | Train Loss: 0.302 | Train Accuracy: 89.676% | Test Loss: 0.863 | Test Accuracy: 57.317% | Best Test Accuracy: 62.195% | Test AUC:0.5498 | Test Sen:0.3636 | Test Spe:0.7143 | Test F1:0.5732 | Test Recall:0.5732 | Test Precision:0.5732 | LR:0.0000186
+[2023-08-15 12:07:04][Train.py][L153][INFO]Epoch[70/100] | Train Loss: 0.303 | Train Accuracy: 89.522% | Test Loss: 0.864 | Test Accuracy: 57.317% | Best Test Accuracy: 62.195% | Test AUC:0.5492 | Test Sen:0.3636 | Test Spe:0.7143 | Test F1:0.5732 | Test Recall:0.5732 | Test Precision:0.5732 | LR:0.0000181
+[2023-08-15 12:07:05][Train.py][L153][INFO]Epoch[71/100] | Train Loss: 0.300 | Train Accuracy: 89.676% | Test Loss: 0.870 | Test Accuracy: 54.878% | Best Test Accuracy: 62.195% | Test AUC:0.5492 | Test Sen:0.3636 | Test Spe:0.6735 | Test F1:0.5488 | Test Recall:0.5488 | Test Precision:0.5488 | LR:0.0000176
+[2023-08-15 12:07:06][Train.py][L153][INFO]Epoch[72/100] | Train Loss: 0.296 | Train Accuracy: 89.985% | Test Loss: 0.868 | Test Accuracy: 57.317% | Best Test Accuracy: 62.195% | Test AUC:0.5492 | Test Sen:0.3636 | Test Spe:0.7143 | Test F1:0.5732 | Test Recall:0.5732 | Test Precision:0.5732 | LR:0.0000171
+[2023-08-15 12:07:07][Train.py][L153][INFO]Epoch[73/100] | Train Loss: 0.296 | Train Accuracy: 89.522% | Test Loss: 0.873 | Test Accuracy: 54.878% | Best Test Accuracy: 62.195% | Test AUC:0.5510 | Test Sen:0.3636 | Test Spe:0.6735 | Test F1:0.5488 | Test Recall:0.5488 | Test Precision:0.5488 | LR:0.0000166
+[2023-08-15 12:07:08][Train.py][L153][INFO]Epoch[74/100] | Train Loss: 0.294 | Train Accuracy: 89.831% | Test Loss: 0.873 | Test Accuracy: 59.756% | Best Test Accuracy: 62.195% | Test AUC:0.5461 | Test Sen:0.3636 | Test Spe:0.7551 | Test F1:0.5976 | Test Recall:0.5976 | Test Precision:0.5976 | LR:0.0000161
+[2023-08-15 12:07:09][Train.py][L153][INFO]Epoch[75/100] | Train Loss: 0.293 | Train Accuracy: 89.831% | Test Loss: 0.875 | Test Accuracy: 57.317% | Best Test Accuracy: 62.195% | Test AUC:0.5492 | Test Sen:0.3636 | Test Spe:0.7143 | Test F1:0.5732 | Test Recall:0.5732 | Test Precision:0.5732 | LR:0.0000156
+[2023-08-15 12:07:10][Train.py][L153][INFO]Epoch[76/100] | Train Loss: 0.290 | Train Accuracy: 90.447% | Test Loss: 0.889 | Test Accuracy: 52.439% | Best Test Accuracy: 62.195% | Test AUC:0.5498 | Test Sen:0.3939 | Test Spe:0.6122 | Test F1:0.5244 | Test Recall:0.5244 | Test Precision:0.5244 | LR:0.0000152
+[2023-08-15 12:07:11][Train.py][L153][INFO]Epoch[77/100] | Train Loss: 0.290 | Train Accuracy: 90.601% | Test Loss: 0.878 | Test Accuracy: 59.756% | Best Test Accuracy: 62.195% | Test AUC:0.5492 | Test Sen:0.3636 | Test Spe:0.7551 | Test F1:0.5976 | Test Recall:0.5976 | Test Precision:0.5976 | LR:0.0000148
+[2023-08-15 12:07:12][Train.py][L153][INFO]Epoch[78/100] | Train Loss: 0.289 | Train Accuracy: 90.909% | Test Loss: 0.886 | Test Accuracy: 53.659% | Best Test Accuracy: 62.195% | Test AUC:0.5504 | Test Sen:0.3636 | Test Spe:0.6531 | Test F1:0.5366 | Test Recall:0.5366 | Test Precision:0.5366 | LR:0.0000144
+[2023-08-15 12:07:13][Train.py][L153][INFO]Epoch[79/100] | Train Loss: 0.287 | Train Accuracy: 91.063% | Test Loss: 0.886 | Test Accuracy: 53.659% | Best Test Accuracy: 62.195% | Test AUC:0.5485 | Test Sen:0.3636 | Test Spe:0.6531 | Test F1:0.5366 | Test Recall:0.5366 | Test Precision:0.5366 | LR:0.0000140
+[2023-08-15 12:07:14][Train.py][L153][INFO]Epoch[80/100] | Train Loss: 0.286 | Train Accuracy: 90.601% | Test Loss: 0.894 | Test Accuracy: 52.439% | Best Test Accuracy: 62.195% | Test AUC:0.5492 | Test Sen:0.3939 | Test Spe:0.6122 | Test F1:0.5244 | Test Recall:0.5244 | Test Precision:0.5244 | LR:0.0000136
+[2023-08-15 12:07:15][Train.py][L153][INFO]Epoch[81/100] | Train Loss: 0.286 | Train Accuracy: 90.601% | Test Loss: 0.893 | Test Accuracy: 53.659% | Best Test Accuracy: 62.195% | Test AUC:0.5473 | Test Sen:0.3939 | Test Spe:0.6327 | Test F1:0.5366 | Test Recall:0.5366 | Test Precision:0.5366 | LR:0.0000132
+[2023-08-15 12:07:16][Train.py][L153][INFO]Epoch[82/100] | Train Loss: 0.284 | Train Accuracy: 90.909% | Test Loss: 0.895 | Test Accuracy: 53.659% | Best Test Accuracy: 62.195% | Test AUC:0.5467 | Test Sen:0.3939 | Test Spe:0.6327 | Test F1:0.5366 | Test Recall:0.5366 | Test Precision:0.5366 | LR:0.0000129
+[2023-08-15 12:07:17][Train.py][L153][INFO]Epoch[83/100] | Train Loss: 0.283 | Train Accuracy: 90.601% | Test Loss: 0.892 | Test Accuracy: 54.878% | Best Test Accuracy: 62.195% | Test AUC:0.5467 | Test Sen:0.3636 | Test Spe:0.6735 | Test F1:0.5488 | Test Recall:0.5488 | Test Precision:0.5488 | LR:0.0000126
+[2023-08-15 12:07:18][Train.py][L153][INFO]Epoch[84/100] | Train Loss: 0.282 | Train Accuracy: 90.293% | Test Loss: 0.899 | Test Accuracy: 53.659% | Best Test Accuracy: 62.195% | Test AUC:0.5479 | Test Sen:0.3939 | Test Spe:0.6327 | Test F1:0.5366 | Test Recall:0.5366 | Test Precision:0.5366 | LR:0.0000123
+[2023-08-15 12:07:19][Train.py][L153][INFO]Epoch[85/100] | Train Loss: 0.281 | Train Accuracy: 91.371% | Test Loss: 0.894 | Test Accuracy: 54.878% | Best Test Accuracy: 62.195% | Test AUC:0.5473 | Test Sen:0.3636 | Test Spe:0.6735 | Test F1:0.5488 | Test Recall:0.5488 | Test Precision:0.5488 | LR:0.0000120
+[2023-08-15 12:07:20][Train.py][L153][INFO]Epoch[86/100] | Train Loss: 0.279 | Train Accuracy: 91.525% | Test Loss: 0.896 | Test Accuracy: 54.878% | Best Test Accuracy: 62.195% | Test AUC:0.5473 | Test Sen:0.3636 | Test Spe:0.6735 | Test F1:0.5488 | Test Recall:0.5488 | Test Precision:0.5488 | LR:0.0000118
+[2023-08-15 12:07:21][Train.py][L153][INFO]Epoch[87/100] | Train Loss: 0.279 | Train Accuracy: 91.217% | Test Loss: 0.901 | Test Accuracy: 53.659% | Best Test Accuracy: 62.195% | Test AUC:0.5479 | Test Sen:0.3939 | Test Spe:0.6327 | Test F1:0.5366 | Test Recall:0.5366 | Test Precision:0.5366 | LR:0.0000115
+[2023-08-15 12:07:22][Train.py][L153][INFO]Epoch[88/100] | Train Loss: 0.278 | Train Accuracy: 91.834% | Test Loss: 0.901 | Test Accuracy: 53.659% | Best Test Accuracy: 62.195% | Test AUC:0.5461 | Test Sen:0.3636 | Test Spe:0.6531 | Test F1:0.5366 | Test Recall:0.5366 | Test Precision:0.5366 | LR:0.0000113
+[2023-08-15 12:07:23][Train.py][L153][INFO]Epoch[89/100] | Train Loss: 0.277 | Train Accuracy: 91.834% | Test Loss: 0.900 | Test Accuracy: 54.878% | Best Test Accuracy: 62.195% | Test AUC:0.5479 | Test Sen:0.3636 | Test Spe:0.6735 | Test F1:0.5488 | Test Recall:0.5488 | Test Precision:0.5488 | LR:0.0000111
+[2023-08-15 12:07:24][Train.py][L153][INFO]Epoch[90/100] | Train Loss: 0.276 | Train Accuracy: 91.680% | Test Loss: 0.903 | Test Accuracy: 54.878% | Best Test Accuracy: 62.195% | Test AUC:0.5473 | Test Sen:0.3636 | Test Spe:0.6735 | Test F1:0.5488 | Test Recall:0.5488 | Test Precision:0.5488 | LR:0.0000109
+[2023-08-15 12:07:25][Train.py][L153][INFO]Epoch[91/100] | Train Loss: 0.275 | Train Accuracy: 91.371% | Test Loss: 0.899 | Test Accuracy: 58.537% | Best Test Accuracy: 62.195% | Test AUC:0.5485 | Test Sen:0.3636 | Test Spe:0.7347 | Test F1:0.5854 | Test Recall:0.5854 | Test Precision:0.5854 | LR:0.0000107
+[2023-08-15 12:07:27][Train.py][L153][INFO]Epoch[92/100] | Train Loss: 0.274 | Train Accuracy: 91.525% | Test Loss: 0.906 | Test Accuracy: 54.878% | Best Test Accuracy: 62.195% | Test AUC:0.5461 | Test Sen:0.3636 | Test Spe:0.6735 | Test F1:0.5488 | Test Recall:0.5488 | Test Precision:0.5488 | LR:0.0000106
+[2023-08-15 12:07:28][Train.py][L153][INFO]Epoch[93/100] | Train Loss: 0.273 | Train Accuracy: 91.525% | Test Loss: 0.907 | Test Accuracy: 54.878% | Best Test Accuracy: 62.195% | Test AUC:0.5467 | Test Sen:0.3636 | Test Spe:0.6735 | Test F1:0.5488 | Test Recall:0.5488 | Test Precision:0.5488 | LR:0.0000104
+[2023-08-15 12:07:29][Train.py][L153][INFO]Epoch[94/100] | Train Loss: 0.273 | Train Accuracy: 91.680% | Test Loss: 0.908 | Test Accuracy: 54.878% | Best Test Accuracy: 62.195% | Test AUC:0.5448 | Test Sen:0.3636 | Test Spe:0.6735 | Test F1:0.5488 | Test Recall:0.5488 | Test Precision:0.5488 | LR:0.0000103
+[2023-08-15 12:07:30][Train.py][L153][INFO]Epoch[95/100] | Train Loss: 0.271 | Train Accuracy: 91.834% | Test Loss: 0.906 | Test Accuracy: 54.878% | Best Test Accuracy: 62.195% | Test AUC:0.5455 | Test Sen:0.3636 | Test Spe:0.6735 | Test F1:0.5488 | Test Recall:0.5488 | Test Precision:0.5488 | LR:0.0000102
+[2023-08-15 12:07:31][Train.py][L153][INFO]Epoch[96/100] | Train Loss: 0.271 | Train Accuracy: 91.371% | Test Loss: 0.910 | Test Accuracy: 56.098% | Best Test Accuracy: 62.195% | Test AUC:0.5467 | Test Sen:0.3939 | Test Spe:0.6735 | Test F1:0.5610 | Test Recall:0.5610 | Test Precision:0.5610 | LR:0.0000101
+[2023-08-15 12:07:32][Train.py][L153][INFO]Epoch[97/100] | Train Loss: 0.270 | Train Accuracy: 91.988% | Test Loss: 0.909 | Test Accuracy: 54.878% | Best Test Accuracy: 62.195% | Test AUC:0.5461 | Test Sen:0.3636 | Test Spe:0.6735 | Test F1:0.5488 | Test Recall:0.5488 | Test Precision:0.5488 | LR:0.0000101
+[2023-08-15 12:07:33][Train.py][L153][INFO]Epoch[98/100] | Train Loss: 0.269 | Train Accuracy: 91.834% | Test Loss: 0.908 | Test Accuracy: 56.098% | Best Test Accuracy: 62.195% | Test AUC:0.5461 | Test Sen:0.3636 | Test Spe:0.6939 | Test F1:0.5610 | Test Recall:0.5610 | Test Precision:0.5610 | LR:0.0000100
+[2023-08-15 12:07:34][Train.py][L153][INFO]Epoch[99/100] | Train Loss: 0.268 | Train Accuracy: 91.371% | Test Loss: 0.921 | Test Accuracy: 53.659% | Best Test Accuracy: 62.195% | Test AUC:0.5461 | Test Sen:0.3939 | Test Spe:0.6327 | Test F1:0.5366 | Test Recall:0.5366 | Test Precision:0.5366 | LR:0.0000100
+[2023-08-15 12:07:35][Train.py][L153][INFO]Epoch[100/100] | Train Loss: 0.269 | Train Accuracy: 91.525% | Test Loss: 0.910 | Test Accuracy: 58.537% | Best Test Accuracy: 62.195% | Test AUC:0.5467 | Test Sen:0.3636 | Test Spe:0.7347 | Test F1:0.5854 | Test Recall:0.5854 | Test Precision:0.5854 | LR:0.0000100

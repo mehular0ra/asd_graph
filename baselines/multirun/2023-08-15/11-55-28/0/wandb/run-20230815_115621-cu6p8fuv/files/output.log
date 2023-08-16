@@ -1,0 +1,71 @@
+[2023-08-15 11:56:31][__main__.py][L41][INFO]dataset:
+  name: fc_small
+  batch_size: 16
+  train_set: 0.8
+  val_set: 0.1
+  test_set: 0.1
+  fc_path: /mnt/ssd1/mehul_data/research/fc_small_data.npy
+  drop_last: true
+  stratified: true
+  node_sz: 400
+  node_feature_sz: 400
+  num_classes: 2
+  perc_edges: 10
+model:
+  name: GCN
+  num_layers: 2
+  hidden_size: 64
+  dropout: 0.5
+  readout: mean
+optimizer:
+- name: Adam
+  lr: 0.0001
+  match_rule: None
+  except_rule: None
+  no_weight_decay: false
+  weight_decay: 0.0001
+  lr_scheduler:
+    mode: poly
+    base_lr: 0.0001
+    target_lr: 1.0e-05
+    decay_factor: 0.1
+    milestones:
+    - 0.3
+    - 0.6
+    - 0.9
+    poly_power: 2.0
+    lr_decay: 0.98
+    warm_up_from: 0.0
+    warm_up_steps: 0
+training:
+  name: Train
+  epochs: 50
+  l2: 0.0
+log_path: result
+repeat_time: 3
+device: cuda:0
+is_wandb: true
+project: asd-graph
+[2023-08-15 11:56:31][__init__.py][L15][INFO]cfg.dataset.name: fc_small
+GCN(
+  (convs): ModuleList(
+    (0): GCNConv(400, 64)
+    (1): GCNConv(64, 64)
+  )
+  (lincomb): Linear(in_features=25600, out_features=64, bias=True)
+  (lin): Linear(in_features=64, out_features=1, bias=True)
+)
+[2023-08-15 11:56:33][optimizer.py][L66][INFO]Parameters [normal] length [8]
+[2023-08-15 11:56:33][__init__.py][L25][INFO]Training: Train
+[2023-08-15 11:56:33][Train.py][L35][INFO]#model params: 1668353
+Starting training...
+> /home/mehul/asd_graph/baselines/source/models/GCN.py(53)forward()
+     52         x = torch.stack([self.lincomb(x[i:i+self.node_sz].flatten())
+---> 53                             for i in range(0, x.shape[0], self.node_sz)]).to('cuda')
+     54
+/home/mehul/.conda/envs/pyg/lib/python3.11/site-packages/hydra/_internal/defaults_list.py:251: UserWarning: In 'config': Defaults list is missing `_self_`. See https://hydra.cc/docs/1.2/upgrades/1.0_to_1.1/default_composition_order for more information
+  warnings.warn(msg, UserWarning)
+/home/mehul/.conda/envs/pyg/lib/python3.11/site-packages/hydra/_internal/core_plugins/basic_launcher.py:74: UserWarning: Future Hydra versions will no longer change working directory at job runtime by default.
+See https://hydra.cc/docs/1.2/upgrades/1.1_to_1.2/changes_to_job_working_dir/ for more information.
+  ret = run_job(
+[2023-08-15 11:56:43,542][HYDRA] 	#2 : dataset=fc_large

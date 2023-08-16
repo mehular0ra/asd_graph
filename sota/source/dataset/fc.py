@@ -1,7 +1,9 @@
 import numpy as np
 import torch
 
-from omegaconf import DictConfig
+from omegaconf import DictConfig, OmegaConf, open_dict
+
+import ipdb
 
 
 def top_percent_edges(matrix, percent):
@@ -31,6 +33,13 @@ def load_data(cfg: DictConfig):
             fc[i] = top_percent_edges(fc[i], cfg.dataset.perc_edges)
 
         fc = torch.from_numpy(fc).float()
+
+        #  write node_feature_dim, num_nodes values in config using omegaconf
+        with open_dict(cfg):
+            cfg.dataset.node_feature_dim = fc.shape[1]
+            cfg.dataset.num_nodes = fc.shape[1]
+
+
     else:
         fc = None
 

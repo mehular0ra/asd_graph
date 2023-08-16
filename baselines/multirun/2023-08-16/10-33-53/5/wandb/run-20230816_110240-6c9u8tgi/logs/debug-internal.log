@@ -1,0 +1,700 @@
+2023-08-16 11:02:40,875 INFO    StreamThr :268574 [internal.py:wandb_internal():86] W&B internal server running at pid: 268574, started at: 2023-08-16 11:02:40.875069
+2023-08-16 11:02:40,877 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: status
+2023-08-16 11:02:40,878 INFO    WriterThread:268574 [datastore.py:open_for_write():85] open: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/run-6c9u8tgi.wandb
+2023-08-16 11:02:40,879 DEBUG   SenderThread:268574 [sender.py:send():375] send: header
+2023-08-16 11:02:40,879 DEBUG   SenderThread:268574 [sender.py:send():375] send: run
+2023-08-16 11:02:41,583 INFO    SenderThread:268574 [dir_watcher.py:__init__():219] watching files in: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files
+2023-08-16 11:02:41,584 INFO    SenderThread:268574 [sender.py:_start_run_threads():1124] run started: 6c9u8tgi with start time 1692163960.020019
+2023-08-16 11:02:41,584 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:02:41,584 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:02:41,587 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: check_version
+2023-08-16 11:02:41,587 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: check_version
+2023-08-16 11:02:41,691 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: run_start
+2023-08-16 11:02:41,692 DEBUG   HandlerThread:268574 [system_info.py:__init__():31] System info init
+2023-08-16 11:02:41,692 DEBUG   HandlerThread:268574 [system_info.py:__init__():46] System info init done
+2023-08-16 11:02:41,692 INFO    HandlerThread:268574 [system_monitor.py:start():181] Starting system monitor
+2023-08-16 11:02:41,692 INFO    SystemMonitor:268574 [system_monitor.py:_start():145] Starting system asset monitoring threads
+2023-08-16 11:02:41,692 INFO    HandlerThread:268574 [system_monitor.py:probe():201] Collecting system info
+2023-08-16 11:02:41,693 INFO    SystemMonitor:268574 [interfaces.py:start():190] Started cpu monitoring
+2023-08-16 11:02:41,693 INFO    SystemMonitor:268574 [interfaces.py:start():190] Started disk monitoring
+2023-08-16 11:02:41,694 INFO    SystemMonitor:268574 [interfaces.py:start():190] Started gpu monitoring
+2023-08-16 11:02:41,694 INFO    SystemMonitor:268574 [interfaces.py:start():190] Started memory monitoring
+2023-08-16 11:02:41,695 INFO    SystemMonitor:268574 [interfaces.py:start():190] Started network monitoring
+2023-08-16 11:02:41,725 DEBUG   HandlerThread:268574 [system_info.py:probe():195] Probing system
+2023-08-16 11:02:41,726 DEBUG   HandlerThread:268574 [system_info.py:_probe_git():180] Probing git
+2023-08-16 11:02:41,731 DEBUG   HandlerThread:268574 [system_info.py:_probe_git():188] Probing git done
+2023-08-16 11:02:41,732 DEBUG   HandlerThread:268574 [system_info.py:probe():240] Probing system done
+2023-08-16 11:02:41,732 DEBUG   HandlerThread:268574 [system_monitor.py:probe():210] {'os': 'Linux-5.15.0-78-generic-x86_64-with-glibc2.31', 'python': '3.11.2', 'heartbeatAt': '2023-08-16T05:32:41.725742', 'startedAt': '2023-08-16T05:32:40.013869', 'docker': None, 'cuda': None, 'args': ('--multirun', 'dataset=fc_bnt,fc_small,fc_large,fc_200', 'model=graphsage,gat,signedgcn'), 'state': 'running', 'program': '-m source.__main__', 'git': {'remote': 'https://github.com/mehular0ra/asd_graph.git', 'commit': 'dd920842aec84b306f3d204b4e1f217c7b73ce4d'}, 'email': '22mehularora22@gmail.com', 'root': '/home/mehul/asd_graph', 'host': 'bccl-lab', 'username': 'mehul', 'executable': '/home/mehul/.conda/envs/pyg/bin/python', 'cpu_count': 32, 'cpu_count_logical': 64, 'cpu_freq': {'current': 1.9041874999999981, 'min': 1800.0, 'max': 3600.0}, 'cpu_freq_per_core': [{'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 3.6, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 3.6, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 3.968, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}], 'disk': {'total': 93.31179428100586, 'used': 87.97999954223633}, 'gpu': 'NVIDIA GeForce RTX 3080 Ti', 'gpu_count': 2, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 3080 Ti', 'memory_total': 12884901888}, {'name': 'NVIDIA GeForce RTX 3080 Ti', 'memory_total': 12884901888}], 'memory': {'total': 251.50732803344727}}
+2023-08-16 11:02:41,732 INFO    HandlerThread:268574 [system_monitor.py:probe():211] Finished collecting system info
+2023-08-16 11:02:41,732 INFO    HandlerThread:268574 [system_monitor.py:probe():214] Publishing system info
+2023-08-16 11:02:41,732 DEBUG   HandlerThread:268574 [system_info.py:_save_pip():51] Saving list of pip packages installed into the current environment
+2023-08-16 11:02:41,732 DEBUG   HandlerThread:268574 [system_info.py:_save_pip():67] Saving pip packages done
+2023-08-16 11:02:41,732 DEBUG   HandlerThread:268574 [system_info.py:_save_conda():74] Saving list of conda packages installed into the current environment
+2023-08-16 11:02:42,585 INFO    Thread-265:268574 [dir_watcher.py:_on_file_created():278] file/dir created: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/requirements.txt
+2023-08-16 11:02:42,585 INFO    Thread-265:268574 [dir_watcher.py:_on_file_created():278] file/dir created: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:02:42,585 INFO    Thread-265:268574 [dir_watcher.py:_on_file_created():278] file/dir created: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/conda-environment.yaml
+2023-08-16 11:02:44,042 DEBUG   HandlerThread:268574 [system_info.py:_save_conda():86] Saving conda packages done
+2023-08-16 11:02:44,043 INFO    HandlerThread:268574 [system_monitor.py:probe():216] Finished publishing system info
+2023-08-16 11:02:44,044 DEBUG   SenderThread:268574 [sender.py:send():375] send: files
+2023-08-16 11:02:44,044 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-metadata.json with policy now
+2023-08-16 11:02:44,049 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: stop_status
+2023-08-16 11:02:44,049 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: stop_status
+2023-08-16 11:02:44,380 DEBUG   SenderThread:268574 [sender.py:send():375] send: telemetry
+2023-08-16 11:02:44,584 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/conda-environment.yaml
+2023-08-16 11:02:44,584 INFO    Thread-265:268574 [dir_watcher.py:_on_file_created():278] file/dir created: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:02:44,584 INFO    Thread-265:268574 [dir_watcher.py:_on_file_created():278] file/dir created: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-metadata.json
+2023-08-16 11:02:45,753 INFO    wandb-upload_0:268574 [upload_job.py:push():137] Uploaded file /tmp/tmpp7hyuakvwandb/2kcj4xsb-wandb-metadata.json
+2023-08-16 11:02:46,036 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: status_report
+2023-08-16 11:02:46,585 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:02:46,726 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:02:46,731 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:02:46,731 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:02:46,731 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:02:47,403 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:02:47,406 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:02:47,406 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:02:47,407 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:02:47,585 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:02:48,074 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:02:48,079 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:02:48,079 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:02:48,079 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:02:48,585 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:02:48,585 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:02:48,748 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:02:48,754 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:02:48,755 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:02:48,755 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:02:49,419 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:02:49,424 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:02:49,424 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:02:49,424 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:02:49,585 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:02:50,087 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:02:50,091 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:02:50,092 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:02:50,092 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:02:50,585 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:02:50,586 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:02:50,752 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:02:50,756 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:02:50,756 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:02:50,756 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:02:51,413 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:02:51,415 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: status_report
+2023-08-16 11:02:51,417 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:02:51,417 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:02:51,418 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:02:51,586 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:02:52,084 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:02:52,088 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:02:52,088 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:02:52,089 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:02:52,586 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:02:52,586 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:02:52,751 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:02:52,752 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:02:52,753 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:02:52,753 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:02:53,420 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:02:53,421 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:02:53,421 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:02:53,422 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:02:53,586 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:02:54,086 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:02:54,089 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:02:54,089 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:02:54,090 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:02:54,586 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:02:54,586 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:02:54,748 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:02:54,750 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:02:54,750 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:02:54,751 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:02:55,413 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:02:55,415 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:02:55,415 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:02:55,416 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:02:55,587 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:02:56,079 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:02:56,082 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:02:56,083 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:02:56,083 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:02:56,587 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:02:56,587 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:02:56,741 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:02:56,746 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: status_report
+2023-08-16 11:02:56,746 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:02:56,746 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:02:56,747 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:02:57,406 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:02:57,409 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:02:57,409 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:02:57,410 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:02:57,587 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:02:58,080 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:02:58,082 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:02:58,082 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:02:58,083 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:02:58,587 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:02:58,587 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:02:58,743 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:02:58,745 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:02:58,746 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:02:58,746 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:02:59,049 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: stop_status
+2023-08-16 11:02:59,050 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: stop_status
+2023-08-16 11:02:59,413 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:02:59,430 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:02:59,430 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:02:59,431 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:02:59,587 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:00,128 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:00,129 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:00,130 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:00,130 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:00,588 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:03:00,588 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:00,757 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:00,759 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:00,760 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:00,761 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:01,423 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:01,425 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:01,426 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:01,426 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:01,588 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:02,088 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:02,090 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: status_report
+2023-08-16 11:03:02,090 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:02,091 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:02,091 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:02,588 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:03:02,588 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:02,750 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:02,752 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:02,753 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:02,753 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:03,418 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:03,420 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:03,420 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:03,420 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:03,588 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:04,087 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:04,089 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:04,089 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:04,090 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:04,588 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:03:04,589 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:04,752 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:04,755 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:04,756 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:04,756 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:05,414 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:05,425 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:05,425 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:05,425 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:05,589 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:06,080 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:06,083 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:06,083 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:06,083 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:06,589 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:03:06,589 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:06,750 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:06,752 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:06,752 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:06,753 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:07,414 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: status_report
+2023-08-16 11:03:07,414 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:07,418 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:07,418 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:07,418 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:07,589 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:08,087 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:08,089 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:08,090 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:08,090 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:08,589 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:03:08,589 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:08,765 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:08,767 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:08,768 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:08,769 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:09,431 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:09,433 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:09,434 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:09,434 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:09,589 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:10,098 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:10,100 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:10,101 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:10,101 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:10,590 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:03:10,590 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:10,765 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:10,767 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:10,768 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:10,769 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:11,428 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:11,430 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:11,431 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:11,431 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:11,590 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:12,097 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:12,099 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:12,100 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:12,100 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:12,590 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:03:12,590 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:12,780 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: status_report
+2023-08-16 11:03:12,780 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:13,118 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:13,118 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:13,118 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:13,445 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:13,446 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:13,447 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:13,448 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:13,591 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/config.yaml
+2023-08-16 11:03:13,591 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:14,049 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: stop_status
+2023-08-16 11:03:14,049 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: stop_status
+2023-08-16 11:03:14,112 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:14,396 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:14,397 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:14,397 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:14,591 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:03:14,591 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:14,775 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:14,777 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:14,777 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:14,778 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:15,439 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:15,441 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:15,441 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:15,442 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:15,591 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:16,104 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:16,107 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:16,107 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:16,108 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:16,591 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:03:16,592 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:16,770 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:16,773 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:16,773 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:16,774 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:17,435 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:17,437 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:17,438 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:17,438 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:17,592 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:18,100 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:18,103 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:18,103 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:18,103 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:18,592 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:03:18,592 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:18,762 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: status_report
+2023-08-16 11:03:18,762 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:18,765 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:18,765 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:18,765 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:19,424 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:19,426 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:19,427 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:19,427 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:19,592 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:20,088 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:20,091 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:20,091 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:20,092 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:20,592 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:03:20,592 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:20,756 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:20,761 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:20,761 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:20,761 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:21,441 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:21,443 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:21,444 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:21,445 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:21,592 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:22,122 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:22,124 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:22,124 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:22,125 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:22,593 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:03:22,593 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:22,789 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:22,792 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:22,792 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:22,793 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:23,454 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:23,456 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:23,456 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:23,457 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:23,593 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:24,115 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: status_report
+2023-08-16 11:03:24,115 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:24,117 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:24,118 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:24,118 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:24,593 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:03:24,593 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:24,779 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:24,781 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:24,782 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:24,783 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:25,441 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:25,443 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:25,445 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:25,445 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:25,593 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:26,114 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:26,125 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:26,125 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:26,125 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:26,593 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:03:26,594 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:26,782 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:26,784 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:26,784 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:26,785 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:27,448 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:27,450 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:27,451 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:27,451 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:27,594 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:28,110 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:28,113 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:28,113 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:28,114 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:28,594 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:03:28,594 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:28,775 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:28,780 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:28,780 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:28,781 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:29,049 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: stop_status
+2023-08-16 11:03:29,049 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: stop_status
+2023-08-16 11:03:29,351 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: status_report
+2023-08-16 11:03:29,438 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:29,440 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:29,441 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:29,441 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:29,594 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:30,118 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:30,120 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:30,120 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:30,121 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:30,594 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:03:30,594 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:30,794 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:30,797 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:30,797 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:30,797 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:31,457 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:31,460 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:31,460 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:31,460 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:31,595 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:32,121 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:32,124 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:32,124 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:32,124 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:32,595 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:03:32,595 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:32,785 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:32,788 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:32,788 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:32,788 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:33,448 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:33,451 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:33,451 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:33,451 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:33,595 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:34,112 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:34,114 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:34,114 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:34,115 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:34,595 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:03:34,595 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:34,782 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: status_report
+2023-08-16 11:03:34,782 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:34,784 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:34,784 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:34,784 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:35,445 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:35,447 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:35,447 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:35,448 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:35,595 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:36,110 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:36,112 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:36,112 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:36,113 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:36,596 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:03:36,596 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:36,775 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:36,779 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:36,780 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:36,780 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:37,438 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:37,440 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:37,440 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:37,441 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:37,596 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:38,099 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:38,101 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:38,101 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:38,102 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:38,596 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:03:38,596 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:38,761 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:38,763 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:38,763 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:38,764 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:39,423 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:39,425 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:39,425 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:39,426 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:39,597 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:40,086 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: status_report
+2023-08-16 11:03:40,086 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:40,088 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:40,088 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:40,089 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:40,597 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:03:40,597 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:40,749 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:40,751 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:40,752 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:40,753 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:41,409 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:41,411 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:41,411 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:41,412 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:41,597 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:41,695 DEBUG   SystemMonitor:268574 [system_monitor.py:_start():159] Starting system metrics aggregation loop
+2023-08-16 11:03:41,698 DEBUG   SenderThread:268574 [sender.py:send():375] send: stats
+2023-08-16 11:03:42,077 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:42,078 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:42,078 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:42,079 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:42,597 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:03:42,598 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:42,755 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:42,757 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:42,757 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:42,758 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:43,417 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:43,419 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:43,420 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:43,420 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:43,598 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:44,049 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: stop_status
+2023-08-16 11:03:44,049 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: stop_status
+2023-08-16 11:03:44,095 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:44,337 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:44,337 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:44,337 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:44,598 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:03:44,598 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:44,761 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:44,763 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:44,763 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:44,764 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:45,437 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:45,447 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:45,447 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: status_report
+2023-08-16 11:03:45,447 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:45,448 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:45,598 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:46,106 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:46,107 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:46,107 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:46,108 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:46,599 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:03:46,599 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:46,779 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:46,781 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:46,781 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:46,782 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:47,439 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:47,441 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:47,441 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:47,442 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:47,599 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:48,099 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:48,100 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:48,101 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:48,102 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:48,599 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:03:48,599 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:48,890 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:48,891 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:48,892 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:48,892 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:49,555 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:49,556 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:49,556 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:49,557 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:49,599 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:50,215 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:50,216 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:50,217 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:50,217 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:50,600 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:03:50,600 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:50,879 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: status_report
+2023-08-16 11:03:50,879 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:50,880 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:50,881 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:50,881 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:51,547 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:51,548 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:51,549 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:51,549 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:51,600 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:52,210 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:52,211 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:52,212 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:52,212 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:52,600 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:03:52,601 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:52,871 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: partial_history
+2023-08-16 11:03:52,872 DEBUG   SenderThread:268574 [sender.py:send():375] send: history
+2023-08-16 11:03:52,872 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: summary_record
+2023-08-16 11:03:52,873 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:52,873 DEBUG   SenderThread:268574 [sender.py:send():375] send: telemetry
+2023-08-16 11:03:52,874 DEBUG   SenderThread:268574 [sender.py:send():375] send: exit
+2023-08-16 11:03:52,874 INFO    SenderThread:268574 [sender.py:send_exit():598] handling exit code: 0
+2023-08-16 11:03:52,874 INFO    SenderThread:268574 [sender.py:send_exit():600] handling runtime: 71
+2023-08-16 11:03:52,879 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:52,879 INFO    SenderThread:268574 [sender.py:send_exit():606] send defer
+2023-08-16 11:03:52,879 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: defer
+2023-08-16 11:03:52,879 INFO    HandlerThread:268574 [handler.py:handle_request_defer():170] handle defer: 0
+2023-08-16 11:03:52,880 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: defer
+2023-08-16 11:03:52,880 INFO    SenderThread:268574 [sender.py:send_request_defer():622] handle sender defer: 0
+2023-08-16 11:03:52,880 INFO    SenderThread:268574 [sender.py:transition_state():626] send defer: 1
+2023-08-16 11:03:52,880 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: defer
+2023-08-16 11:03:52,880 INFO    HandlerThread:268574 [handler.py:handle_request_defer():170] handle defer: 1
+2023-08-16 11:03:52,880 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: defer
+2023-08-16 11:03:52,880 INFO    SenderThread:268574 [sender.py:send_request_defer():622] handle sender defer: 1
+2023-08-16 11:03:52,880 INFO    SenderThread:268574 [sender.py:transition_state():626] send defer: 2
+2023-08-16 11:03:52,880 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: defer
+2023-08-16 11:03:52,880 INFO    HandlerThread:268574 [handler.py:handle_request_defer():170] handle defer: 2
+2023-08-16 11:03:52,880 INFO    HandlerThread:268574 [system_monitor.py:finish():190] Stopping system monitor
+2023-08-16 11:03:52,881 DEBUG   SystemMonitor:268574 [system_monitor.py:_start():166] Finished system metrics aggregation loop
+2023-08-16 11:03:52,881 INFO    HandlerThread:268574 [interfaces.py:finish():202] Joined cpu monitor
+2023-08-16 11:03:52,881 DEBUG   SystemMonitor:268574 [system_monitor.py:_start():170] Publishing last batch of metrics
+2023-08-16 11:03:52,881 INFO    HandlerThread:268574 [interfaces.py:finish():202] Joined disk monitor
+2023-08-16 11:03:52,954 INFO    HandlerThread:268574 [interfaces.py:finish():202] Joined gpu monitor
+2023-08-16 11:03:52,955 INFO    HandlerThread:268574 [interfaces.py:finish():202] Joined memory monitor
+2023-08-16 11:03:52,955 INFO    HandlerThread:268574 [interfaces.py:finish():202] Joined network monitor
+2023-08-16 11:03:52,955 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: defer
+2023-08-16 11:03:52,955 INFO    SenderThread:268574 [sender.py:send_request_defer():622] handle sender defer: 2
+2023-08-16 11:03:52,955 INFO    SenderThread:268574 [sender.py:transition_state():626] send defer: 3
+2023-08-16 11:03:52,955 DEBUG   SenderThread:268574 [sender.py:send():375] send: stats
+2023-08-16 11:03:52,956 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: defer
+2023-08-16 11:03:52,956 INFO    HandlerThread:268574 [handler.py:handle_request_defer():170] handle defer: 3
+2023-08-16 11:03:52,956 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: defer
+2023-08-16 11:03:52,956 INFO    SenderThread:268574 [sender.py:send_request_defer():622] handle sender defer: 3
+2023-08-16 11:03:52,956 INFO    SenderThread:268574 [sender.py:transition_state():626] send defer: 4
+2023-08-16 11:03:52,956 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: defer
+2023-08-16 11:03:52,956 INFO    HandlerThread:268574 [handler.py:handle_request_defer():170] handle defer: 4
+2023-08-16 11:03:52,956 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: defer
+2023-08-16 11:03:52,956 INFO    SenderThread:268574 [sender.py:send_request_defer():622] handle sender defer: 4
+2023-08-16 11:03:52,956 INFO    SenderThread:268574 [sender.py:transition_state():626] send defer: 5
+2023-08-16 11:03:52,956 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: defer
+2023-08-16 11:03:52,956 INFO    HandlerThread:268574 [handler.py:handle_request_defer():170] handle defer: 5
+2023-08-16 11:03:52,957 DEBUG   SenderThread:268574 [sender.py:send():375] send: summary
+2023-08-16 11:03:52,957 INFO    SenderThread:268574 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-16 11:03:52,957 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: defer
+2023-08-16 11:03:52,957 INFO    SenderThread:268574 [sender.py:send_request_defer():622] handle sender defer: 5
+2023-08-16 11:03:52,957 INFO    SenderThread:268574 [sender.py:transition_state():626] send defer: 6
+2023-08-16 11:03:52,957 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: defer
+2023-08-16 11:03:52,957 INFO    HandlerThread:268574 [handler.py:handle_request_defer():170] handle defer: 6
+2023-08-16 11:03:52,957 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: defer
+2023-08-16 11:03:52,957 INFO    SenderThread:268574 [sender.py:send_request_defer():622] handle sender defer: 6
+2023-08-16 11:03:52,959 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: status_report
+2023-08-16 11:03:53,274 INFO    SenderThread:268574 [sender.py:transition_state():626] send defer: 7
+2023-08-16 11:03:53,274 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: defer
+2023-08-16 11:03:53,274 INFO    HandlerThread:268574 [handler.py:handle_request_defer():170] handle defer: 7
+2023-08-16 11:03:53,274 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: defer
+2023-08-16 11:03:53,274 INFO    SenderThread:268574 [sender.py:send_request_defer():622] handle sender defer: 7
+2023-08-16 11:03:53,601 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/config.yaml
+2023-08-16 11:03:53,601 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:53,875 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: poll_exit
+2023-08-16 11:03:54,484 INFO    SenderThread:268574 [sender.py:transition_state():626] send defer: 8
+2023-08-16 11:03:54,485 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: poll_exit
+2023-08-16 11:03:54,485 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: defer
+2023-08-16 11:03:54,485 INFO    HandlerThread:268574 [handler.py:handle_request_defer():170] handle defer: 8
+2023-08-16 11:03:54,486 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: defer
+2023-08-16 11:03:54,486 INFO    SenderThread:268574 [sender.py:send_request_defer():622] handle sender defer: 8
+2023-08-16 11:03:54,486 INFO    SenderThread:268574 [sender.py:transition_state():626] send defer: 9
+2023-08-16 11:03:54,486 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: defer
+2023-08-16 11:03:54,486 INFO    HandlerThread:268574 [handler.py:handle_request_defer():170] handle defer: 9
+2023-08-16 11:03:54,486 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: defer
+2023-08-16 11:03:54,486 INFO    SenderThread:268574 [sender.py:send_request_defer():622] handle sender defer: 9
+2023-08-16 11:03:54,487 INFO    SenderThread:268574 [dir_watcher.py:finish():365] shutting down directory watcher
+2023-08-16 11:03:54,601 INFO    Thread-265:268574 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:03:54,602 INFO    SenderThread:268574 [dir_watcher.py:finish():395] scan: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files
+2023-08-16 11:03:54,602 INFO    SenderThread:268574 [dir_watcher.py:finish():409] scan save: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log output.log
+2023-08-16 11:03:54,602 INFO    SenderThread:268574 [dir_watcher.py:finish():409] scan save: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-metadata.json wandb-metadata.json
+2023-08-16 11:03:54,602 INFO    SenderThread:268574 [dir_watcher.py:finish():409] scan save: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/conda-environment.yaml conda-environment.yaml
+2023-08-16 11:03:54,602 INFO    SenderThread:268574 [dir_watcher.py:finish():409] scan save: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/requirements.txt requirements.txt
+2023-08-16 11:03:54,602 INFO    SenderThread:268574 [dir_watcher.py:finish():409] scan save: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json wandb-summary.json
+2023-08-16 11:03:54,602 INFO    SenderThread:268574 [dir_watcher.py:finish():409] scan save: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/config.yaml config.yaml
+2023-08-16 11:03:54,603 INFO    SenderThread:268574 [sender.py:transition_state():626] send defer: 10
+2023-08-16 11:03:54,603 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: defer
+2023-08-16 11:03:54,608 INFO    HandlerThread:268574 [handler.py:handle_request_defer():170] handle defer: 10
+2023-08-16 11:03:54,616 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: defer
+2023-08-16 11:03:54,616 INFO    SenderThread:268574 [sender.py:send_request_defer():622] handle sender defer: 10
+2023-08-16 11:03:54,616 INFO    SenderThread:268574 [file_pusher.py:finish():168] shutting down file pusher
+2023-08-16 11:03:54,875 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: poll_exit
+2023-08-16 11:03:54,876 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: poll_exit
+2023-08-16 11:03:55,282 INFO    wandb-upload_1:268574 [upload_job.py:push():137] Uploaded file /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/output.log
+2023-08-16 11:03:55,430 INFO    wandb-upload_4:268574 [upload_job.py:push():137] Uploaded file /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/config.yaml
+2023-08-16 11:03:55,445 INFO    wandb-upload_2:268574 [upload_job.py:push():137] Uploaded file /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/requirements.txt
+2023-08-16 11:03:55,493 INFO    wandb-upload_0:268574 [upload_job.py:push():137] Uploaded file /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/conda-environment.yaml
+2023-08-16 11:03:55,499 INFO    wandb-upload_3:268574 [upload_job.py:push():137] Uploaded file /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/files/wandb-summary.json
+2023-08-16 11:03:55,699 INFO    Thread-264 (_thread_body):268574 [sender.py:transition_state():626] send defer: 11
+2023-08-16 11:03:55,700 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: defer
+2023-08-16 11:03:55,707 INFO    HandlerThread:268574 [handler.py:handle_request_defer():170] handle defer: 11
+2023-08-16 11:03:55,707 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: defer
+2023-08-16 11:03:55,707 INFO    SenderThread:268574 [sender.py:send_request_defer():622] handle sender defer: 11
+2023-08-16 11:03:55,707 INFO    SenderThread:268574 [file_pusher.py:join():173] waiting for file pusher
+2023-08-16 11:03:55,707 INFO    SenderThread:268574 [sender.py:transition_state():626] send defer: 12
+2023-08-16 11:03:55,707 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: defer
+2023-08-16 11:03:55,708 INFO    HandlerThread:268574 [handler.py:handle_request_defer():170] handle defer: 12
+2023-08-16 11:03:55,708 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: defer
+2023-08-16 11:03:55,708 INFO    SenderThread:268574 [sender.py:send_request_defer():622] handle sender defer: 12
+2023-08-16 11:03:55,876 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: poll_exit
+2023-08-16 11:03:56,623 INFO    SenderThread:268574 [sender.py:transition_state():626] send defer: 13
+2023-08-16 11:03:56,624 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: poll_exit
+2023-08-16 11:03:56,624 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: defer
+2023-08-16 11:03:56,624 INFO    HandlerThread:268574 [handler.py:handle_request_defer():170] handle defer: 13
+2023-08-16 11:03:56,625 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: defer
+2023-08-16 11:03:56,625 INFO    SenderThread:268574 [sender.py:send_request_defer():622] handle sender defer: 13
+2023-08-16 11:03:56,625 INFO    SenderThread:268574 [sender.py:transition_state():626] send defer: 14
+2023-08-16 11:03:56,625 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: defer
+2023-08-16 11:03:56,625 INFO    HandlerThread:268574 [handler.py:handle_request_defer():170] handle defer: 14
+2023-08-16 11:03:56,626 DEBUG   SenderThread:268574 [sender.py:send():375] send: final
+2023-08-16 11:03:56,626 DEBUG   SenderThread:268574 [sender.py:send():375] send: footer
+2023-08-16 11:03:56,626 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: defer
+2023-08-16 11:03:56,626 INFO    SenderThread:268574 [sender.py:send_request_defer():622] handle sender defer: 14
+2023-08-16 11:03:56,627 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: poll_exit
+2023-08-16 11:03:56,628 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: server_info
+2023-08-16 11:03:56,628 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: get_summary
+2023-08-16 11:03:56,629 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: sampled_history
+2023-08-16 11:03:56,632 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: poll_exit
+2023-08-16 11:03:56,633 DEBUG   SenderThread:268574 [sender.py:send_request():402] send_request: server_info
+2023-08-16 11:03:57,169 DEBUG   HandlerThread:268574 [handler.py:handle_request():144] handle_request: shutdown
+2023-08-16 11:03:57,169 INFO    HandlerThread:268574 [handler.py:finish():845] shutting down handler
+2023-08-16 11:03:57,633 INFO    WriterThread:268574 [datastore.py:close():298] close: /home/mehul/asd_graph/baselines/multirun/2023-08-16/10-33-53/5/wandb/run-20230816_110240-6c9u8tgi/run-6c9u8tgi.wandb
+2023-08-16 11:03:58,168 INFO    SenderThread:268574 [sender.py:finish():1550] shutting down sender
+2023-08-16 11:03:58,168 INFO    SenderThread:268574 [file_pusher.py:finish():168] shutting down file pusher
+2023-08-16 11:03:58,168 INFO    SenderThread:268574 [file_pusher.py:join():173] waiting for file pusher
