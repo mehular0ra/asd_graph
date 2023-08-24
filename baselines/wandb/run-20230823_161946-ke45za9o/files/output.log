@@ -1,0 +1,26 @@
+Sweep config for this run
+{}
+{'defaults': [{'dataset': 'fc_large'}, {'model': 'hgnn'}, {'optimizer': 'adam'}, {'training': 'train'}], 'dataset': {'node': 'fc'}, 'log_path': 'result', 'repeat_time': 1, 'device': 'cuda:0', 'is_wandb': True, 'doing_sweep': True, 'project': 'asd-graph', 'entity': 'mehular0ra', 'sweep_id': 'asd-graph/asd-graph/r49h4avh', 'hydra': {'job_logging': {'root': {'handlers': ['console', 'file'], 'propagate': True}, 'formatters': {'precise': {'format': '[%(asctime)s][%(filename)s][L%(lineno)d][%(levelname)s]%(message)s', 'datefmt': '%Y-%m-%d %H:%M:%S'}}, 'handlers': {'console': {'class': 'logging.StreamHandler', 'formatter': 'precise', 'stream': 'ext://sys.stdout'}, 'file': {'class': 'logging.FileHandler', 'formatter': 'precise', 'filename': './output.log'}}}}}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/mehul/asd_graph/baselines/source/__main__.py", line 73, in <module>
+    sweep_agent_manager()
+  File "/home/mehul/asd_graph/baselines/source/__main__.py", line 64, in sweep_agent_manager
+    sweep_config = OmegaConf.create(sweep_config)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mehul/.conda/envs/pyg/lib/python3.11/site-packages/omegaconf/omegaconf.py", line 178, in create
+    return OmegaConf._create_impl(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mehul/.conda/envs/pyg/lib/python3.11/site-packages/omegaconf/omegaconf.py", line 900, in _create_impl
+    format_and_raise(node=None, key=None, value=None, msg=str(e), cause=e)
+  File "/home/mehul/.conda/envs/pyg/lib/python3.11/site-packages/omegaconf/_utils.py", line 899, in format_and_raise
+    _raise(ex, cause)
+  File "/home/mehul/.conda/envs/pyg/lib/python3.11/site-packages/omegaconf/_utils.py", line 797, in _raise
+    raise ex.with_traceback(sys.exc_info()[2])  # set env var OC_CAUSE=1 for full trace
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mehul/.conda/envs/pyg/lib/python3.11/site-packages/omegaconf/omegaconf.py", line 896, in _create_impl
+    raise ValidationError(
+omegaconf.errors.ValidationError: Object of unsupported type: 'Config'
+    full_key:
+    object_type=None

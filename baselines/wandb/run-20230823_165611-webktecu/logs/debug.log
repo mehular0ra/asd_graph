@@ -1,0 +1,40 @@
+2023-08-23 16:56:11,856 INFO    Thread-10 (_run_job):1398348 [wandb_setup.py:_flush():76] Configure stats pid to 1398348
+2023-08-23 16:56:11,856 INFO    Thread-10 (_run_job):1398348 [wandb_setup.py:_flush():76] Loading settings from /home/mehul/.config/wandb/settings
+2023-08-23 16:56:11,856 INFO    Thread-10 (_run_job):1398348 [wandb_setup.py:_flush():76] Loading settings from /home/mehul/asd_graph/baselines/wandb/settings
+2023-08-23 16:56:11,856 INFO    Thread-10 (_run_job):1398348 [wandb_setup.py:_flush():76] Loading settings from environment variables: {'root_dir': '/home/mehul/asd_graph/baselines', 'entity': 'asd-graph', 'project': 'asd-graph', 'run_id': 'webktecu', 'sweep_param_path': '/home/mehul/asd_graph/baselines/wandb/sweep-r49h4avh/config-webktecu.yaml', 'sweep_id': 'r49h4avh'}
+2023-08-23 16:56:11,856 INFO    Thread-10 (_run_job):1398348 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2023-08-23 16:56:11,856 INFO    Thread-10 (_run_job):1398348 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program': '<python with no main file>'}
+2023-08-23 16:56:11,856 INFO    Thread-10 (_run_job):1398348 [wandb_init.py:_log_setup():507] Logging user logs to /home/mehul/asd_graph/baselines/wandb/run-20230823_165611-webktecu/logs/debug.log
+2023-08-23 16:56:11,856 INFO    Thread-10 (_run_job):1398348 [wandb_init.py:_log_setup():508] Logging internal logs to /home/mehul/asd_graph/baselines/wandb/run-20230823_165611-webktecu/logs/debug-internal.log
+2023-08-23 16:56:11,856 INFO    Thread-10 (_run_job):1398348 [wandb_init.py:_jupyter_setup():453] configuring jupyter hooks <wandb.sdk.wandb_init._WandbInit object at 0x7fd8a9251190>
+2023-08-23 16:56:11,856 INFO    Thread-10 (_run_job):1398348 [wandb_init.py:init():547] calling init triggers
+2023-08-23 16:56:11,856 INFO    Thread-10 (_run_job):1398348 [wandb_init.py:init():554] wandb.init called with sweep_config: {'dataset': {'perc_edges': 10}, 'model': {'K_neigs': 2, 'dropout': 0.25, 'hidden_size': 8, 'num_layers': 3}, 'training': {'l2': 0.01}}
+config: {}
+2023-08-23 16:56:11,857 INFO    Thread-10 (_run_job):1398348 [wandb_init.py:init():595] starting backend
+2023-08-23 16:56:11,857 INFO    Thread-10 (_run_job):1398348 [wandb_init.py:init():599] setting up manager
+2023-08-23 16:56:11,862 INFO    Thread-10 (_run_job):1398348 [backend.py:_multiprocessing_setup():106] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2023-08-23 16:56:11,865 INFO    Thread-10 (_run_job):1398348 [wandb_init.py:init():605] backend started and connected
+2023-08-23 16:56:11,866 INFO    Thread-10 (_run_job):1398348 [wandb_run.py:_config_callback():1285] config_cb None None {'dataset': {'perc_edges': 10}, 'model': {'K_neigs': 2, 'dropout': 0.25, 'hidden_size': 8, 'num_layers': 3}, 'training': {'l2': 0.01}}
+2023-08-23 16:56:11,867 INFO    Thread-10 (_run_job):1398348 [wandb_run.py:_label_probe_notebook():1237] probe notebook
+2023-08-23 16:56:11,867 INFO    Thread-10 (_run_job):1398348 [wandb_run.py:_label_probe_notebook():1247] Unable to probe notebook: 'NoneType' object has no attribute 'get'
+2023-08-23 16:56:11,867 INFO    Thread-10 (_run_job):1398348 [wandb_init.py:init():695] updated telemetry
+2023-08-23 16:56:11,870 INFO    Thread-10 (_run_job):1398348 [wandb_init.py:init():732] communicating run to backend with 60.0 second timeout
+2023-08-23 16:56:12,525 INFO    Thread-10 (_run_job):1398348 [wandb_run.py:_on_init():2176] communicating current version
+2023-08-23 16:56:12,599 INFO    Thread-10 (_run_job):1398348 [wandb_run.py:_on_init():2185] got version response upgrade_message: "wandb version 0.15.8 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2023-08-23 16:56:12,599 INFO    Thread-10 (_run_job):1398348 [wandb_init.py:init():782] starting run threads in backend
+2023-08-23 16:56:15,269 INFO    Thread-10 (_run_job):1398348 [wandb_run.py:_console_start():2157] atexit reg
+2023-08-23 16:56:15,269 INFO    Thread-10 (_run_job):1398348 [wandb_run.py:_redirect():2012] redirect: 3
+2023-08-23 16:56:15,269 INFO    Thread-10 (_run_job):1398348 [wandb_run.py:_redirect():2077] Wrapping output streams.
+2023-08-23 16:56:15,269 INFO    Thread-10 (_run_job):1398348 [wandb_run.py:_redirect():2102] Redirects installed.
+2023-08-23 16:56:15,270 INFO    Thread-10 (_run_job):1398348 [wandb_init.py:init():824] run started, returning control to user process
+2023-08-23 16:56:45,784 INFO    Thread-10 (_run_job):1398348 [wandb_run.py:_finish():1892] finishing run asd-graph/asd-graph/webktecu
+2023-08-23 16:56:45,784 ERROR   Thread-10 (_run_job):1398348 [jupyter.py:save_history():437] Run pip install nbformat to save notebook history
+2023-08-23 16:56:45,784 INFO    Thread-10 (_run_job):1398348 [jupyter.py:save_ipynb():373] not saving jupyter notebook
+2023-08-23 16:56:45,784 INFO    Thread-10 (_run_job):1398348 [wandb_init.py:_jupyter_teardown():435] cleaning up jupyter logic
+2023-08-23 16:56:45,784 INFO    Thread-10 (_run_job):1398348 [wandb_run.py:_atexit_cleanup():2126] got exitcode: 1
+2023-08-23 16:56:45,785 INFO    Thread-10 (_run_job):1398348 [wandb_run.py:_restore():2109] restore
+2023-08-23 16:56:45,785 INFO    Thread-10 (_run_job):1398348 [wandb_run.py:_restore():2115] restore done
+2023-08-23 16:56:51,995 INFO    Thread-10 (_run_job):1398348 [wandb_run.py:_footer_history_summary_info():3476] rendering history
+2023-08-23 16:56:51,995 INFO    Thread-10 (_run_job):1398348 [wandb_run.py:_footer_history_summary_info():3508] rendering summary
+2023-08-23 16:56:51,999 INFO    Thread-10 (_run_job):1398348 [wandb_run.py:_footer_sync_info():3434] logging synced files

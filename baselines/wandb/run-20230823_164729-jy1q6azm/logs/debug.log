@@ -1,0 +1,19 @@
+2023-08-23 16:47:29,888 INFO    Thread-6 (_run_job):1396550 [wandb_setup.py:_flush():76] Configure stats pid to 1396550
+2023-08-23 16:47:29,888 INFO    Thread-6 (_run_job):1396550 [wandb_setup.py:_flush():76] Loading settings from /home/mehul/.config/wandb/settings
+2023-08-23 16:47:29,888 INFO    Thread-6 (_run_job):1396550 [wandb_setup.py:_flush():76] Loading settings from /home/mehul/asd_graph/baselines/wandb/settings
+2023-08-23 16:47:29,888 INFO    Thread-6 (_run_job):1396550 [wandb_setup.py:_flush():76] Loading settings from environment variables: {'root_dir': '/home/mehul/asd_graph/baselines', 'entity': 'asd-graph', 'project': 'asd-graph', 'run_id': 'jy1q6azm', 'sweep_param_path': '/home/mehul/asd_graph/baselines/wandb/sweep-r49h4avh/config-jy1q6azm.yaml', 'sweep_id': 'r49h4avh'}
+2023-08-23 16:47:29,888 INFO    Thread-6 (_run_job):1396550 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2023-08-23 16:47:29,888 WARNING Thread-6 (_run_job):1396550 [wandb_setup.py:_flush():76] Could not find program at -m source.__main__
+2023-08-23 16:47:29,888 INFO    Thread-6 (_run_job):1396550 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': None, 'program': '-m source.__main__'}
+2023-08-23 16:47:29,888 INFO    Thread-6 (_run_job):1396550 [wandb_init.py:_log_setup():507] Logging user logs to /home/mehul/asd_graph/baselines/wandb/run-20230823_164729-jy1q6azm/logs/debug.log
+2023-08-23 16:47:29,888 INFO    Thread-6 (_run_job):1396550 [wandb_init.py:_log_setup():508] Logging internal logs to /home/mehul/asd_graph/baselines/wandb/run-20230823_164729-jy1q6azm/logs/debug-internal.log
+2023-08-23 16:47:29,888 INFO    Thread-6 (_run_job):1396550 [wandb_init.py:init():547] calling init triggers
+2023-08-23 16:47:29,888 INFO    Thread-6 (_run_job):1396550 [wandb_init.py:init():554] wandb.init called with sweep_config: {'dataset': {'perc_edges': 10}, 'model': {'K_neigs': 2, 'dropout': 0.25, 'hidden_size': 8, 'num_layers': 2}, 'training': {'l2': 0.001}}
+config: {}
+2023-08-23 16:47:29,888 INFO    Thread-6 (_run_job):1396550 [wandb_init.py:init():595] starting backend
+2023-08-23 16:47:29,888 INFO    Thread-6 (_run_job):1396550 [wandb_init.py:init():599] setting up manager
+2023-08-23 16:47:29,895 INFO    Thread-6 (_run_job):1396550 [backend.py:_multiprocessing_setup():106] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2023-08-23 16:47:29,897 INFO    Thread-6 (_run_job):1396550 [wandb_init.py:init():605] backend started and connected
+2023-08-23 16:47:29,897 WARNING MsgRouterThr:1396550 [router.py:message_loop():77] message_loop has been closed
+2023-08-23 16:47:29,899 INFO    Thread-6 (_run_job):1396550 [wandb_run.py:_config_callback():1285] config_cb None None {'dataset': {'perc_edges': 10}, 'model': {'K_neigs': 2, 'dropout': 0.25, 'hidden_size': 8, 'num_layers': 2}, 'training': {'l2': 0.001}}
+2023-08-23 16:47:29,899 INFO    Thread-6 (_run_job):1396550 [wandb_init.py:init():695] updated telemetry

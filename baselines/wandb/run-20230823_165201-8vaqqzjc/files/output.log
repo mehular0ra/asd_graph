@@ -1,0 +1,28 @@
+> /home/mehul/asd_graph/baselines/source/__main__.py(63)sweep_agent_manager()
+     62
+---> 63     cfg.defaults.model.num_layers = sweep_config.model.num_layers
+     64     cfg.defaults.model.hidden_dim = sweep_config.model.hidden_dim
+omegaconf.errors.ConfigAttributeError: ListConfig does not support attribute access
+    full_key: defaults[model]
+    object_type=list
+> /home/mehul/asd_graph/baselines/source/__main__.py(63)sweep_agent_manager()
+     62
+---> 63     cfg.defaults.model.num_layers = sweep_config.model.num_layers
+     64     cfg.defaults.model.hidden_dim = sweep_config.model.hidden_dim
+--Return--
+None
+> /home/mehul/asd_graph/baselines/source/__main__.py(63)sweep_agent_manager()
+     62
+---> 63     cfg.defaults.model.num_layers = sweep_config.model.num_layers
+     64     cfg.defaults.model.hidden_dim = sweep_config.model.hidden_dim
+omegaconf.errors.ConfigAttributeError: ListConfig does not support attribute access
+    full_key: defaults[model]
+    object_type=list
+> /home/mehul/.conda/envs/pyg/lib/python3.11/site-packages/wandb/agents/pyagent.py(298)_run_job()
+    297
+--> 298             self._function()
+    299             wandb.finish()
+> /home/mehul/.conda/envs/pyg/lib/python3.11/site-packages/wandb/agents/pyagent.py(300)_run_job()
+    299             wandb.finish()
+--> 300         except KeyboardInterrupt as ki:
+    301             raise ki

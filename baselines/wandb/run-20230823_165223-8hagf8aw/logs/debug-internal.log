@@ -1,0 +1,264 @@
+2023-08-23 16:52:23,061 INFO    StreamThr :1398763 [internal.py:wandb_internal():86] W&B internal server running at pid: 1398763, started at: 2023-08-23 16:52:23.061306
+2023-08-23 16:52:23,063 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status
+2023-08-23 16:52:23,064 INFO    WriterThread:1398763 [datastore.py:open_for_write():85] open: /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/run-8hagf8aw.wandb
+2023-08-23 16:52:23,065 DEBUG   SenderThread:1398763 [sender.py:send():375] send: header
+2023-08-23 16:52:23,068 DEBUG   SenderThread:1398763 [sender.py:send():375] send: run
+2023-08-23 16:52:23,721 INFO    SenderThread:1398763 [dir_watcher.py:__init__():219] watching files in: /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files
+2023-08-23 16:52:23,721 INFO    SenderThread:1398763 [sender.py:_start_run_threads():1124] run started: 8hagf8aw with start time 1692789743.059994
+2023-08-23 16:52:23,721 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: summary_record
+2023-08-23 16:52:23,722 INFO    SenderThread:1398763 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-23 16:52:23,722 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: check_version
+2023-08-23 16:52:23,723 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: check_version
+2023-08-23 16:52:23,999 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: run_start
+2023-08-23 16:52:24,020 DEBUG   HandlerThread:1398763 [system_info.py:__init__():31] System info init
+2023-08-23 16:52:24,020 DEBUG   HandlerThread:1398763 [system_info.py:__init__():46] System info init done
+2023-08-23 16:52:24,020 INFO    HandlerThread:1398763 [system_monitor.py:start():181] Starting system monitor
+2023-08-23 16:52:24,020 INFO    SystemMonitor:1398763 [system_monitor.py:_start():145] Starting system asset monitoring threads
+2023-08-23 16:52:24,020 INFO    HandlerThread:1398763 [system_monitor.py:probe():201] Collecting system info
+2023-08-23 16:52:24,021 INFO    SystemMonitor:1398763 [interfaces.py:start():190] Started cpu monitoring
+2023-08-23 16:52:24,021 INFO    SystemMonitor:1398763 [interfaces.py:start():190] Started disk monitoring
+2023-08-23 16:52:24,021 INFO    SystemMonitor:1398763 [interfaces.py:start():190] Started gpu monitoring
+2023-08-23 16:52:24,022 INFO    SystemMonitor:1398763 [interfaces.py:start():190] Started memory monitoring
+2023-08-23 16:52:24,022 INFO    SystemMonitor:1398763 [interfaces.py:start():190] Started network monitoring
+2023-08-23 16:52:24,052 DEBUG   HandlerThread:1398763 [system_info.py:probe():195] Probing system
+2023-08-23 16:52:24,053 DEBUG   HandlerThread:1398763 [system_info.py:_probe_git():180] Probing git
+2023-08-23 16:52:24,057 DEBUG   HandlerThread:1398763 [system_info.py:_probe_git():188] Probing git done
+2023-08-23 16:52:24,057 DEBUG   HandlerThread:1398763 [system_info.py:probe():240] Probing system done
+2023-08-23 16:52:24,057 DEBUG   HandlerThread:1398763 [system_monitor.py:probe():210] {'os': 'Linux-5.15.0-78-generic-x86_64-with-glibc2.31', 'python': '3.11.2', 'heartbeatAt': '2023-08-23T11:22:24.052577', 'startedAt': '2023-08-23T11:22:23.047329', 'docker': None, 'cuda': None, 'args': None, 'state': 'running', 'program': '<python with no main file>', 'git': {'remote': 'https://github.com/mehular0ra/asd_graph.git', 'commit': 'e3725983dcac055b8dc93a3faaf430c8cae0f617'}, 'email': '22mehularora22@gmail.com', 'root': '/home/mehul/asd_graph', 'host': 'bccl-lab', 'username': 'mehul', 'executable': '/home/mehul/.conda/envs/pyg/bin/python', 'cpu_count': 32, 'cpu_count_logical': 64, 'cpu_freq': {'current': 2.1550468749999996, 'min': 1800.0, 'max': 3600.0}, 'cpu_freq_per_core': [{'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 4.3, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 4.291, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 3.6, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 4.29, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 3.433, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 4.29, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 3.6, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 4.29, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 4.291, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 2.7, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}, {'current': 1.8, 'min': 1800.0, 'max': 3600.0}], 'disk': {'total': 93.31179428100586, 'used': 88.03676986694336}, 'gpu': 'NVIDIA GeForce RTX 3080 Ti', 'gpu_count': 2, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 3080 Ti', 'memory_total': 12884901888}, {'name': 'NVIDIA GeForce RTX 3080 Ti', 'memory_total': 12884901888}], 'memory': {'total': 251.50732803344727}}
+2023-08-23 16:52:24,057 INFO    HandlerThread:1398763 [system_monitor.py:probe():211] Finished collecting system info
+2023-08-23 16:52:24,057 INFO    HandlerThread:1398763 [system_monitor.py:probe():214] Publishing system info
+2023-08-23 16:52:24,057 DEBUG   HandlerThread:1398763 [system_info.py:_save_pip():51] Saving list of pip packages installed into the current environment
+2023-08-23 16:52:24,058 DEBUG   HandlerThread:1398763 [system_info.py:_save_pip():67] Saving pip packages done
+2023-08-23 16:52:24,058 DEBUG   HandlerThread:1398763 [system_info.py:_save_conda():74] Saving list of conda packages installed into the current environment
+2023-08-23 16:52:24,722 INFO    Thread-12 :1398763 [dir_watcher.py:_on_file_created():278] file/dir created: /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files/requirements.txt
+2023-08-23 16:52:24,722 INFO    Thread-12 :1398763 [dir_watcher.py:_on_file_created():278] file/dir created: /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files/wandb-summary.json
+2023-08-23 16:52:24,723 INFO    Thread-12 :1398763 [dir_watcher.py:_on_file_created():278] file/dir created: /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files/conda-environment.yaml
+2023-08-23 16:52:27,724 INFO    Thread-12 :1398763 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files/conda-environment.yaml
+2023-08-23 16:52:27,815 DEBUG   HandlerThread:1398763 [system_info.py:_save_conda():86] Saving conda packages done
+2023-08-23 16:52:27,816 INFO    HandlerThread:1398763 [system_monitor.py:probe():216] Finished publishing system info
+2023-08-23 16:52:27,818 DEBUG   SenderThread:1398763 [sender.py:send():375] send: files
+2023-08-23 16:52:27,818 INFO    SenderThread:1398763 [sender.py:_save_file():1378] saving file wandb-metadata.json with policy now
+2023-08-23 16:52:27,828 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: stop_status
+2023-08-23 16:52:27,829 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: stop_status
+2023-08-23 16:52:28,243 DEBUG   SenderThread:1398763 [sender.py:send():375] send: telemetry
+2023-08-23 16:52:28,243 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:52:28,663 INFO    wandb-upload_0:1398763 [upload_job.py:push():137] Uploaded file /tmp/tmp1nj1kjscwandb/2s5izoxq-wandb-metadata.json
+2023-08-23 16:52:28,724 INFO    Thread-12 :1398763 [dir_watcher.py:_on_file_created():278] file/dir created: /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files/wandb-metadata.json
+2023-08-23 16:52:28,724 INFO    Thread-12 :1398763 [dir_watcher.py:_on_file_created():278] file/dir created: /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files/output.log
+2023-08-23 16:52:30,725 INFO    Thread-12 :1398763 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files/output.log
+2023-08-23 16:52:33,252 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:52:38,252 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:52:42,824 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: stop_status
+2023-08-23 16:52:42,824 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: stop_status
+2023-08-23 16:52:44,165 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:52:49,166 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:52:52,729 INFO    Thread-12 :1398763 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files/output.log
+2023-08-23 16:52:55,156 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:52:55,730 INFO    Thread-12 :1398763 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files/config.yaml
+2023-08-23 16:52:57,824 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: stop_status
+2023-08-23 16:52:57,824 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: stop_status
+2023-08-23 16:53:01,201 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:53:06,202 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:53:11,203 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:53:12,824 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: stop_status
+2023-08-23 16:53:12,824 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: stop_status
+2023-08-23 16:53:17,164 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:53:18,736 INFO    Thread-12 :1398763 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files/output.log
+2023-08-23 16:53:22,697 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:53:22,737 INFO    Thread-12 :1398763 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files/output.log
+2023-08-23 16:53:24,022 DEBUG   SystemMonitor:1398763 [system_monitor.py:_start():159] Starting system metrics aggregation loop
+2023-08-23 16:53:24,025 DEBUG   SenderThread:1398763 [sender.py:send():375] send: stats
+2023-08-23 16:53:27,824 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: stop_status
+2023-08-23 16:53:27,825 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: stop_status
+2023-08-23 16:53:28,196 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:53:33,196 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:53:38,197 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:53:42,824 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: stop_status
+2023-08-23 16:53:42,824 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: stop_status
+2023-08-23 16:53:44,165 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:53:49,166 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:53:54,026 DEBUG   SenderThread:1398763 [sender.py:send():375] send: stats
+2023-08-23 16:53:55,027 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:53:57,824 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: stop_status
+2023-08-23 16:53:57,825 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: stop_status
+2023-08-23 16:54:00,106 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:54:05,107 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:54:10,108 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:54:12,824 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: stop_status
+2023-08-23 16:54:12,825 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: stop_status
+2023-08-23 16:54:15,187 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:54:20,188 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:54:24,027 DEBUG   SenderThread:1398763 [sender.py:send():375] send: stats
+2023-08-23 16:54:26,028 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:54:27,824 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: stop_status
+2023-08-23 16:54:27,825 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: stop_status
+2023-08-23 16:54:31,138 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:54:36,265 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:54:36,757 INFO    Thread-12 :1398763 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files/output.log
+2023-08-23 16:54:41,771 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:54:42,759 INFO    Thread-12 :1398763 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files/output.log
+2023-08-23 16:54:42,824 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: stop_status
+2023-08-23 16:54:42,825 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: stop_status
+2023-08-23 16:54:47,117 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:54:52,392 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:54:52,761 INFO    Thread-12 :1398763 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files/output.log
+2023-08-23 16:54:54,029 DEBUG   SenderThread:1398763 [sender.py:send():375] send: stats
+2023-08-23 16:54:57,825 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: stop_status
+2023-08-23 16:54:57,825 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: stop_status
+2023-08-23 16:54:58,209 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:54:58,763 INFO    Thread-12 :1398763 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files/output.log
+2023-08-23 16:55:03,209 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:55:08,210 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:55:12,825 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: stop_status
+2023-08-23 16:55:12,825 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: stop_status
+2023-08-23 16:55:14,193 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:55:19,193 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:55:24,030 DEBUG   SenderThread:1398763 [sender.py:send():375] send: stats
+2023-08-23 16:55:25,031 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:55:27,825 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: stop_status
+2023-08-23 16:55:27,825 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: stop_status
+2023-08-23 16:55:30,161 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:55:35,162 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:55:40,163 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:55:42,825 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: stop_status
+2023-08-23 16:55:42,825 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: stop_status
+2023-08-23 16:55:45,209 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:55:50,210 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:55:54,031 DEBUG   SenderThread:1398763 [sender.py:send():375] send: stats
+2023-08-23 16:55:56,032 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:55:57,825 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: stop_status
+2023-08-23 16:55:57,825 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: stop_status
+2023-08-23 16:56:00,951 DEBUG   SenderThread:1398763 [sender.py:send():375] send: telemetry
+2023-08-23 16:56:00,952 DEBUG   SenderThread:1398763 [sender.py:send():375] send: exit
+2023-08-23 16:56:00,952 INFO    SenderThread:1398763 [sender.py:send_exit():598] handling exit code: 1
+2023-08-23 16:56:00,952 INFO    SenderThread:1398763 [sender.py:send_exit():600] handling runtime: 216
+2023-08-23 16:56:00,952 INFO    SenderThread:1398763 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-23 16:56:00,952 INFO    SenderThread:1398763 [sender.py:send_exit():606] send defer
+2023-08-23 16:56:00,953 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: defer
+2023-08-23 16:56:00,953 INFO    HandlerThread:1398763 [handler.py:handle_request_defer():170] handle defer: 0
+2023-08-23 16:56:00,953 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: defer
+2023-08-23 16:56:00,953 INFO    SenderThread:1398763 [sender.py:send_request_defer():622] handle sender defer: 0
+2023-08-23 16:56:00,953 INFO    SenderThread:1398763 [sender.py:transition_state():626] send defer: 1
+2023-08-23 16:56:00,953 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: defer
+2023-08-23 16:56:00,953 INFO    HandlerThread:1398763 [handler.py:handle_request_defer():170] handle defer: 1
+2023-08-23 16:56:00,953 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: defer
+2023-08-23 16:56:00,953 INFO    SenderThread:1398763 [sender.py:send_request_defer():622] handle sender defer: 1
+2023-08-23 16:56:00,953 INFO    SenderThread:1398763 [sender.py:transition_state():626] send defer: 2
+2023-08-23 16:56:00,953 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: defer
+2023-08-23 16:56:00,953 INFO    HandlerThread:1398763 [handler.py:handle_request_defer():170] handle defer: 2
+2023-08-23 16:56:00,953 INFO    HandlerThread:1398763 [system_monitor.py:finish():190] Stopping system monitor
+2023-08-23 16:56:00,954 INFO    HandlerThread:1398763 [interfaces.py:finish():202] Joined cpu monitor
+2023-08-23 16:56:00,954 INFO    HandlerThread:1398763 [interfaces.py:finish():202] Joined disk monitor
+2023-08-23 16:56:00,954 DEBUG   SystemMonitor:1398763 [system_monitor.py:_start():166] Finished system metrics aggregation loop
+2023-08-23 16:56:00,954 DEBUG   SystemMonitor:1398763 [system_monitor.py:_start():170] Publishing last batch of metrics
+2023-08-23 16:56:01,056 INFO    HandlerThread:1398763 [interfaces.py:finish():202] Joined gpu monitor
+2023-08-23 16:56:01,056 INFO    HandlerThread:1398763 [interfaces.py:finish():202] Joined memory monitor
+2023-08-23 16:56:01,057 INFO    HandlerThread:1398763 [interfaces.py:finish():202] Joined network monitor
+2023-08-23 16:56:01,057 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: defer
+2023-08-23 16:56:01,057 INFO    SenderThread:1398763 [sender.py:send_request_defer():622] handle sender defer: 2
+2023-08-23 16:56:01,058 INFO    SenderThread:1398763 [sender.py:transition_state():626] send defer: 3
+2023-08-23 16:56:01,058 DEBUG   SenderThread:1398763 [sender.py:send():375] send: stats
+2023-08-23 16:56:01,058 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: defer
+2023-08-23 16:56:01,058 INFO    HandlerThread:1398763 [handler.py:handle_request_defer():170] handle defer: 3
+2023-08-23 16:56:01,058 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:56:01,058 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: defer
+2023-08-23 16:56:01,058 INFO    SenderThread:1398763 [sender.py:send_request_defer():622] handle sender defer: 3
+2023-08-23 16:56:01,058 INFO    SenderThread:1398763 [sender.py:transition_state():626] send defer: 4
+2023-08-23 16:56:01,059 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: defer
+2023-08-23 16:56:01,059 INFO    HandlerThread:1398763 [handler.py:handle_request_defer():170] handle defer: 4
+2023-08-23 16:56:01,059 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: defer
+2023-08-23 16:56:01,059 INFO    SenderThread:1398763 [sender.py:send_request_defer():622] handle sender defer: 4
+2023-08-23 16:56:01,059 INFO    SenderThread:1398763 [sender.py:transition_state():626] send defer: 5
+2023-08-23 16:56:01,059 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: defer
+2023-08-23 16:56:01,059 INFO    HandlerThread:1398763 [handler.py:handle_request_defer():170] handle defer: 5
+2023-08-23 16:56:01,059 DEBUG   SenderThread:1398763 [sender.py:send():375] send: summary
+2023-08-23 16:56:01,059 INFO    SenderThread:1398763 [sender.py:_save_file():1378] saving file wandb-summary.json with policy end
+2023-08-23 16:56:01,060 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: defer
+2023-08-23 16:56:01,060 INFO    SenderThread:1398763 [sender.py:send_request_defer():622] handle sender defer: 5
+2023-08-23 16:56:01,060 INFO    SenderThread:1398763 [sender.py:transition_state():626] send defer: 6
+2023-08-23 16:56:01,060 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: defer
+2023-08-23 16:56:01,060 INFO    HandlerThread:1398763 [handler.py:handle_request_defer():170] handle defer: 6
+2023-08-23 16:56:01,060 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: defer
+2023-08-23 16:56:01,060 INFO    SenderThread:1398763 [sender.py:send_request_defer():622] handle sender defer: 6
+2023-08-23 16:56:01,062 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:56:01,389 INFO    SenderThread:1398763 [sender.py:transition_state():626] send defer: 7
+2023-08-23 16:56:01,390 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: defer
+2023-08-23 16:56:01,390 INFO    HandlerThread:1398763 [handler.py:handle_request_defer():170] handle defer: 7
+2023-08-23 16:56:01,390 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: defer
+2023-08-23 16:56:01,390 INFO    SenderThread:1398763 [sender.py:send_request_defer():622] handle sender defer: 7
+2023-08-23 16:56:01,779 INFO    Thread-12 :1398763 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files/wandb-summary.json
+2023-08-23 16:56:01,779 INFO    Thread-12 :1398763 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files/config.yaml
+2023-08-23 16:56:01,952 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: poll_exit
+2023-08-23 16:56:02,272 INFO    SenderThread:1398763 [sender.py:transition_state():626] send defer: 8
+2023-08-23 16:56:02,273 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: poll_exit
+2023-08-23 16:56:02,273 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: defer
+2023-08-23 16:56:02,273 INFO    HandlerThread:1398763 [handler.py:handle_request_defer():170] handle defer: 8
+2023-08-23 16:56:02,274 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: defer
+2023-08-23 16:56:02,274 INFO    SenderThread:1398763 [sender.py:send_request_defer():622] handle sender defer: 8
+2023-08-23 16:56:02,274 INFO    SenderThread:1398763 [sender.py:transition_state():626] send defer: 9
+2023-08-23 16:56:02,274 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: defer
+2023-08-23 16:56:02,274 INFO    HandlerThread:1398763 [handler.py:handle_request_defer():170] handle defer: 9
+2023-08-23 16:56:02,274 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: defer
+2023-08-23 16:56:02,274 INFO    SenderThread:1398763 [sender.py:send_request_defer():622] handle sender defer: 9
+2023-08-23 16:56:02,274 INFO    SenderThread:1398763 [dir_watcher.py:finish():365] shutting down directory watcher
+2023-08-23 16:56:02,779 INFO    Thread-12 :1398763 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files/output.log
+2023-08-23 16:56:02,779 INFO    SenderThread:1398763 [dir_watcher.py:finish():395] scan: /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files
+2023-08-23 16:56:02,779 INFO    SenderThread:1398763 [dir_watcher.py:finish():409] scan save: /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files/output.log output.log
+2023-08-23 16:56:02,780 INFO    SenderThread:1398763 [dir_watcher.py:finish():409] scan save: /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files/wandb-metadata.json wandb-metadata.json
+2023-08-23 16:56:02,780 INFO    SenderThread:1398763 [dir_watcher.py:finish():409] scan save: /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files/conda-environment.yaml conda-environment.yaml
+2023-08-23 16:56:02,780 INFO    SenderThread:1398763 [dir_watcher.py:finish():409] scan save: /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files/requirements.txt requirements.txt
+2023-08-23 16:56:02,782 INFO    SenderThread:1398763 [dir_watcher.py:finish():409] scan save: /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files/wandb-summary.json wandb-summary.json
+2023-08-23 16:56:02,783 INFO    SenderThread:1398763 [dir_watcher.py:finish():409] scan save: /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files/config.yaml config.yaml
+2023-08-23 16:56:02,785 INFO    SenderThread:1398763 [sender.py:transition_state():626] send defer: 10
+2023-08-23 16:56:02,786 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: defer
+2023-08-23 16:56:02,787 INFO    HandlerThread:1398763 [handler.py:handle_request_defer():170] handle defer: 10
+2023-08-23 16:56:02,788 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: defer
+2023-08-23 16:56:02,788 INFO    SenderThread:1398763 [sender.py:send_request_defer():622] handle sender defer: 10
+2023-08-23 16:56:02,788 INFO    SenderThread:1398763 [file_pusher.py:finish():168] shutting down file pusher
+2023-08-23 16:56:02,953 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: poll_exit
+2023-08-23 16:56:02,953 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: poll_exit
+2023-08-23 16:56:03,475 INFO    wandb-upload_2:1398763 [upload_job.py:push():137] Uploaded file /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files/requirements.txt
+2023-08-23 16:56:03,953 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: poll_exit
+2023-08-23 16:56:03,954 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: poll_exit
+2023-08-23 16:56:04,008 INFO    wandb-upload_1:1398763 [upload_job.py:push():137] Uploaded file /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files/conda-environment.yaml
+2023-08-23 16:56:04,023 INFO    wandb-upload_3:1398763 [upload_job.py:push():137] Uploaded file /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files/wandb-summary.json
+2023-08-23 16:56:04,030 INFO    wandb-upload_4:1398763 [upload_job.py:push():137] Uploaded file /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files/config.yaml
+2023-08-23 16:56:04,536 INFO    wandb-upload_0:1398763 [upload_job.py:push():137] Uploaded file /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/files/output.log
+2023-08-23 16:56:04,736 INFO    Thread-11 (_thread_body):1398763 [sender.py:transition_state():626] send defer: 11
+2023-08-23 16:56:04,736 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: defer
+2023-08-23 16:56:04,736 INFO    HandlerThread:1398763 [handler.py:handle_request_defer():170] handle defer: 11
+2023-08-23 16:56:04,737 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: defer
+2023-08-23 16:56:04,737 INFO    SenderThread:1398763 [sender.py:send_request_defer():622] handle sender defer: 11
+2023-08-23 16:56:04,737 INFO    SenderThread:1398763 [file_pusher.py:join():173] waiting for file pusher
+2023-08-23 16:56:04,737 INFO    SenderThread:1398763 [sender.py:transition_state():626] send defer: 12
+2023-08-23 16:56:04,737 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: defer
+2023-08-23 16:56:04,737 INFO    HandlerThread:1398763 [handler.py:handle_request_defer():170] handle defer: 12
+2023-08-23 16:56:04,737 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: defer
+2023-08-23 16:56:04,737 INFO    SenderThread:1398763 [sender.py:send_request_defer():622] handle sender defer: 12
+2023-08-23 16:56:04,954 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: poll_exit
+2023-08-23 16:56:06,568 INFO    SenderThread:1398763 [sender.py:transition_state():626] send defer: 13
+2023-08-23 16:56:06,568 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: poll_exit
+2023-08-23 16:56:06,569 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: defer
+2023-08-23 16:56:06,569 INFO    HandlerThread:1398763 [handler.py:handle_request_defer():170] handle defer: 13
+2023-08-23 16:56:06,569 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: status_report
+2023-08-23 16:56:06,569 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: defer
+2023-08-23 16:56:06,570 INFO    SenderThread:1398763 [sender.py:send_request_defer():622] handle sender defer: 13
+2023-08-23 16:56:06,570 INFO    SenderThread:1398763 [sender.py:transition_state():626] send defer: 14
+2023-08-23 16:56:06,570 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: defer
+2023-08-23 16:56:06,570 INFO    HandlerThread:1398763 [handler.py:handle_request_defer():170] handle defer: 14
+2023-08-23 16:56:06,570 DEBUG   SenderThread:1398763 [sender.py:send():375] send: final
+2023-08-23 16:56:06,570 DEBUG   SenderThread:1398763 [sender.py:send():375] send: footer
+2023-08-23 16:56:06,570 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: defer
+2023-08-23 16:56:06,570 INFO    SenderThread:1398763 [sender.py:send_request_defer():622] handle sender defer: 14
+2023-08-23 16:56:06,572 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: poll_exit
+2023-08-23 16:56:06,572 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: server_info
+2023-08-23 16:56:06,572 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: get_summary
+2023-08-23 16:56:06,572 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: sampled_history
+2023-08-23 16:56:06,572 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: poll_exit
+2023-08-23 16:56:06,572 DEBUG   SenderThread:1398763 [sender.py:send_request():402] send_request: server_info
+2023-08-23 16:56:07,127 DEBUG   HandlerThread:1398763 [handler.py:handle_request():144] handle_request: shutdown
+2023-08-23 16:56:07,127 INFO    HandlerThread:1398763 [handler.py:finish():845] shutting down handler
+2023-08-23 16:56:07,572 INFO    WriterThread:1398763 [datastore.py:close():298] close: /home/mehul/asd_graph/baselines/wandb/run-20230823_165223-8hagf8aw/run-8hagf8aw.wandb
+2023-08-23 16:56:08,126 INFO    SenderThread:1398763 [sender.py:finish():1550] shutting down sender
+2023-08-23 16:56:08,126 INFO    SenderThread:1398763 [file_pusher.py:finish():168] shutting down file pusher
+2023-08-23 16:56:08,126 INFO    SenderThread:1398763 [file_pusher.py:join():173] waiting for file pusher

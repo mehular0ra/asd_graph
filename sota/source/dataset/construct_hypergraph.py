@@ -28,7 +28,7 @@ class HyperGraph(object):
         self.sc = sc if sc is not None else None
         self.t1 = t1 if t1 is not None else None
         self.k = k
-        self.x = x.to(torch.float32)
+        self.x = x.to(torch.float32)    
         self.y = y
         self.num_nodes = self.x.shape[0]
 

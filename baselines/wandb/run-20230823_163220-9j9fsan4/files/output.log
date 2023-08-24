@@ -1,0 +1,39 @@
+Sweep config for this run
+{}
+> /home/mehul/asd_graph/baselines/source/__main__.py(64)sweep_agent_manager()
+     63     # Merging sweep config with config
+---> 64     cfg = OmegaConf.load("source/conf/config.yaml")
+     65     print(cfg)
+<class 'wandb.sdk.wandb_config.Config'>
+*** omegaconf.errors.ValidationError: Object of unsupported type: 'Config'
+    full_key:
+    object_type=None
+<class 'wandb.sdk.wandb_config.Config'>
+*** RecursionError: maximum recursion depth exceeded while calling a Python object
+{}
+{}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/mehul/asd_graph/baselines/source/__main__.py", line 75, in <module>
+    sweep_agent_manager()
+  File "/home/mehul/asd_graph/baselines/source/__main__.py", line 64, in sweep_agent_manager
+    cfg = OmegaConf.load("source/conf/config.yaml")
+          ^^^^^^^^^
+  File "/home/mehul/asd_graph/baselines/source/__main__.py", line 64, in sweep_agent_manager
+    cfg = OmegaConf.load("source/conf/config.yaml")
+          ^^^^^^^^^
+  File "/home/mehul/.conda/envs/pyg/lib/python3.11/bdb.py", line 90, in trace_dispatch
+    return self.dispatch_line(frame)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mehul/.conda/envs/pyg/lib/python3.11/bdb.py", line 115, in dispatch_line
+    if self.quitting: raise BdbQuit
+                      ^^^^^^^^^^^^^
+bdb.BdbQuit
+If you suspect this is an IPython 8.12.0 bug, please report it at:
+    https://github.com/ipython/ipython/issues
+or send an email to the mailing list at ipython-dev@python.org
+You can print a more detailed traceback right now with "%tb", or use "%debug"
+to interactively debug it.
+Extra-detailed tracebacks for bug-reporting purposes can be enabled via:
+    %config Application.verbose_crash=True

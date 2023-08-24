@@ -1,0 +1,39 @@
+Sweep config for this run
+{}
+{'defaults': [{'dataset': 'fc_large'}, {'model': 'hgnn'}, {'optimizer': 'adam'}, {'training': 'train'}], 'dataset': {'node': 'fc'}, 'log_path': 'result', 'repeat_time': 1, 'device': 'cuda:0', 'is_wandb': True, 'doing_sweep': True, 'project': 'asd-graph', 'entity': 'mehular0ra', 'sweep_id': 'asd-graph/asd-graph/r49h4avh', 'hydra': {'job_logging': {'root': {'handlers': ['console', 'file'], 'propagate': True}, 'formatters': {'precise': {'format': '[%(asctime)s][%(filename)s][L%(lineno)d][%(levelname)s]%(message)s', 'datefmt': '%Y-%m-%d %H:%M:%S'}}, 'handlers': {'console': {'class': 'logging.StreamHandler', 'formatter': 'precise', 'stream': 'ext://sys.stdout'}, 'file': {'class': 'logging.FileHandler', 'formatter': 'precise', 'filename': './output.log'}}}}}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/mehul/asd_graph/baselines/source/__main__.py", line 73, in <module>
+    sweep_agent_manager()
+  File "/home/mehul/asd_graph/baselines/source/__main__.py", line 67, in sweep_agent_manager
+    main(merged_config)
+  File "/home/mehul/.conda/envs/pyg/lib/python3.11/site-packages/hydra/main.py", line 83, in decorated_main
+    return task_function(cfg_passthrough)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mehul/asd_graph/baselines/source/__main__.py", line 39, in main
+    group_name = f"{cfg.dataset.name}_{cfg.model.name}_node:{cfg.dataset.node}"
+                    ^^^^^^^^^^^^^^^^
+  File "/home/mehul/.conda/envs/pyg/lib/python3.11/site-packages/omegaconf/dictconfig.py", line 355, in __getattr__
+    self._format_and_raise(
+  File "/home/mehul/.conda/envs/pyg/lib/python3.11/site-packages/omegaconf/base.py", line 231, in _format_and_raise
+    format_and_raise(
+  File "/home/mehul/.conda/envs/pyg/lib/python3.11/site-packages/omegaconf/_utils.py", line 899, in format_and_raise
+    _raise(ex, cause)
+  File "/home/mehul/.conda/envs/pyg/lib/python3.11/site-packages/omegaconf/_utils.py", line 797, in _raise
+    raise ex.with_traceback(sys.exc_info()[2])  # set env var OC_CAUSE=1 for full trace
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mehul/.conda/envs/pyg/lib/python3.11/site-packages/omegaconf/dictconfig.py", line 351, in __getattr__
+    return self._get_impl(
+           ^^^^^^^^^^^^^^^
+  File "/home/mehul/.conda/envs/pyg/lib/python3.11/site-packages/omegaconf/dictconfig.py", line 442, in _get_impl
+    node = self._get_child(
+           ^^^^^^^^^^^^^^^^
+  File "/home/mehul/.conda/envs/pyg/lib/python3.11/site-packages/omegaconf/basecontainer.py", line 73, in _get_child
+    child = self._get_node(
+            ^^^^^^^^^^^^^^^
+  File "/home/mehul/.conda/envs/pyg/lib/python3.11/site-packages/omegaconf/dictconfig.py", line 480, in _get_node
+    raise ConfigKeyError(f"Missing key {key!s}")
+omegaconf.errors.ConfigAttributeError: Missing key name
+    full_key: dataset.name
+    object_type=dict

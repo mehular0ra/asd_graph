@@ -32,7 +32,7 @@ def create_graph_data(cfg: DictConfig,
 
         # define node features
         if cfg.dataset.node == 'one_hot':
-            # Create a tensor of indices from 0 to num_nodes
+           # Create a tensor of indices from 0 to num_nodes
             indices = torch.arange(num_nodes)
             # Create a one-hot encoded tensor
             node_feature = torch.nn.functional.one_hot(indices).float()
@@ -41,7 +41,7 @@ def create_graph_data(cfg: DictConfig,
             node_feature = final_pearson[i]
         elif cfg.dataset.node == 'sc':
             # Using the fully connected (fc) tensor as node features
-            node_feature = final_sc[i]
+            node_feature = final_sc[i] 
 
         mapped_site = site_mapping[site[i]]
 

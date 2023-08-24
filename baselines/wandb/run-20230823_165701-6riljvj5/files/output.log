@@ -1,0 +1,4 @@
+> /home/mehul/asd_graph/baselines/source/__main__.py(63)sweep_agent_manager()
+     62
+---> 63     cfg.defaults.model.num_layers = sweep_config.model.num_layers
+     64     cfg.defaults.model.hidden_dim = sweep_config.model.hidden_dim

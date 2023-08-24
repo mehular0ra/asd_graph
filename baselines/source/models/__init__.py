@@ -3,6 +3,9 @@ from .GCN import GCN
 from .GraphSAGE import GraphSAGE
 from .SignedGCN import SignedGCN
 from .GAT import GAT
+from .Hypergraph_models.HGNN import HGNN
+from .Hypergraph_models.HypergraphGCN import HypergraphGCN
+from .Hypergraph_models.DwHGN import DwHGN
 
 
 

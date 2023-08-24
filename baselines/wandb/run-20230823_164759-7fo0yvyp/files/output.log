@@ -1,0 +1,11 @@
+> /home/mehul/asd_graph/baselines/source/__main__.py(61)sweep_agent_manager()
+     60     ipdb.set_trace()
+---> 61     cfg.defaults.model.K_neigs = sweep_config.model.K_neigs
+     62
+[('dataset', {'perc_edges': 10}), ('model', {'K_neigs': 2, 'dropout': 0.25, 'hidden_size': 8, 'num_layers': 2}), ('training', {'l2': 0.01})]
+*** omegaconf.errors.ValidationError: Object of unsupported type: 'Config'
+    full_key:
+    object_type=None
+{'dataset': {'perc_edges': 10}, 'model': {'K_neigs': 2, 'dropout': 0.25, 'hidden_size': 8, 'num_layers': 2}, 'training': {'l2': 0.01}}
+{'K_neigs': 2, 'dropout': 0.25, 'hidden_size': 8, 'num_layers': 2}
+2

@@ -10,6 +10,11 @@ from .models import model_factory
 from .components import optimizers_factory, lr_scheduler_factory
 from .training import training_factory
 
+import os
+os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
+os.environ['TORCH_USE_CUDA_DSA'] = '1'
+
+
 
 
 def model_training(cfg: DictConfig):
@@ -46,6 +51,30 @@ def main(cfg: DictConfig) -> None:
 
 
 
+def sweep_agent_manager():
+    wandb.init()
+    sweep_config = wandb.config
+    sweep_config = OmegaConf.create(sweep_config.as_dict())
+
+    # Merging sweep config with config
+    cfg = OmegaConf.load("source/conf/config.yaml")
+    ipdb.set_trace()
+
+    cfg.defaults.model.num_layers = sweep_config.model.num_layers
+    cfg.defaults.model.hidden_dim = sweep_config.model.hidden_dim
+    cfg.defaults.model.K_neigs = sweep_config.model.K_neigs
+
+    # cfg.defaults.dataset.perc_edges = sweep_config.dataset.perc_edges
+
+    print("#############################################")
+    print(cfg)
+    main(cfg)
+    
 
 if __name__ == "__main__":
+    # cfg = OmegaConf.load("source/conf/config.yaml")
+    # if cfg.doing_sweep:
+    #     wandb.agent(sweep_id=cfg.sweep_id, function=sweep_agent_manager)
+    # else:
+    #     main()
     main()

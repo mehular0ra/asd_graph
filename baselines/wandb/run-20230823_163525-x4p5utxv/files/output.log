@@ -1,0 +1,46 @@
+Sweep config for this run
+{}
+> /home/mehul/asd_graph/baselines/source/__main__.py(64)sweep_agent_manager()
+     63     # Merging sweep config with config
+---> 64     cfg = OmegaConf.load("source/conf/config.yaml")
+     65     print(cfg)
+> /home/mehul/asd_graph/baselines/source/__main__.py(65)sweep_agent_manager()
+     64     cfg = OmegaConf.load("source/conf/config.yaml")
+---> 65     print(cfg)
+     66     sweep_config = OmegaConf.create(sweep_config)
+{'defaults': [{'dataset': 'fc_large'}, {'model': 'hgnn'}, {'optimizer': 'adam'}, {'training': 'train'}], 'dataset': {'node': 'fc'}, 'log_path': 'result', 'repeat_time': 1, 'device': 'cuda:0', 'is_wandb': True, 'doing_sweep': True, 'project': 'asd-graph', 'entity': 'mehular0ra', 'sweep_id': 'asd-graph/asd-graph/r49h4avh', 'hydra': {'job_logging': {'root': {'handlers': ['console', 'file'], 'propagate': True}, 'formatters': {'precise': {'format': '[%(asctime)s][%(filename)s][L%(lineno)d][%(levelname)s]%(message)s', 'datefmt': '%Y-%m-%d %H:%M:%S'}}, 'handlers': {'console': {'class': 'logging.StreamHandler', 'formatter': 'precise', 'stream': 'ext://sys.stdout'}, 'file': {'class': 'logging.FileHandler', 'formatter': 'precise', 'filename': './output.log'}}}}}
+> /home/mehul/asd_graph/baselines/source/__main__.py(66)sweep_agent_manager()
+     65     print(cfg)
+---> 66     sweep_config = OmegaConf.create(sweep_config)
+     67
+omegaconf.errors.ValidationError: Object of unsupported type: 'Config'
+    full_key:
+    object_type=None
+> /home/mehul/asd_graph/baselines/source/__main__.py(66)sweep_agent_manager()
+     65     print(cfg)
+---> 66     sweep_config = OmegaConf.create(sweep_config)
+     67
+{}
+{}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/mehul/asd_graph/baselines/source/__main__.py", line 75, in <module>
+    main()
+  File "/home/mehul/asd_graph/baselines/source/__main__.py", line 66, in sweep_agent_manager
+    merged_config = OmegaConf.merge(cfg, sweep_config)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mehul/.conda/envs/pyg/lib/python3.11/bdb.py", line 96, in trace_dispatch
+    return self.dispatch_exception(frame, arg)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mehul/.conda/envs/pyg/lib/python3.11/bdb.py", line 176, in dispatch_exception
+    if self.quitting: raise BdbQuit
+                      ^^^^^^^^^^^^^
+bdb.BdbQuit
+If you suspect this is an IPython 8.12.0 bug, please report it at:
+    https://github.com/ipython/ipython/issues
+or send an email to the mailing list at ipython-dev@python.org
+You can print a more detailed traceback right now with "%tb", or use "%debug"
+to interactively debug it.
+Extra-detailed tracebacks for bug-reporting purposes can be enabled via:
+    %config Application.verbose_crash=True
