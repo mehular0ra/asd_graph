@@ -1,11 +1,7 @@
 import numpy as np
-
 import torch
-
-from omegaconf import DictConfig, open_dict
-
+from omegaconf import DictConfig, OmegaConf, open_dict
 from scipy.signal import hilbert
-
 
 import ipdb
 
@@ -55,13 +51,14 @@ def load_fc_data(cfg: DictConfig):
     labels = fc_data["label"]
     site = fc_data['site']
 
-    if hasattr(cfg.dataset, 'transform') and cfg.dataset.transform == 'hilbert':
-        timeseries = fc_data['timeseries']  # fixed a typo here
+    transform = OmegaConf.select(cfg, "dataset.transform")
+    if transform == 'hilbert':
+        timeseries = fc_data['timeseries']
         fc_cov = []
         for i in range(timeseries.shape[0]):
             fc_cov.append(normalized_covariance_matrix(
                 np.transpose(timeseries[i])))
-            
+
         final_pearson = np.imag(np.array(fc_cov))
 
     # # Apply edge pruning
