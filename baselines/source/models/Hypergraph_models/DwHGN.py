@@ -24,10 +24,10 @@ class DwHGN(torch.nn.Module):
         for i in range(self.num_layers):
             if i == 0:
                 self.convs.append(HypergraphConv(
-                    cfg.dataset.node_feature_sz, self.hidden_size, self.num_edges))
+                    cfg.dataset.node_feature_sz, self.hidden_size))
             else:
                 self.convs.append(HypergraphConv(
-                    self.hidden_size, self.hidden_size, self.num_edges))
+                    self.hidden_size, self.hidden_size))
 
         self.readout_lin = nn.Linear(
             self.node_sz * self.hidden_size, self.hidden_size)

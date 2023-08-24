@@ -1,6 +1,6 @@
 defaults: 
-  - dataset: fc_bnt_hilbert
-  - model: HypergraphGCN
+  - dataset: fc_large
+  - model: hypergraphgcn
   - optimizer: adam
   - training: train
 
