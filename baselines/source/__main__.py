@@ -36,7 +36,7 @@ def model_training(cfg: DictConfig):
 @hydra.main(config_path="conf", config_name="config")
 def main(cfg: DictConfig) -> None:
 
-    group_name = f"{cfg.dataset.name}_{cfg.model.name}_node:{cfg.dataset.node}"
+    group_name = f"{cfg.dataset.name}_{cfg.model.name}_node:{cfg.dataset.node}_Kneigs:{cfg.model.K_neigs}_layers:{cfg.model.num_layers}_hidden:{cfg.model.hidden_size}_lr:exp_1e-5"
 
     for _ in range(cfg.repeat_time):
 
@@ -58,7 +58,6 @@ def sweep_agent_manager():
 
     # Merging sweep config with config
     cfg = OmegaConf.load("source/conf/config.yaml")
-    ipdb.set_trace()
 
     cfg.defaults.model.num_layers = sweep_config.model.num_layers
     cfg.defaults.model.hidden_dim = sweep_config.model.hidden_dim

@@ -1,6 +1,6 @@
 defaults: 
   - dataset: fc_large
-  - model: hypergraphgcn
+  - model: dwhgn   # dwattnhgn,attnhgn,dwhgn,hypergraphgcn
   - optimizer: adam
   - training: train
 
@@ -8,25 +8,28 @@ defaults:
 dataset:
   node: fc
 
-models: 
-  K_neigs: 4
+model: 
+  K_neigs: 40
   num_layers: 2
   hidden_size: 64  # 8, 16, 32, 64, 128
   dropout: 0.5     # 0.25
-
+  heads: 1
+  readout: linear #linear, set_transformer, janossy
+  attention_mode: edge
+  num_perm: 25
 
 log_path: result
 
-repeat_time: 1
+repeat_time: 4
 
 # total_steps: 100 # remove this later
 
 device: cuda:0
 
 # wandb:
-is_wandb: False
+is_wandb: True
 # doing_sweep: True
-project: asd-graph
+project: wacv24
 entity: mehular0ra
 # sweep_id: asd-graph/asd-graph/r49h4avh
 

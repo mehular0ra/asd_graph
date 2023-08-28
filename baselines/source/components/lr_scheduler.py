@@ -12,7 +12,7 @@ class LRScheduler:
         self.lr = optimizer_cfg.lr
 
         assert self.lr_config.mode in [
-            'step', 'poly', 'cos', 'linear', 'decay']
+            'step', 'poly', 'cos', 'linear', 'decay', 'exp']
 
     def update(self, optimizer: torch.optim.Optimizer, step: int):
         lr_config = self.lr_config
@@ -46,7 +46,9 @@ class LRScheduler:
             elif lr_mode == 'decay':
                 epoch = step // self.training_config.steps_per_epoch
                 self.lr = base_lr * lr_config.lr_decay ** epoch
-
+            elif lr_mode == 'exp':# Add 'exp' scheduler logic  
+                decay_factor = lr_config.exp_decay_factor
+                self.lr = base_lr * math.exp(-decay_factor * step)
         for param_group in optimizer.param_groups:
             param_group['lr'] = self.lr
 

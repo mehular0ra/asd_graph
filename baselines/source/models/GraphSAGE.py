@@ -34,7 +34,6 @@ class GraphSAGE(torch.nn.Module):
         # TODO: Add different pooling methods
 
     # def convert_edge_positive(self, edge_index, edge_weight):
-    #     ipdb.set_trace()
 
     #     edge_index = edge_index[:, edge_weight > 0]
     #     edge_weight = edge_weight[edge_weight > 0]

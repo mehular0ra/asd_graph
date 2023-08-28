@@ -6,10 +6,14 @@ from torch_geometric.data import Batch
 
 from omegaconf import DictConfig
 
+from .Readouts.set_transformer_models import SetTransformer
+from .Readouts.janossy_pooling import JanossyPooling
+
 
 class HypergraphGCN(torch.nn.Module):
     def __init__(self, cfg: DictConfig):
         super(HypergraphGCN, self).__init__()
+        self.cfg = cfg
         self.num_layers = cfg.model.num_layers
         self.dropout = cfg.model.dropout
         self.hidden_size = cfg.model.hidden_size
@@ -25,8 +29,16 @@ class HypergraphGCN(torch.nn.Module):
                 self.convs.append(HypergraphConv(
                     self.hidden_size, self.hidden_size))
 
-        self.readout_lin = nn.Linear(
-            self.node_sz * self.hidden_size, self.hidden_size)
+        if self.cfg.model.readout == 'set_transformer':
+            self.readout_layer = SetTransformer(dim_input=self.hidden_size,
+                                                num_outputs=1, dim_output=self.hidden_size)
+        elif self.cfg.model.readout == 'janossy':
+            self.readout_layer = JanossyPooling(
+                num_perm=cfg.model.num_perm, in_features=self.hidden_size, fc_out_features=self.hidden_size)
+        else:
+            self.readout_lin = nn.Linear(
+                self.node_sz * self.hidden_size, self.hidden_size)
+
 
         self.lin = nn.Linear(self.hidden_size, 1)
 
@@ -37,12 +49,17 @@ class HypergraphGCN(torch.nn.Module):
             if i < self.num_layers - 1:
                 x = F.leaky_relu(x)
 
-        xs = []
-        for graph_idx in batch.unique():
-            graph_nodes = x[batch == graph_idx]
-            graph_nodes = graph_nodes.view(-1)
-            xs.append(self.readout_lin(graph_nodes))
-        x = torch.stack(xs).to(x.device)
+        if self.cfg.model.readout in ['set_transformer', 'janossy']:
+            x = x.view(-1, self.node_sz, self.hidden_size)
+            x = self.readout_layer(x)
+            x = x.squeeze()
+        else:
+            xs = []
+            for graph_idx in batch.unique():
+                graph_nodes = x[batch == graph_idx]
+                graph_nodes = graph_nodes.view(-1)
+                xs.append(self.readout_lin(graph_nodes))
+            x = torch.stack(xs).to(x.device)
 
         x = self.lin(x)
 

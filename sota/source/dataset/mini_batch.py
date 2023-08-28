@@ -11,7 +11,6 @@ import ipdb
 #         a big (sparse) Graph representing the entire batch
 #     """
 #     # insert first graph into the structure
-#     ipdb.set_trace()
 #     batch_edge_index = hgraph_list[0].hyper_edge_index
 #     batch_x = hgraph_list[0].x
 #     batch_y = [hgraph_list[0].y.item()]

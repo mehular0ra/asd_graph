@@ -66,7 +66,6 @@ class Train:
             meter.reset()
 
     def train_per_epoch(self, optimizer, lr_scheduler):
-        # ipdb.set_trace()
 
         self.model.train()
         BATCH_SIZE = self.cfg.training.batch_size

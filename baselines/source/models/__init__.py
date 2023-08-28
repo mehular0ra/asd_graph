@@ -6,6 +6,8 @@ from .GAT import GAT
 from .Hypergraph_models.HGNN import HGNN
 from .Hypergraph_models.HypergraphGCN import HypergraphGCN
 from .Hypergraph_models.DwHGN import DwHGN
+from .Hypergraph_models.AttnHGN import AttnHGN
+from .Hypergraph_models.DwAttnHGN import DwAttnHGN
 
 
 

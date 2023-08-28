@@ -10,3 +10,24 @@ log_transformed_ADNI_expression_data_with_covariates.csv
 protein_adjacency_matrix.csv
 
 data_read.ipynb
+
+# Ignore all 'output.log' files
+output.log
+debug.log
+wandb-debug.log
+wandb-error.log
+wandb-metadata.json
+wandb-summary.json
+*.wandb
+*.log
+overrides.yaml
+multirun.yaml
+*.yaml
+requirements.txt
+latest-run
+
+
+
+
+
+baselines/multirun/2023-08-25/22-30-54/0/output.log
