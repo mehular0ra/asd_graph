@@ -25,7 +25,6 @@ class Train:
                  lr_schedulers: List[LRScheduler],
                  dataloaders: List[utils.DataLoader]) -> None:
 
-                
 
         self.cfg = cfg
         self.device = self.cfg.device
@@ -39,6 +38,9 @@ class Train:
         self.optimizers = optimizers
         self.lr_schedulers = lr_schedulers
         self.loss_fn = BCEWithLogitsLossL2(self.model, self.cfg.training.l2)
+
+        if cfg.model.save_interpret:
+            self.tensor_collections = {epoch: {} for epoch in range(self.epochs)}
 
         # self.best_test_accuracy = 0.0
         self.best_test_metrics = {
@@ -60,11 +62,11 @@ class Train:
         for meter in [self.train_accuracy, self.test_accuracy, self.train_loss, self.test_loss]:
             meter.reset()
 
-    def train_per_epoch(self, optimizer, lr_scheduler):
+    def train_per_epoch(self, epoch, optimizer, lr_scheduler):
 
         self.model.train()
 
-        for data in self.train_dataloader:
+        for i, data in enumerate(self.train_dataloader):
             optimizer.zero_grad()
             # label = label.float()
             self.current_step += 1
@@ -73,7 +75,10 @@ class Train:
                                 step=self.current_step) 
             
             data = data.to(self.device)
-            predict = self.model(data).squeeze()
+            if self.cfg.model.name == "DwHGN":
+                predict = self.model(data, epoch=epoch).squeeze()
+            else: 
+                predict = self.model(data).squeeze()
 
             label = data.y.to(self.device)
 
@@ -85,12 +90,20 @@ class Train:
             acc = accuracy(predict, label) 
             self.train_accuracy.update_with_weight(acc, label.shape[0])
 
+
+            if self.cfg.model.save_interpret and epoch in self.cfg.model.save_epochs:
+                # Access the saved tensors of the second DwAttnHGNConv layer
+                current_tensors = self.model.convs[0].saved_tensors
+
+                # Store them in the tensor collections
+                self.tensor_collections[epoch][f'sub{i + 1}'] = current_tensors
+
             # if self.cfg.is_wandb:
             #     # WANDB LOGGING
             #     wandb.log({"LR": lr_scheduler.lr,
             #            "Iter loss": loss.item()})
 
-    def test_per_epoch(self, dataloader, loss_meter, acc_meter):
+    def test_per_epoch(self, epoch, dataloader, loss_meter, acc_meter):
         labels = []
         logits = []
 
@@ -101,7 +114,13 @@ class Train:
             for data in dataloader:
 
                 data = data.to(self.device)
-                output = self.model(data).squeeze()
+                if self.cfg.model.name == "DwHGN":
+                    output = self.model(data, epoch=epoch).squeeze()
+                else:
+                    output = self.model(data).squeeze()
+
+                # data = data.to(self.device)
+                # output = self.model(data).squeeze()
 
                 label = data.y.to(self.device)
 
@@ -146,8 +165,8 @@ class Train:
         
         for epoch in range(self.epochs):
             self.reset_meters()
-            self.train_per_epoch(self.optimizers[0], self.lr_schedulers[0])
-            test_result = self.test_per_epoch(self.test_dataloader,    
+            self.train_per_epoch(epoch, self.optimizers[0], self.lr_schedulers[0])
+            test_result = self.test_per_epoch(epoch, self.test_dataloader,    
                                             self.test_loss, self.test_accuracy)
             
             if self.test_accuracy.avg > self.best_test_metrics["accuracy"]:
@@ -180,6 +199,12 @@ class Train:
                 f'LR:{self.lr_schedulers[0].lr:.7f}'
 
             ]))
+
+            if self.cfg.model.save_interpret and epoch in self.cfg.model.save_epochs:
+                # At the end of each epoch, save tensor collections for that epoch
+                save_path = "./"
+                self.logger.info(f"Saving tensor collections for epoch {epoch + 1}...")
+                torch.save(self.tensor_collections[epoch], f'tensor_collections_epoch_{epoch + 1}.pt')
 
             if self.cfg.is_wandb:
                 wandb.log({

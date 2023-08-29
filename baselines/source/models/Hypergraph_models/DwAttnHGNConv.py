@@ -1,5 +1,6 @@
 import math
 from typing import Optional
+from omegaconf import DictConfig
 
 import torch
 import torch.nn.functional as F
@@ -21,6 +22,8 @@ class DwAttnHGNConv(MessagePassing):
 
     def __init__(
         self,
+        cfg: DictConfig,
+        layer_num: int,
         in_channels: int,
         out_channels: int,
         use_attention: bool = False,
@@ -37,6 +40,8 @@ class DwAttnHGNConv(MessagePassing):
 
         assert attention_mode in ['node', 'edge']
 
+        self.cfg = cfg
+        self.layer_num = layer_num
         self.in_channels = in_channels
         self.out_channels = out_channels
         self.use_attention = use_attention
@@ -67,6 +72,13 @@ class DwAttnHGNConv(MessagePassing):
             self.bias = Parameter(torch.empty(out_channels))
         else:
             self.register_parameter('bias', None)
+        
+        # saving for interpretabilty
+        self.saved_tensors = {
+            "learned_he_weights": [],
+            "hyperedge_index": [],
+            "alpha": []
+        }
 
         self.reset_parameters()
 
@@ -94,6 +106,7 @@ class DwAttnHGNConv(MessagePassing):
                 hyperedge_attr: Optional[Tensor] = None,
                 num_edges: Optional[int] = None) -> Tensor:
 
+
         num_nodes = x.size(0)
 
         if num_edges is None:
@@ -117,6 +130,8 @@ class DwAttnHGNConv(MessagePassing):
                                          hyperedge_index[1], dim=0, reduce='sum')
 
             # assert hyperedge_attr is not None
+
+
             x = self.lin(x)
             x = x.view(-1, self.heads, self.out_channels)
 
@@ -128,6 +143,11 @@ class DwAttnHGNConv(MessagePassing):
             x_j = hyperedge_attr[hyperedge_index[1]]
             alpha = (torch.cat([x_i, x_j], dim=-1) * self.att).sum(dim=-1)
             alpha = F.leaky_relu(alpha, self.negative_slope)
+            if self.cfg.model.save_interpret:
+                self.saved_tensors["learned_he_weights"].append(self.learned_he_weights.detach().clone())
+                self.saved_tensors["hyperedge_index"].append(hyperedge_index.detach().clone())
+                self.saved_tensors["alpha"].append(alpha.detach().clone())
+
             if self.attention_mode == 'node':
                 alpha = softmax(alpha, hyperedge_index[1], num_nodes=x.size(0))
             else:
@@ -167,6 +187,14 @@ class DwAttnHGNConv(MessagePassing):
 
         if self.bias is not None:
             out = out + self.bias
+
+        # Save the tensors at the appropriate places
+        # self.saved_tensors["learned_he_weights"].append(
+        #     self.learned_he_weights.detach().clone())
+        # self.saved_tensors["att"].append(self.att.detach().clone())
+        # self.saved_tensors["hyperedge_index"].append(
+        #     hyperedge_index.detach().clone())
+        # self.saved_tensors["out"].append(out.detach().clone())
 
         return out
 

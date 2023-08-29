@@ -1,5 +1,6 @@
 import math
 from typing import Optional
+from omegaconf import DictConfig
 
 import torch
 import torch.nn.functional as F
@@ -21,6 +22,7 @@ class DwHGNConv(MessagePassing):
 
     def __init__(
         self,
+        cfg: DictConfig,
         in_channels: int,
         out_channels: int,
         use_attention: bool = False,
@@ -37,6 +39,7 @@ class DwHGNConv(MessagePassing):
 
         assert attention_mode in ['node', 'edge']
 
+        self.cfg = cfg
         self.in_channels = in_channels
         self.out_channels = out_channels
         self.use_attention = use_attention
@@ -69,6 +72,12 @@ class DwHGNConv(MessagePassing):
         else:
             self.register_parameter('bias', None)
 
+        # saving for interpretabilty
+        self.saved_tensors = {
+            "learned_he_weights": [],
+            "hyperedge_index": [],
+        }
+
 
         self.reset_parameters()
 
@@ -100,7 +109,10 @@ class DwHGNConv(MessagePassing):
                 hyperedge_index: Tensor,
                 hyperedge_weight: Optional[Tensor] = None,
                 hyperedge_attr: Optional[Tensor] = None,
-                num_edges: Optional[int] = None) -> Tensor:
+                num_edges: Optional[int] = None,
+                **kwargs) -> Tensor:
+        
+        self.epoch = kwargs['epoch']
 
         num_nodes = x.size(0)
 
@@ -165,6 +177,13 @@ class DwHGNConv(MessagePassing):
 
         if self.bias is not None:
             out = out + self.bias
+
+        if self.cfg.model.save_interpret and self.epoch in self.cfg.model.save_epochs:
+            self.saved_tensors["learned_he_weights"].append(
+                self.learned_he_weights.detach().clone())
+            self.saved_tensors["hyperedge_index"].append(
+                hyperedge_index.detach().clone())
+
 
         return out
 

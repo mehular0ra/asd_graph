@@ -1,5 +1,5 @@
 name: fc_large
-batch_size: 16
+batch_size: 1
 
 train_set: 0.9
 # val_set: 0.1

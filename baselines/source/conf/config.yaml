@@ -7,10 +7,14 @@ defaults:
 
 dataset:
   node: fc
+  train_set: 0.9
+  test_set: 0.1
+  batch_size: 16
+
 
 model: 
   K_neigs: 40
-  num_layers: 2
+  num_layers: 1
   hidden_size: 64  # 8, 16, 32, 64, 128
   dropout: 0.5     # 0.25
   heads: 1
@@ -18,16 +22,19 @@ model:
   attention_mode: edge
   num_perm: 25
 
+  save_interpret: True
+  save_epochs: [0, 19, 50, 99]
+
 log_path: result
 
-repeat_time: 4
+repeat_time: 1
 
 # total_steps: 100 # remove this later
 
 device: cuda:0
 
 # wandb:
-is_wandb: True
+is_wandb: False
 # doing_sweep: True
 project: wacv24
 entity: mehular0ra

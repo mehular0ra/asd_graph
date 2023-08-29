@@ -30,10 +30,10 @@ class DwHGN(torch.nn.Module):
         for i in range(self.num_layers):
             if i == 0:
                 self.convs.append(DwHGNConv(
-                    cfg.dataset.node_feature_sz, self.hidden_size, num_edges=self.num_edges))
+                    cfg, cfg.dataset.node_feature_sz, self.hidden_size, num_edges=self.num_edges))
             else:
                 self.convs.append(DwHGNConv(
-                    self.hidden_size, self.hidden_size, num_edges=self.num_edges))
+                    cfg, self.hidden_size, self.hidden_size, num_edges=self.num_edges))
 
         if self.cfg.model.readout == 'set_transformer':
             self.readout_layer = SetTransformer(dim_input=self.hidden_size,
@@ -47,11 +47,12 @@ class DwHGN(torch.nn.Module):
             
         self.lin = nn.Linear(self.hidden_size, 1)
 
-    def forward(self, data):
+    def forward(self, data, **kwargs):
+        self.epoch = kwargs['epoch']
         x, hyperedge_index, hyperedge_weight, batch = data.x, data.edge_index, data.edge_weight, data.batch
         for i in range(self.num_layers):
             # x = self.convs[i](x, hyperedge_index, hyperedge_weight, self.num_edges)
-            x = self.convs[i](x, hyperedge_index)
+            x = self.convs[i](x, hyperedge_index, epoch=self.epoch)
 
             if i < self.num_layers - 1:
                 x = F.leaky_relu(x)

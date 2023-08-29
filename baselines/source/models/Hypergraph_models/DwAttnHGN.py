@@ -10,6 +10,8 @@ from .DwAttnHGNConv import DwAttnHGNConv
 from .Readouts.set_transformer_models import SetTransformer
 from .Readouts.janossy_pooling import JanossyPooling
 
+import ipdb
+
 
 class HeadAggregatorMLP(nn.Module):
     def __init__(self, input_size: int, output_size: int, hidden_size: int = None):
@@ -39,15 +41,16 @@ class DwAttnHGN(torch.nn.Module):
         self.concat = cfg.model.concat
         self.attention_mode = cfg.model.attention_mode
 
+
         self.convs = torch.nn.ModuleList()
         for i in range(self.num_layers):
             if i == 0:
                 self.convs.append(DwAttnHGNConv(
-                    cfg.dataset.node_feature_sz, self.hidden_size, num_edges=self.num_edges,
+                    cfg, i, cfg.dataset.node_feature_sz, self.hidden_size, num_edges=self.num_edges,
                     use_attention=True, attention_mode=self.attention_mode, heads=self.heads, dropout=cfg.model.dropout, concat=self.concat))
             else:
                 self.convs.append(DwAttnHGNConv(
-                    self.hidden_size, self.hidden_size, num_edges=self.num_edges,
+                    cfg, i, self.hidden_size, self.hidden_size, num_edges=self.num_edges,
                     use_attention=True, attention_mode=self.attention_mode, heads=self.heads, dropout=cfg.model.dropout, concat=self.concat))
 
         if self.heads > 1:
@@ -73,12 +76,14 @@ class DwAttnHGN(torch.nn.Module):
 
         self.lin = nn.Linear(self.hidden_size, 1)
 
+
+
     def forward(self, data):
         x, hyperedge_index, hyperedge_weight, batch = data.x, data.edge_index, data.edge_weight, data.batch
         for i in range(self.num_layers):
+            ipdb.set_trace()
             # x = self.convs[i](x, hyperedge_index, hyperedge_weight, self.num_edges)
             x = self.convs[i](x, hyperedge_index)
-
             # Apply the aggregator MLP
             if self.heads > 1:
                 x = self.aggregator_mlps[i](x)

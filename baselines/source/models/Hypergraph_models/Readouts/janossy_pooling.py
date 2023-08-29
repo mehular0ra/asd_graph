@@ -54,7 +54,6 @@ class JanossyPooling(pl.LightningModule):
 
         # Now flatten for the fully connected NN
         x_permutations = x_permutations.view(-1, num_nodes, num_features)
-        ipdb.set_trace()
         # out has shape (num_perm * batch_size, fc_out_features)
         out = self.nn(x_permutations)
 
