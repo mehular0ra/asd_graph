@@ -25,6 +25,7 @@ class Train:
                  lr_schedulers: List[LRScheduler],
                  dataloaders: List[utils.DataLoader]) -> None:
 
+        self.all_saved_x = []
 
         self.cfg = cfg
         self.device = self.cfg.device
@@ -66,7 +67,7 @@ class Train:
 
         self.model.train()
 
-        for i, data in enumerate(self.train_dataloader):
+        for iteration, data in enumerate(self.train_dataloader):
             optimizer.zero_grad()
             # label = label.float()
             self.current_step += 1
@@ -75,8 +76,9 @@ class Train:
                                 step=self.current_step) 
             
             data = data.to(self.device)
-            if self.cfg.model.name == "DwHGN":
-                predict = self.model(data, epoch=epoch).squeeze()
+            if self.cfg.model.name in ["DwHGN", "HypergraphGCN", "GCN"]:
+                predict = self.model(
+                    data, epoch=epoch, iteration=iteration, test_phase=False).squeeze()
             else: 
                 predict = self.model(data).squeeze()
 
@@ -96,7 +98,7 @@ class Train:
                 current_tensors = self.model.convs[0].saved_tensors
 
                 # Store them in the tensor collections
-                self.tensor_collections[epoch][f'sub{i + 1}'] = current_tensors
+                self.tensor_collections[epoch][f'sub{iteration + 1}'] = current_tensors
 
             # if self.cfg.is_wandb:
             #     # WANDB LOGGING
@@ -111,13 +113,17 @@ class Train:
 
         with torch.no_grad():
 
-            for data in dataloader:
+            for iteration, data in enumerate(dataloader):
 
                 data = data.to(self.device)
-                if self.cfg.model.name == "DwHGN":
-                    output = self.model(data, epoch=epoch).squeeze()
+                if self.cfg.model.name in ["DwHGN", "HypergraphGCN", "GCN"]:
+                    output = self.model(data, epoch=epoch, iteration=iteration, test_phase=True).squeeze()
                 else:
                     output = self.model(data).squeeze()
+
+                # Here you can access the saved value of x during testing
+                # if self.cfg.model.tsne and self.cfg.model.name == "DwHGN":
+                #     saved_x = self.model.saved_x
 
                 # data = data.to(self.device)
                 # output = self.model(data).squeeze()
@@ -153,6 +159,11 @@ class Train:
             if isfloat(k):
                 recall[int(float(k))] = report[k]['recall']
         return [auc] + list(metric) + recall
+    
+    # def save_all_saved_x(self):
+    #     concatenated_saved_x = np.concatenate(self.all_saved_x, axis=0)
+    #     np.save("saved_x.npy", concatenated_saved_x)
+    #     self.all_saved_x = []
 
     def train(self):
         print("\nStarting training...")
@@ -166,8 +177,11 @@ class Train:
         for epoch in range(self.epochs):
             self.reset_meters()
             self.train_per_epoch(epoch, self.optimizers[0], self.lr_schedulers[0])
-            test_result = self.test_per_epoch(epoch, self.test_dataloader,    
+            test_result = self.test_per_epoch(epoch, self.test_dataloader,   
                                             self.test_loss, self.test_accuracy)
+            
+            # if self.cfg.model.tsne:
+            #     self.save_all_saved_x()
             
             if self.test_accuracy.avg > self.best_test_metrics["accuracy"]:
                 self.best_test_metrics["accuracy"] = self.test_accuracy.avg

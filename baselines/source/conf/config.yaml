@@ -1,6 +1,6 @@
 defaults: 
   - dataset: fc_large
-  - model: dwhgn   # dwattnhgn,attnhgn,dwhgn,hypergraphgcn
+  - model: gcn   # dwattnhgn,attnhgn,dwhgn,hypergraphgcn
   - optimizer: adam
   - training: train
 
@@ -13,16 +13,17 @@ dataset:
 
 
 model: 
-  K_neigs: 40
-  num_layers: 1
+  K_neigs: 40 #5, 10, 25, 40, 60, 100
+  num_layers: 1 #2
   hidden_size: 64  # 8, 16, 32, 64, 128
   dropout: 0.5     # 0.25
   heads: 1
-  readout: linear #linear, set_transformer, janossy
+  readout: linear #linear, set_transformer, janossy, max, mean
   attention_mode: edge
   num_perm: 25
+  tsne: True
 
-  save_interpret: True
+  save_interpret: False
   save_epochs: [0, 19, 50, 99]
 
 log_path: result

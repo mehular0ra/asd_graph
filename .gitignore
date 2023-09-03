@@ -26,6 +26,10 @@ multirun.yaml
 requirements.txt
 latest-run
 
+*.csv
+*.pkl
+
+
 
 
 

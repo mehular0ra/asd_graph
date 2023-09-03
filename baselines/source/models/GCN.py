@@ -7,10 +7,13 @@ from torch_geometric.data import Batch
 from omegaconf import DictConfig
 import ipdb
 
+from ..components import tsne_plot_data
+
 
 class GCN(torch.nn.Module):
     def __init__(self, cfg: DictConfig):
         super(GCN, self).__init__()
+        self.cfg = cfg
         self.num_layers = cfg.model.num_layers
         self.dropout = cfg.model.dropout
         self.hidden_size = cfg.model.hidden_size
@@ -37,8 +40,12 @@ class GCN(torch.nn.Module):
         edge_weight = edge_weight[edge_weight > 0]
         return edge_index, edge_weight
 
-    def forward(self, data):
-        x, edge_index, edge_weight, batch = data.x, data.edge_index, data.edge_weight, data.batch
+    def forward(self, data, **kwargs):
+        self.epoch = kwargs['epoch']
+        self.iteration = kwargs['iteration']
+        self.test_phase = kwargs['test_phase']
+
+        x, edge_index, edge_weight, batch, labels = data.x, data.edge_index, data.edge_weight, data.batch, data.y
         edge_index, edge_weight = self.convert_edge_positive(edge_index, edge_weight)
         for i in range(self.num_layers):
             x = self.convs[i](x, edge_index, edge_weight)
@@ -57,6 +64,9 @@ class GCN(torch.nn.Module):
             graph_nodes = graph_nodes.view(-1)
             xs.append(self.readout_lin(graph_nodes))
         x = torch.stack(xs).to(x.device)
+
+        if kwargs['test_phase'] and self.cfg.model.tsne:
+            tsne_plot_data(x, labels, self.epoch, self.iteration)
 
 
         x = self.lin(x)

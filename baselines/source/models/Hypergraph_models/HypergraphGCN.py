@@ -9,6 +9,7 @@ from omegaconf import DictConfig
 from .Readouts.set_transformer_models import SetTransformer
 from .Readouts.janossy_pooling import JanossyPooling
 
+from ...components import tsne_plot_data
 
 class HypergraphGCN(torch.nn.Module):
     def __init__(self, cfg: DictConfig):
@@ -42,8 +43,12 @@ class HypergraphGCN(torch.nn.Module):
 
         self.lin = nn.Linear(self.hidden_size, 1)
 
-    def forward(self, data):
-        x, hyperedge_index, hyperedge_weight, batch = data.x, data.edge_index, data.edge_weight, data.batch
+    def forward(self, data, **kwargs):
+        self.epoch = kwargs['epoch']
+        self.iteration = kwargs['iteration']
+        self.test_phase = kwargs['test_phase']
+
+        x, hyperedge_index, hyperedge_weight, batch, labels = data.x, data.edge_index, data.edge_weight, data.batch, data.y
         for i in range(self.num_layers):
             x = self.convs[i](x, hyperedge_index, hyperedge_weight)
             if i < self.num_layers - 1:
@@ -60,6 +65,10 @@ class HypergraphGCN(torch.nn.Module):
                 graph_nodes = graph_nodes.view(-1)
                 xs.append(self.readout_lin(graph_nodes))
             x = torch.stack(xs).to(x.device)
+
+        if kwargs['test_phase'] and self.cfg.model.tsne:
+            tsne_plot_data(x, labels, self.epoch, self.iteration)
+
 
         x = self.lin(x)
 
