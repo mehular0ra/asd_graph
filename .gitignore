@@ -29,6 +29,17 @@ latest-run
 *.csv
 *.pkl
 
+.vscode
+*__pycache__*
+*.npy
+*.pt
+*.png
+*.txt
+wandb/*
+result/*
+outputs/*
+multirun/*
+
 
 
 
