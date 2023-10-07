@@ -1,11 +1,12 @@
 name: fc_large
-batch_size: 1
+batch_size: 16
 
 train_set: 0.9
 # val_set: 0.1
 test_set: 0.1
 
 fc_path: /mnt/ssd1/mehul_data/research/fc_large_data.npy
+kfold_dataset_dir: /mnt/ssd1/mehul_data/research/fc_large_kfold/
 # drop_last: True
 # stratified: True
 
@@ -14,6 +15,8 @@ node_feature_sz: 400
 num_classes: 2
 
 perc_edges: 100
+
+num_subjects: 812
 
 node: fc
 

@@ -17,9 +17,9 @@ os.environ['TORCH_USE_CUDA_DSA'] = '1'
 
 
 
-def model_training(cfg: DictConfig):
+def model_training(cfg: DictConfig, k=None):
 
-    dataloaders = dataset_factory(cfg)
+    dataloaders = dataset_factory(cfg, k)
     model = model_factory(cfg)
     print(model)
     optimizers = optimizers_factory(
@@ -36,18 +36,44 @@ def model_training(cfg: DictConfig):
 @hydra.main(config_path="conf", config_name="config")
 def main(cfg: DictConfig) -> None:
 
-    group_name = f"{cfg.dataset.name}_{cfg.model.name}_node:{cfg.dataset.node}_Kneigs:{cfg.model.K_neigs}_layers:{cfg.model.num_layers}_hidden:{cfg.model.hidden_size}_lr:exp_1e-5"
+    if cfg.model.node_attn_interpret:
+        group_name = f"{cfg.dataset.name}_{cfg.model.name}_node:{cfg.dataset.node}_Kneigs:{cfg.model.K_neigs}_nodeAttn{cfg.model.node_attn_learn}_layers:{cfg.model.num_layers}_hidden:{cfg.model.hidden_size}_lr:exp_1e-5"
+    else:
+        group_name = f"{cfg.dataset.name}_{cfg.model.name}_node:{cfg.dataset.node}_Kneigs:{cfg.model.K_neigs}_layers:{cfg.model.num_layers}_hidden:{cfg.model.hidden_size}_lr:exp_1e-5"
 
-    for _ in range(cfg.repeat_time):
+    
+    if cfg.kfold == True and cdf.kfold_val == -1:
+        # running kfold
+        for k in range(10):
+            if cfg.is_wandb:
+                run = wandb.init(project=cfg.project, reinit=True,
+                                group=f"{group_name}", tags=[f"{cfg.dataset.name}, {cfg.model.name}"])
+            logging.info(OmegaConf.to_yaml(cfg)) 
+            model_training(cfg, k)
 
+            if cfg.is_wandb:
+                wandb.finish()
+    elif cfg.kfold == True and cfg.kfold_val != -1:
+        # running kfold
         if cfg.is_wandb:
             run = wandb.init(project=cfg.project, reinit=True,
-                             group=f"{group_name}", tags=[f"{cfg.dataset.name}, {cfg.model.name}"])
+                            group=f"{group_name}", tags=[f"{cfg.dataset.name}, {cfg.model.name}"])
         logging.info(OmegaConf.to_yaml(cfg)) 
-        model_training(cfg)
+        model_training(cfg, cfg.kfold_val)
 
         if cfg.is_wandb:
             wandb.finish()
+    else:
+        for _ in range(cfg.repeat_time):
+
+            if cfg.is_wandb:
+                run = wandb.init(project=cfg.project, reinit=True,
+                                group=f"{group_name}", tags=[f"{cfg.dataset.name}, {cfg.model.name}"])
+            logging.info(OmegaConf.to_yaml(cfg)) 
+            model_training(cfg)
+
+            if cfg.is_wandb:
+                wandb.finish()
 
 
 

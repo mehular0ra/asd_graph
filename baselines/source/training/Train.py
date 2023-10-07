@@ -14,6 +14,9 @@ import logging
 
 from scipy.special import expit
 
+
+from ..models import GradCAM
+
 import ipdb
 
 
@@ -32,6 +35,7 @@ class Train:
 
         self.logger = logging.getLogger()
         self.model = model.to(self.device)
+        # self.model = torch.nn.DataParallel(self.model, device_ids=[0, 1])
         self.logger.info(f'#model params: {count_params(self.model)}')
         self.train_dataloader, self.test_dataloader = dataloaders
         self.epochs = cfg.training.epochs
@@ -51,9 +55,13 @@ class Train:
             "specificity": 0.0,
         }
 
-
-
         self.init_meters()
+
+        # Initialize GradCAM if needed
+        if self.cfg.model.gradcam:
+            # Replace with the layer you wish to target
+            target_layer = self.model.convs[-1]
+            self.gradcam = GradCAM(self.model, target_layer)
 
     def init_meters(self):
         self.train_loss, self.test_loss, self.train_accuracy, self.test_accuracy = [
@@ -82,28 +90,46 @@ class Train:
             else: 
                 predict = self.model(data).squeeze()
 
+            # unsqueeze if output is a scalar
+            if len(predict.shape) == 0:
+                predict = predict.unsqueeze(0)
+
             label = data.y.to(self.device)
-
             loss = self.loss_fn(predict, label)
-            loss.backward()
-
+            loss.backward(retain_graph=True)
             self.train_loss.update_with_weight(loss.item(), label.shape[0])
             optimizer.step()
-            acc = accuracy(predict, label) 
+            acc = accuracy(predict, label)
             self.train_accuracy.update_with_weight(acc, label.shape[0])
+
+
+
+            ##############################
+            if self.cfg.model.gradcam == True:
+                target_class = (predict > 0).float()
+                self.model.zero_grad()
+                predict.backward(torch.ones_like(predict) * target_class, retain_graph=True)
+
+                importance_scores = self.gradcam.compute_cam()
+                ipdb.set_trace()
+                # Optionally, store or visualize importance_scores here
+
+                self.gradcam.remove_hooks()  # Clean up hooks after use
+
+                #########################################
+
+
 
 
             if self.cfg.model.save_interpret and epoch in self.cfg.model.save_epochs:
                 # Access the saved tensors of the second DwAttnHGNConv layer
-                current_tensors = self.model.convs[0].saved_tensors
-
+                current_tensors = self.model.convs[-1].saved_tensors
+                # save labels and predictions
+                current_tensors['label'] = label
+                current_tensors['predict'] = predict
                 # Store them in the tensor collections
-                self.tensor_collections[epoch][f'sub{iteration + 1}'] = current_tensors
+                self.tensor_collections[epoch][f'iter{iteration + 1}'] = current_tensors
 
-            # if self.cfg.is_wandb:
-            #     # WANDB LOGGING
-            #     wandb.log({"LR": lr_scheduler.lr,
-            #            "Iter loss": loss.item()})
 
     def test_per_epoch(self, epoch, dataloader, loss_meter, acc_meter):
         labels = []
@@ -120,13 +146,10 @@ class Train:
                     output = self.model(data, epoch=epoch, iteration=iteration, test_phase=True).squeeze()
                 else:
                     output = self.model(data).squeeze()
-
-                # Here you can access the saved value of x during testing
-                # if self.cfg.model.tsne and self.cfg.model.name == "DwHGN":
-                #     saved_x = self.model.saved_x
-
-                # data = data.to(self.device)
-                # output = self.model(data).squeeze()
+                
+                # unsqueeze if output is a scalar
+                if len(output.shape) == 0:
+                    output = output.unsqueeze(0)
 
                 label = data.y.to(self.device)
 
@@ -137,7 +160,7 @@ class Train:
                 acc = accuracy(output, label)
                 acc_meter.update_with_weight(acc, label.shape[0])
                 # result += F.softmax(output, dim=1)[:, 1].tolist()
-                logits += output.squeeze().tolist()
+                logits += output.tolist()
                 labels += label.tolist()
 
         # convert logits to probabilities and predictions
@@ -191,6 +214,11 @@ class Train:
                 self.best_test_metrics["auc"] = auc
                 self.best_test_metrics["sensitivity"] = sensitivity
                 self.best_test_metrics["specificity"] = specificity
+
+                # save model for best accuracy
+                if self.cfg.model.model_save:
+                    torch.save(self.model.state_dict(), 'best_model.pt')
+                    
 
             self.logger.info(" | ".join([
                 f'Epoch[{epoch+1}/{self.epochs}]',

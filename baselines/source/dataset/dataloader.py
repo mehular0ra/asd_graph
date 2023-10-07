@@ -18,12 +18,14 @@ from collections import Counter
 import ipdb
 
 
-def k_fold_cv_dataloader(cfg: DictConfig,
+def k_fold_dataloader(cfg: DictConfig,
                          graph_data_list: List,
                          site: np.array) -> List[Tuple[DataLoader, DataLoader]]:
 
-    n_splits = cfg.training.n_splits  # Number of folds
-    skf = StratifiedKFold(n_splits=n_splits)
+    # n_splits = cfg.training.n_splits  # Number of folds
+    n_splits = 10  # Number of folds
+
+    skf = StratifiedKFold(n_splits=n_splits, random_state=42, shuffle=True)
 
     dataloaders = []
     for train_index, test_index in skf.split(graph_data_list, site):
@@ -59,6 +61,12 @@ def init_stratified_dataloader(cfg: DictConfig,
     # train_length = cfg.dataset.train_set * final_pearson.shape[0]
     train_ratio = cfg.dataset.train_set
     test_ratio = cfg.dataset.test_set
+
+    asd_count = [graph_data_list[i].y.item() == 1.0 for i in range(len(graph_data_list))].count(True)
+    print(asd_count)    
+    td_count = [graph_data_list[i].y.item() == 0.0 for i in range(len(graph_data_list))].count(True)
+    print(td_count)   
+
 
     # Stratified split
     split = StratifiedShuffleSplit(

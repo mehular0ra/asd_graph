@@ -9,6 +9,8 @@ from .Hypergraph_models.DwHGN import DwHGN
 from .Hypergraph_models.AttnHGN import AttnHGN
 from .Hypergraph_models.DwAttnHGN import DwAttnHGN
 
+from .GCN import GradCAM
+
 
 
 def model_factory(config: DictConfig):

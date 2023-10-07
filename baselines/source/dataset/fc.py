@@ -46,10 +46,19 @@ def top_percent_edges(matrix, percent):
 
 
 def load_fc_data(cfg: DictConfig):
-    fc_data = np.load(cfg.dataset.fc_path, allow_pickle=True).item()
-    final_pearson = fc_data["corr"]
-    labels = fc_data["label"]
-    site = fc_data['site']
+    if cfg.dataset.name == 'fc_abide1':
+        fc_data = np.load(cfg.dataset.fc_path, allow_pickle=True)
+        final_pearson = np.array(fc_data["corr"])
+        labels = np.array(fc_data["label"])
+        site = np.array(fc_data['site'])
+        # labels which are 2 are converted to 0
+        labels[labels == 2] = 0
+    else:
+        fc_data = np.load(cfg.dataset.fc_path, allow_pickle=True).item()
+        final_pearson = fc_data["corr"]
+        labels = fc_data["label"]
+        site = fc_data['site']
+
 
     transform = OmegaConf.select(cfg, "dataset.transform")
     if transform == 'hilbert':

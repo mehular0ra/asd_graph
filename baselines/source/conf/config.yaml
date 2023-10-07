@@ -1,6 +1,6 @@
 defaults: 
   - dataset: fc_large
-  - model: gcn   # dwattnhgn,attnhgn,dwhgn,hypergraphgcn
+  - model: dwhgn   # dwhgn,hypergraphgcn dwattnhgn,attnhgn
   - optimizer: adam
   - training: train
 
@@ -14,30 +14,42 @@ dataset:
 
 model: 
   K_neigs: 40 #5, 10, 25, 40, 60, 100
-  num_layers: 1 #2
+  num_layers: 1 #2, 3, 5
   hidden_size: 64  # 8, 16, 32, 64, 128
   dropout: 0.5     # 0.25
   heads: 1
   readout: linear #linear, set_transformer, janossy, max, mean
   attention_mode: edge
   num_perm: 25
-  tsne: True
 
+  node_attn_interpret: True
+  node_attn_learn: True
+  node_attn_save: False
+
+  tsne: False
+  tsne_train: False
+
+  gradcam: False
+  ####
+  model_save: True
+  
   save_interpret: False
   save_epochs: [0, 19, 50, 99]
 
 log_path: result
 
-repeat_time: 1
+repeat_time: 5
+kfold: True
+kfold_val: -1
 
 # total_steps: 100 # remove this later
 
-device: cuda:0
+device: cuda
 
 # wandb:
 is_wandb: False
 # doing_sweep: True
-project: wacv24
+project: icassp
 entity: mehular0ra
 # sweep_id: asd-graph/asd-graph/r49h4avh
 
