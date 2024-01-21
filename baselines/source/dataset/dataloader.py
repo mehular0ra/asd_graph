@@ -49,6 +49,27 @@ def k_fold_dataloader(cfg: DictConfig,
 
     return dataloaders
 
+def leave_one_site_out_dataloader(cfg: DictConfig, graph_data_list: List, site: np.array) -> List[Tuple[DataLoader, DataLoader]]:
+    unique_sites = np.unique(site)
+    dataloaders = []
+    test_site = cfg.test_site
+
+    # for test_site in unique_sites:  
+    train_data_list = [graph_data_list[i] for i, s in enumerate(site) if s != test_site]
+    test_data_list = [graph_data_list[i] for i, s in enumerate(site) if s == test_site]
+
+    train_dataloader = DataLoader(train_data_list, batch_size=cfg.dataset.batch_size, shuffle=True)
+    test_dataloader = DataLoader(test_data_list, batch_size=cfg.dataset.batch_size, shuffle=False)
+
+    # add total_steps and steps_per_epoch to cfg
+    with open_dict(cfg):
+        train_length = cfg.dataset.train_set * len(graph_data_list)
+        # total_steps, steps_per_epoch for lr schedular
+        cfg.steps_per_epoch = (train_length - 1) // cfg.dataset.batch_size + 1
+        cfg.total_steps = cfg.steps_per_epoch * cfg.training.epochs
+    
+
+    return [train_dataloader, test_dataloader]
 
 
 

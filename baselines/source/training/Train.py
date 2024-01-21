@@ -111,7 +111,6 @@ class Train:
                 predict.backward(torch.ones_like(predict) * target_class, retain_graph=True)
 
                 importance_scores = self.gradcam.compute_cam()
-                ipdb.set_trace()
                 # Optionally, store or visualize importance_scores here
 
                 self.gradcam.remove_hooks()  # Clean up hooks after use
@@ -169,7 +168,10 @@ class Train:
 
         labels = np.array(labels)
 
-        auc = roc_auc_score(labels, probabilities)
+        if self.cfg.leave_one_site_out and self.cfg.test_site == "KUL":
+            auc = 0.0
+        else:
+            auc = roc_auc_score(labels, probabilities)
 
         metric = precision_recall_fscore_support(
             labels, predictions, average='micro')

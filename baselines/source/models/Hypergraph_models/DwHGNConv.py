@@ -166,6 +166,7 @@ class DwHGNConv(MessagePassing):
 
         out = self.propagate(hyperedge_index, x=x, norm=modified_hyperedge_weight, alpha=alpha,
                              size=(num_nodes, num_edges))
+
         out = self.propagate(hyperedge_index.flip([0]), x=out, norm=D,
                              alpha=alpha, size=(num_edges, num_nodes))
 

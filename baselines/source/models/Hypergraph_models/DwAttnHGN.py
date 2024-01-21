@@ -81,7 +81,6 @@ class DwAttnHGN(torch.nn.Module):
     def forward(self, data):
         x, hyperedge_index, hyperedge_weight, batch = data.x, data.edge_index, data.edge_weight, data.batch
         for i in range(self.num_layers):
-            ipdb.set_trace()
             # x = self.convs[i](x, hyperedge_index, hyperedge_weight, self.num_edges)
             x = self.convs[i](x, hyperedge_index)
             # Apply the aggregator MLP

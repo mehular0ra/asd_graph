@@ -2,7 +2,7 @@ from omegaconf import DictConfig, open_dict
 import os
 import torch
 from .fc import load_fc_data
-from .dataloader import init_stratified_dataloader, k_fold_dataloader
+from .dataloader import init_stratified_dataloader, k_fold_dataloader, leave_one_site_out_dataloader
 
 from typing import List
 import torch.utils as utils
@@ -32,7 +32,9 @@ def create_dataloader(cfg: DictConfig) -> List[utils.data.DataLoader]:
     graph_data_list, site = eval(data_creation_func)(cfg, *datasets)
 
     # dataloader creation
-    if cfg.kfold:
+    if cfg.leave_one_site_out:
+        dataloaders = leave_one_site_out_dataloader(cfg, graph_data_list, site)
+    elif cfg.kfold:
         dataloaders = k_fold_dataloader(cfg, graph_data_list, site)
     else:
         dataloaders = init_stratified_dataloader(cfg, graph_data_list, site)
